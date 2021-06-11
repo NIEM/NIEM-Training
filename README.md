@@ -6,6 +6,6 @@ Materials for the revamped NIEM Training presentations.
 
 ## Outline
 
-- [NIEM Training Outline.md]
+- [NIEM Training Outline](NIEM Training Outline.md)
 
  
