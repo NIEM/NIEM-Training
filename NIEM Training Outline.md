@@ -199,7 +199,7 @@ For this entire section, we'll look at various things in the mapping spreadsheet
 		- [[Christina Medlin]] is a genius
 		- #todo **Get the materials from her for modification/inclusion**
 
-## Assemble
+## Assembly
 
 - Required documents
 	- catalog
@@ -208,7 +208,7 @@ For this entire section, we'll look at various things in the mapping spreadsheet
 - Putting together by hand (ZIP file)
 	- Show directory structure
 
-## Publish
+## Publishing
 
 - Reg/Repo demo [[GTRI]]
 - Cover, but not demo, Restricted Reg/Repo

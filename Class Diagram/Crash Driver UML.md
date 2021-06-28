@@ -1,10 +1,14 @@
-Command line is `mmdc`, https://github.com/mermaid-js/mermaid-cli
+Command line is `mmdc`, from [mermaid-js](https://github.com/mermaid-js)/[mermaid-cli](https://github.com/mermaid-js/mermaid-cli)
 
 ```
 mmdc --input CrashDriverClassDiagram.mmd --output CrashDriverClassDiagram.svg --theme neutral
 mmdc --input CrashDriverClassDiagram-NIEM.mmd --output CrashDriverClassDiagram-NIEM.svg --theme neutral
-``
+```
+___
 
+## Sample
+
+From [Mermaid Class diagrams](https://mermaid-js.github.io/mermaid/#/classDiagram):
 
 ```mermaid
 classDiagram
