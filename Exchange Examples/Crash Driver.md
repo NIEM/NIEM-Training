@@ -1,5 +1,11 @@
 Sample from [[Dr. Scott]] Crash Driver IEPD
 
+Changes:
+
+- `nc:IncidentLocation` is now just `nc:Location`
+- `j:JusticeMetadata` is now just `j:Metadata`
+- `@sequenceID` is gone now
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <exch:CrashDriverInfo 
