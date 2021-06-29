@@ -1,0 +1,21 @@
+sequenceDiagram
+	Agreement to Share ->> Source Documents: Scenario Planning
+	Source Documents ->> Diagrams: Requirement Analysis
+	Diagrams ->> Mapping Spreadsheet: Mapping
+
+	Mapping Spreadsheet -->> Diagrams: (forgot a piece of information)
+	Diagrams ->> Mapping Spreadsheet: Mapping
+	
+	Mapping Spreadsheet -->> Source Documents: (missed a source document)
+	Source Documents ->> Diagrams: Requirement Analysis
+	Diagrams ->> Mapping Spreadsheet: Mapping
+
+
+	Mapping Spreadsheet ->> Schemas: Creating and Validating Schemas
+	
+	Schemas -->> Mapping Spreadsheet: (did something weird while mapping that doesn't work in schema)
+	
+	Mapping Spreadsheet ->> Schemas: Creating and Validating Schemas
+	
+	Schemas ->> IEPD Package: Assembly
+	IEPD Package ->> Repository Record: Publishing
