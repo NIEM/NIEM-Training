@@ -1,0 +1,57 @@
+classDiagram
+
+	Person <-- PersonName
+	Person <-- BirthDate
+
+	class Person{
+	}
+
+	class PersonName{
+		+String PersonGivenName
+		+String PersonMiddleName
+		+String PersonLastName
+	}
+
+
+	class BirthDate{
+		+Date Date
+	}
+
+	Activity <|-- Incident
+	Incident <|-- Crash
+	Activity <-- ActivityDate
+	Incident <-- Location
+	class Crash{
+	}
+
+	class Incident{
+	}
+	
+	class Activity{
+	}
+
+	class ActivityDate{
+		+Date Date
+	}
+
+
+	Location <-- Location2DGeospatialCoordinate
+	Location2DGeospatialCoordinate <-- GeographicCoordinateLatitude
+	Location2DGeospatialCoordinate <-- GeographicCoordinateLongitude
+	
+	class Location{
+		
+	}
+
+	class Location2DGeospatialCoordinate{
+	}
+
+	class GeographicCoordinateLatitude{
+		+Number LatitudeDegreeValue
+		+Number LatitudeMinuteValue
+	}
+
+	class GeographicCoordinateLongitude{
+		LongitudeDegreeValue
+		LongitudeMinuteValue
+	}

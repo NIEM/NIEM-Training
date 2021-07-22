@@ -1,0 +1,36 @@
+classDiagram
+
+	Person <|-- CrashDriver
+	Person <|-- InjuredPerson
+	
+	class Person{
+		+Date BirthDate
+		+String FirstName
+		+String MiddleName
+		+String LastName
+	}
+	
+	class CrashDriver{
+		+String DriverLicenseNumber
+	
+	}
+
+	class InjuredPerson{
+		+String InjuryDescription
+		+Code SeverityCode
+	}
+
+	class Charge{
+		+String Description
+		+boolean isFelony
+	}
+
+	class Crash{
+		+Date CrashDate
+		+String CrashLocationCoordinates
+	}
+
+	CrashVehicle <-- CrashDriver
+
+	class CrashVehicle{
+	}

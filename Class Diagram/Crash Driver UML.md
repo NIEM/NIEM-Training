@@ -4,6 +4,13 @@ Command line is `mmdc`, from [mermaid-js](https://github.com/mermaid-js)/[mermai
 mmdc --input CrashDriverClassDiagram.mmd --output CrashDriverClassDiagram.svg --theme neutral
 mmdc --input CrashDriverClassDiagram-NIEM.mmd --output CrashDriverClassDiagram-NIEM.svg --theme neutral
 ```
+
+Try this for png?
+
+```
+/Applications/Inkscape.app/Contents/Resources/bin/inkscape -z -e test.png -w 1024 -h 1024 test.svg
+```
+
 ___
 
 ## Sample

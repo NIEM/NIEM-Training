@@ -1,0 +1,72 @@
+digraph schemas {
+
+	// layouts
+    // layout="circo";
+    layout="dot";
+    
+    // layout="fdp";
+    // layout="neato";
+    // layout="osage";
+    // layout="patchwork";
+    // layout="sfdp";
+    // layout="twopi";
+
+	// extension
+
+	CrashDriver [label="CrashDriver.xsd"];
+		CrashDriver -> PrivacyMetadata;
+		CrashDriver -> niem_core;
+		CrashDriver -> jxdm;
+		CrashDriver -> geospatial;
+		CrashDriver -> niem_xs;
+		CrashDriver -> structures;
+
+	PrivacyMetadata [label="PrivacyMetadata.xsd"];
+		PrivacyMetadata -> structures;
+
+	// external
+	gml [label="gml.xsd"];
+		gml -> xlinks;
+	xlinks [label="xlinks.xsd"];
+
+
+	structures [label="structures.xsd"];
+
+
+	// core
+
+	niem_core [label="niem-core.xsd"];
+		niem_core -> niem_xs;
+		niem_core -> structures;
+
+	// domains
+	jxdm [label="jxdm.xsd"];
+		jxdm -> aamva_d20;
+		jxdm -> niem_core;
+		jxdm -> niem_xs;
+		jxdm -> structures;
+
+	// codes
+
+	aamva_d20 [label="aamva_d20.xsd"];
+		aamva_d20 -> structures;
+
+	// adapters
+
+	geospatial [label="geospatial.xsd"];
+		geospatial -> niem_core;
+		geospatial -> structures;
+		geospatial -> gml;
+
+	niem_xs [label="niem-xs.xsd"];
+		niem_xs -> structures;
+
+	// ========================
+
+{ rank="source" CrashDriver, PrivacyMetadata }
+{ rank="same" niem_core, geospatial, jxdm }
+{ rank="same" aamva_d20 }
+{ rank="same" gml, xlinks }
+{ rank="same" structures, niem_xs }
+
+}
