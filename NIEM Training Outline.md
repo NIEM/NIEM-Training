@@ -1,4 +1,4 @@
-# Detailed Outline
+# NIEM Training Detailed Outline
 
 ## Introduction
 
@@ -9,17 +9,27 @@
 - Assumption of XML and XML Schema knowledge
 	- _Reference [[OJJDP]] slides on this for now?_
 
-## Scenario Planning
+## IEPD Development
+
+- Give overview of the process
+	- Idealized: ![[DevSequence.svg]]
+	- Realistic: ![[DevSequenceRealistic.svg]]
+
+### Scenario Planning
 
 - Example MOUs and the like
 - Catalog-oriented metadata
 	- This will return later when we build the IEPD
 - This can mainly pull from the existing materials
 
-## Requirement Analysis
+### Requirement Analysis
 
-- Create UML diagram
-	- Bare minimum of UML needed to start
+- Create UML class diagram
+	- Only bare minimum of UML needed to start
+	- Can start with business terms and structures
+		- ![[CrashDriverClassDiagram.svg]]
+	- Or can use NIEM terms and structures
+		- ![[CrashDriverClassDiagram-NIEM.svg]]
 	- _Reference [[OJJDP]] slides on this for now?_
 - Business rules
 	- In whatever format you need
@@ -29,21 +39,23 @@
 - Cover process differences?
 	- Step-by-step, e.g. finish mapping entirely before starting schemas
 	- Concurrent, e.g. start building schemas as you go
+	- We'll use something in-between, building a matching instance document as we map
 	- While things are separated into discrete steps, the border is fuzzy
 		- Document business objects by entering them into the mapping template, is that Requirement Analysis or Mapping?
-	- Introduce the template?
+	- Introduce the mapping template here?
 
 
-## Mapping
+### Mapping
 
 For this entire section, we'll look at various things in the mapping spreadsheet and show how to map them to NIEM or to new elements that we'll create later. As we move through, we'll cover all the major aspects of how NIEM works.
 
 - Show a few different mapping spreadsheet options
 	- Class/Attribute
 	- Hierarchical
+	- We'll use Class/Attribute, to match UML closer
 - Enter business objects into mapping spreadsheet?
 
-### Mapping to Existing Objects
+#### Mapping to Existing Objects
 
 - Native properties
 	- `nc:Person`, `nc:PersonName`, etc
@@ -57,7 +69,14 @@ For this entire section, we'll look at various things in the mapping spreadsheet
 - Inherited properties
 	- Date of a `j:Crash` via `nc:ActivityDate`
 	- Explain namespaces
-		- _Pull diagrams from existing slides_
+		- Because you start to really see them here
+		- ![[Namespaces.png]]
+	- Diagrams, **but update to NIEM 5.0**
+		- Each type has objects it contains: ![[Inheritance 01.png]]
+		- No inheritance: ![[Inheritance 02.png]]
+		- One level of inheritance: ![[Inheritance 03.png]]
+		- Two levels of inheritance: ![[Inheritance 04.png]]
+		- Three levels of inheritance: ![[Inheritance 05.png]]
 	- Show expansion of types in SSGT
 	- _Show expansion of types in Wayfarer?_
 	- Show XML Schema representation
@@ -68,11 +87,11 @@ For this entire section, we'll look at various things in the mapping spreadsheet
 - Code tables
 	- `j:InjurySeverityCode`
 
-### Linking things together
+#### Linking things together
 
 - _Introduce Technical Framework here?_
 	- This shows the relationship between infrastructure, core, and domains
-	- _Pull diagrams from existing slides_
+	- ![[NIEM Layers.png]]
 - Referencing with `id` and `idref`
 	- Diagrams and description
 	- `nc:Person` and `j:Charge` as references in XML Schema
@@ -86,30 +105,38 @@ For this entire section, we'll look at various things in the mapping spreadsheet
 - Roles
 	- `j:CrashPerson/nc:RoleOfPerson`
 
-### Combining domains
+#### Combining domains
 
 - Show `exch:LicenseAugmentation` in XML Schema
 - Show `exch:LicenseAugmentation` in XML instance
 - _Need to make the augmentation use better, using multiple domains_
 
-### Information about information
+#### Information about information
 
 - Metadata
 	- Explain conceptually
+		- Document metadata as an example, that's easy in a classroom setting
+		- Image metadata might be better
+		- Image: ![[MicroUSB Cables Photo.jpg]]
+		- Metadata for image: ![[MicroUSB Cables Photo Metadata.png]]
 	- Show `j:JusticeMetadata` in XML Schema
 	- Show `j:JusticeMetadata` in XML instance
+	- Discuss pros and cons
+		- Easy to apply same metadata to many objects
+		- Can result in messy many-to-many relationships
 	
-### Creating something new
+#### Creating something new
 
 - `priv:PrivacyMetadata/priv:PrivacyCode`
+- ![[Element Flow Chart.png]]
 - Creating simple data elements
 	- `PrivacyCode` or `PersonFictionalCharacterIndicator` (**change this**)
-	- Show hierarchical view of the simple types
+	- Show hierarchical view of the simple types (_what did I man by this?_)
 - Creating complex objects
-	- From existing NIEM objects
+	- By extending existing NIEM objects
 		- `PrivacyMetadata`
 		- _Maybe there is a better, non-metadata example?_
-	- From scratch (via `structures:ObjectType`)
+	- From "scratch" (via `structures:ObjectType`)
 		- `CrashDriverInfo` and `CrashDriverInfoType`
 		- _Maybe there is a better non-root example?_
 - Adding the new thing to the exchange
@@ -119,18 +146,31 @@ For this entire section, we'll look at various things in the mapping spreadsheet
 		- Augmentation: `exch:PersonFictionalCharacterIndicator`
 		- Implied Substitution Groups: _Not used in the IEPD, add?_
 
-### Bringing in external standards
+#### Bringing in external standards
 
-- Using adapters
-- Sample uses `nc:Location2DGeospatialCoordinate`?
-	- _This isn't from Geospatial_
-	- _Need to replace it with `[nc:LocationGeospatialCoordinateAbstract]/geo:LocationGeospatialPoint/gml:Point` in the instance_
-	- _Schemas are set up, but need to specifically add in the adapter and verify that it works_
+- Rationale
+	- Some folks just aren't going to change
+	- Find a means to use those XML-based standards alongside NIEM
+	- Wrap them up in NIEM-conformant wrappers
+- Adapters
+	- These are the wrappers
+- Show `[nc:LocationGeospatialCoordinateAbstract]/geo:LocationGeospatialPoint/gml:Point`
+	- NIEM: `nc:LocationGeospatialCoordinateAbstract`
+	- NIEM-conformant adapter: `geo:LocationGeospatialPoint`
+	- External standard: `gml:Point`
 
 **Will have the complete instance document at this point.**
 
-## Creating and Validating Schemas
+### Creating and Validating Schemas
 
+- Show how the schemas fit together
+	- Extension: ![[schema_import_01.png]]
+	- Additional extensions: ![[schema_import_02.png]]
+	- NIEM Core: ![[schema_import_03.png]]
+	- Domains: ![[schema_import_04.png]]
+	- Code Tables![[schema_import_05.png]]
+	- External Standards: ![[schema_import_06.png]]
+	- Infrastructure: ![[schema_import_07.png]]
 - Schema subset
 	- Create the actual subset live in the SSGT
 		- _Maybe have some of it already completed?_
@@ -150,9 +190,9 @@ For this entire section, we'll look at various things in the mapping spreadsheet
 		- [Check NDR Conformance Using Schematron Validation](https://niem.github.io/reference/tools/oxygen/ndr/)
 		- Download files from [reference.niem.gov](https://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/niem-ndr-5.0.zip)
 		- Use `ndr-rules-conformance-target-ext.sch` - Schematron rules for EXT schemas
-			- Uses `ndr-functions.xsl`
+			- Uses `ndr-functions.xsl`, so folks should grab the entire ZIP file, not just the schematron file
 
-## Assembly
+### Assembly
 
 - Required documents
 	- catalog
@@ -161,13 +201,13 @@ For this entire section, we'll look at various things in the mapping spreadsheet
 - Putting together by hand (ZIP file)
 	- Show directory structure
 
-## Publishing
+### Publishing
 
-- Reg/Repo demo [[GTRI]]
+- Reg/Repo demo? [[GTRI]] _Won't be ready in time, future addition_
 - Cover, but not demo, Restricted Reg/Repo
 - Show legacy repositories, for now
 
-## Implement
+### Implement
 - The existing materials essentially ¯\\\_(ツ)\_/¯
 - This is a big issue and gap
 - We need a plan for this
@@ -175,9 +215,10 @@ For this entire section, we'll look at various things in the mapping spreadsheet
 	- Leverage community?
 	- Leverage internal GTRI devs?
 - Could put the [[JAXB]] demo here, apply to the sample IEPD
+	- _[[JAXB]] bindings need to be updated to a more current version of Java, a [[Peter Madruga]] thing_
 - Add this later as part of the pre-recorded version?
 - Could be separate classes, customized for different development environments
-- **Provide better directions on where to go next. Don't provide a lot of actual implementation detail, but don't just leave them hanging either.**
+- **[[Katherine Escobar]]: Provide better directions on where to go next. Don't provide a lot of actual implementation detail, but don't just leave them hanging either.**
 
 ___
 
@@ -187,7 +228,7 @@ ___
 - NIEM Technical Framework
 	- Content Models?
 - Work contact information into this IEPD
-- Show tool alternatives to expensive software like oXygen
+- Show tool alternatives to expensive software like oXygen?
 
 ## Separate videos for later
 
