@@ -12,7 +12,7 @@
 ## IEPD Development
 
 - Give overview of the process
-	- Idealized: ![[DevSequence.svg]] ![Idealized](Graphics/DevSequence.svg)
+	- Idealized: ![[DevSequence.svg]] ![Idealized](IEPD Development Steps/DevSequence.svg)
 	- Realistic: ![[DevSequenceRealistic.svg]]
 
 ### Scenario Planning
