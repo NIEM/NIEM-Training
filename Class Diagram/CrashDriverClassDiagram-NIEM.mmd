@@ -1,10 +1,21 @@
 classDiagram
 
-	Person <-- PersonName
-	Person <-- BirthDate
+	class CrashDriverInfo{
+	}
+
+	CrashDriverInfo o-- Person
+	CrashDriverInfo o-- Crash
+	CrashDriverInfo o-- PersonChargeAssociation
+	CrashDriverInfo o-- Charge
+	CrashDriverInfo o-- Metadata
+	CrashDriverInfo o-- PrivacyMetadata
+	
 
 	class Person{
 	}
+
+	Person o-- PersonName
+	Person o-- PersonBirthDate
 
 	class PersonName{
 		+String PersonGivenName
@@ -12,18 +23,58 @@ classDiagram
 		+String PersonLastName
 	}
 
-
-	class BirthDate{
+	class PersonBirthDate{
 		+Date Date
+	}
+
+	class PersonChargeAssociation{
+		+Boolean JuvenileAsAdultIndicator
+	}
+	PersonChargeAssociation o-- Person
+	PersonChargeAssociation o-- Charge
+	
+	class Charge{
+		+String ChargeDescriptionText
+		+Boolean ChargeFelonyIndicator
+	}
+	
+	class Metadata{
+		+Boolean CriminalInformationIndicator
+	}
+	
+	class PrivacyMetadata{
+		+String PrivacyCode
 	}
 
 	Activity <|-- Incident
 	Incident <|-- Crash
-	Activity <-- ActivityDate
-	Incident <-- Location
+
+	Activity o-- ActivityDate
+
 	class Crash{
 	}
+	
+	Crash o-- CrashVehicle
+	CrashVehicle o-- CrashDriver
+	Crash o-- CrashPerson
+	CrashPerson o-- CrashPersonInjury
+	CrashPerson o-- Person
+	Crash o-- Location
+	CrashDriver o-- Person
+	CrashDriver o-- DriverLicense
+	DriverLicense o-- DriverLicenseCardIdentification
+	
+	
+	class CrashDriver{
+	}
 
+	class CrashPerson{
+	}
+	class CrashPersonInjury{
+		+String InjuryDescriptionText
+		+String InjurySeverityCode
+	}
+	
 	class Incident{
 	}
 	
@@ -34,10 +85,20 @@ classDiagram
 		+Date Date
 	}
 
+	class DriverLicense{
+	}
+	
+	class DriverLicenseCardIdentification{
+		+String IdentificationID
+	}
 
-	Location <-- Location2DGeospatialCoordinate
-	Location2DGeospatialCoordinate <-- GeographicCoordinateLatitude
-	Location2DGeospatialCoordinate <-- GeographicCoordinateLongitude
+	Location o-- Location2DGeospatialCoordinate
+	Location2DGeospatialCoordinate o-- GeographicCoordinateLatitude
+	Location2DGeospatialCoordinate o-- GeographicCoordinateLongitude
+	
+	Location o-- LocationGeospatialPoint
+	LocationGeospatialPoint o-- Point
+	Point <-- pos
 	
 	class Location{
 		
@@ -54,4 +115,16 @@ classDiagram
 	class GeographicCoordinateLongitude{
 		LongitudeDegreeValue
 		LongitudeMinuteValue
+	}
+
+	class LocationGeospatialPoint{
+	}
+	
+	class Point{
+		+String id
+	}
+	
+	class pos{
+		+String srsName
+		+String Value
 	}

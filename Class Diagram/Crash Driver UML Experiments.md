@@ -5,10 +5,12 @@ mmdc --input CrashDriverClassDiagram.mmd --output CrashDriverClassDiagram.svg --
 mmdc --input CrashDriverClassDiagram-NIEM.mmd --output CrashDriverClassDiagram-NIEM.svg --theme neutral
 ```
 
-Try this for png?
+For PNG use [[rsvg-convert]]: 
 
 ```
-/Applications/Inkscape.app/Contents/Resources/bin/inkscape -z -e test.png -w 1024 -h 1024 test.svg
+rsvg-convert -x 2.0 -y 2.0 CrashDriverClassDiagram.svg > CrashDriverClassDiagram.png
+rsvg-convert -x 2.0 -y 2.0 CrashDriverClassDiagram-NIEM.svg > CrashDriverClassDiagram-NIEM.png
+
 ```
 
 ___

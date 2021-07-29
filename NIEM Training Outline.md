@@ -1,131 +1,221 @@
-# NIEM Training Detailed Outline
+# Introduction
 
-## Introduction
+**This can mainly pull from the existing materials**
 
 - Basic Intro
 - What is NIEM
-	- OSI Slide
+	- Existing slides
+	- OSI Slide _Get from [[Aubrey Beach]]?_
+	- ![[OSI Diagram.png]]
+	- Terminology clarification
 - NIEM Harmonization and Organization
 - Assumption of XML and XML Schema knowledge
+	- _Where to point folks who don't have it?_
 	- _Reference [[OJJDP]] slides on this for now?_
+	- _IJIS still intends to do this?_
 
-## IEPD Development
+# IEPD Development
+
+**This can mainly pull from the existing materials**
 
 - Give overview of the process
+	- Loop diagram and steps, describe each
 	- Idealized: ![[DevSequence.svg]]
 	- Realistic: ![[DevSequenceRealistic.svg]]
 
-### Scenario Planning
+## Scenario Planning
+
+**This can mainly pull from the existing materials**
 
 - Example MOUs and the like
 - Catalog-oriented metadata
 	- This will return later when we build the IEPD
-- This can mainly pull from the existing materials
 
-### Requirement Analysis
+## Requirement Analysis
 
-- Create UML class diagram
-	- Only bare minimum of UML needed to start
+- Introduce the variety of UML diagrams
+	- **Use existing slides**
+- Give more detail on UML class diagrams
+	- Only bare minimum knowledge of UML needed to start
 	- Can start with business terms and structures
 		- ![[CrashDriverClassDiagram.svg]]
+		- Recommended, personally, to ensure that business concepts are recorded accurately
+		- Translating those to NIEM isn't the goal in this step
 	- Or can use NIEM terms and structures
 		- ![[CrashDriverClassDiagram-NIEM.svg]]
+		- Can save some time by doing some conversions at this step
+		- Can confuse business experts
+		- Potential for the developer to change requirements for the sake of NIEM mapping
 	- _Reference [[OJJDP]] slides on this for now?_
+	- Tools
+		- ArgoUML
+		- [[BOUML]]
+		- Visio
+		- OmniGraffle
 - Business rules
 	- In whatever format you need
 		- Schematron (which we will not get into)
-			- Show some common examples?
+			- e.g. Birth dates must be in the past, salutations matching gender
 		- Just plain old narrative text
-- Cover process differences?
+		- Other options? _I'm weak on this, need examples_
+- Different processes can be followed from here
 	- Step-by-step, e.g. finish mapping entirely before starting schemas
 	- Concurrent, e.g. start building schemas as you go
-	- We'll use something in-between, building a matching instance document as we map
-	- While things are separated into discrete steps, the border is fuzzy
-		- Document business objects by entering them into the mapping template, is that Requirement Analysis or Mapping?
-	- Introduce the mapping template here?
+	- We'll use something in-between, building an ersatz matching instance document as we map
 
+**Up to this point, this has been a standard presentation.**
 
-### Mapping
+## Mapping
 
-For this entire section, we'll look at various things in the mapping spreadsheet and show how to map them to NIEM or to new elements that we'll create later. As we move through, we'll cover all the major aspects of how NIEM works.
+For this entire section, we'll look at various things in the mapping spreadsheet and show how to map them to NIEM or to new elements that we'll create later. As we move through, we'll cover all the major aspects of how NIEM works. **This is the backbone of the training, covering all the technical details of NIEM.**
 
-- Show a few different mapping spreadsheet options
-	- Class/Attribute
-	- Hierarchical
-	- We'll use Class/Attribute, to match UML closer
-- Enter business objects into mapping spreadsheet?
+### Intro to Mapping
 
-#### Mapping to Existing Objects
+- Introduce the mapping spreadsheet
+	- Explain each column
+	- The more you capture while mapping, the easier schema creation is down the road
+	- Can use the template or roll your own simpler variety
+		- Class/Attribute
+		- Hierarchical
+		- We'll use Class/Attribute, to match the UML
+			- ![[CrashDriverClassDiagram.svg]]
+- Enter business objects into mapping spreadsheet
+	- _Show entering a few object, then switch to a pre-filled version_
+- Handy to maintain a representation of the resulting instance document
+	- Just indented text will work
+		- [[instance_document_text]]
+	- This is a visual representation of the IEP paths
 
-- Native properties
-	- `nc:Person`, `nc:PersonName`, etc
-	- Show searching in SSGT
-	- _Show searching in Wayfarer?_
-	- Show cardinality
-	- Show XML Schema representation (_in Wayfarer?_)
-	- Show matching XML instance (_in oXygen?_)
-	- _Future: Show the same in JSON_
+### Mapping to Existing Objects
 
-- Inherited properties
-	- Date of a `j:Crash` via `nc:ActivityDate`
-	- Explain namespaces
-		- Because you start to really see them here
-		- ![[Namespaces.png]]
-	- Diagrams, **but update to NIEM 5.0**
-		- Each type has objects it contains: ![[Inheritance 01.png]]
-		- No inheritance: ![[Inheritance 02.png]]
-		- One level of inheritance: ![[Inheritance 03.png]]
-		- Two levels of inheritance: ![[Inheritance 04.png]]
-		- Three levels of inheritance: ![[Inheritance 05.png]]
-	- Show expansion of types in SSGT
-	- _Show expansion of types in Wayfarer?_
-	- Show XML Schema representation
-	- Show matching XML instance
-	- _Future: Show the same in JSON_
-	- Show `j:CommercialVehicle` as the deepest example
-		- Temporarily replace `j:CrashVehicle` for this
-- Code tables
-	- `j:InjurySeverityCode`
+- What you are defines what you hold
+	- ![[Type Hierarchy 01.png]]
+	- ![[Type Hierarchy 02.png]]
+	- ![[Type Hierarchy 03.png]]
+	- ![[Type Hierarchy 04.png]]
+	- ![[Type Hierarchy 05.png]]
 
-#### Linking things together
+#### Native properties
 
-- _Introduce Technical Framework here?_
+- Start with easy matches
+- `nc:Person`, `nc:PersonName`, etc
+- Show searching in SSGT
+- _Show searching in Wayfarer?_
+- _Show viewing objects in Grid-ML?_ (Grid-ML lacks global search)
+- Show cardinality
+- Show XML Schema representation (_in HyperNIEM?_)
+	- [`nc:Person`](http://niem5.org/schemas/nc.html#Person)
+	- [`nc:PersonType`](http://niem5.org/schemas/nc.html#PersonType)
+	- [`nc:PersonName`](http://niem5.org/schemas/nc.html#PersonName)
+	- [`nc:PersonNameType`](http://niem5.org/schemas/nc.html#PersonNameType)
+	- [`nc:PersonSurName`](http://niem5.org/schemas/nc.html#PersonSurName)
+- Show matching XML instance (_in oXygen?_)
+	- _Should be able to validate this against the entire model_
+- _Future: Show the same in JSON_
+- Fill in `nc:Person`, `nc:PersonName`, `nc:Person(.*)Name`
+
+#### Substitution groups
+
+- Various means of representing a single concept
+- `nc:PersonBirthDate` contains `nc:DateRepresentation` which is substituted by a variety of representations
+	- Show the list: [`nc:DateRepresentation`](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-92a)
+- _Show the schema for each of these_
+	- [`nc:PersonBirthDate`](http://niem5.org/schemas/nc.html#PersonBirthDate)
+	- [`nc:DateType`](http://niem5.org/schemas/nc.html#DateType)
+	- [`nc:DateRepresentation`](http://niem5.org/schemas/nc.html#DateRepresentation)
+- Fill in `nc:PersonBirthDate`, `nc:DateRepresentation`, and `nc:Date`
+
+#### Inherited properties
+
+- Start with `j:Crash`
+- Fail to find "Crash Date"
+- Introduce searching tips:
+	- Synonyms
+	- Word roots
+	- Likely containers, like a Crash Date would be inside a Crash
+	- Likely sub-elements
+- Show date of a `j:Crash` via `nc:ActivityDate` in SSGT
+- Explain namespaces
+	- Because you start to really see them here
+	- Don't have to be too detailed because this is just XML Schema
+	- ![[Namespaces.png]]
+- Inheritance **update to NIEM 5.0 using `j:Crash`**
+	- Each type has objects it contains: ![[Inheritance 01.png]]
+	- No inheritance: ![[Inheritance 02.png]]
+	- One level of inheritance: ![[Inheritance 03.png]]
+	- Two levels of inheritance: ![[Inheritance 04.png]]
+	- Three levels of inheritance: ![[Inheritance 05.png]]
+- Show expansion of types in SSGT
+- _Show expansion of types in Wayfarer?_
+- Show XML Schema representation
+	- [`j:Crash`](http://niem5.org/schemas/j.html#Crash)
+	- [`j:CrashType`](http://niem5.org/schemas/j.html#CrashType)
+	- [`j:DrivingIncidentType`](http://niem5.org/schemas/j.html#DrivingIncidentType)
+	- [`nc:IncidentType`](http://niem5.org/schemas/nc.html#IncidentType)
+	- [`nc:ActivityType`](http://niem5.org/schemas/nc.html#ActivityType)
+	- [`nc:ActivityDate`](http://niem5.org/schemas/nc.html#ActivityDate)
+- Show matching XML instance
+- _Future: Show the same in JSON_
+- Show `j:CommercialVehicle` as the deepest example
+	- Show in SSGT [`j:CommercialVehicle`](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-dw)
+	- Show in Wayfarer [`j:CommercialVehicle`](http://niem5.org/wayfarer/j/CommercialVehicle.html)
+	- Temporarily replace `j:CrashVehicle` with this in the instance
+
+#### Code tables
+
+- `j:InjurySeverityCode`
+- Show in schema
+	- [`j:InjurySeverityCode`](http://niem5.org/schemas/j.html#InjurySeverityCode)
+	- [`aamva_d20:AccidentSeverityCodeType`](http://niem5.org/schemas/aamva_d20.html#AccidentSeverityCodeType)
+	- [`aamva_d20:AccidentSeverityCodeSimpleType`](http://niem5.org/schemas/aamva_d20.html#AccidentSeverityCodeSimpleType)
+- The wrapping in a complex type leads directly to the infrastructure, which leads off the next section
+
+### Linking things together
+
+- Introduce Technical Framework
+	- This is where the infrastructure come in
 	- This shows the relationship between infrastructure, core, and domains
 	- ![[NIEM Layers.png]]
 - Referencing with `id` and `idref`
 	- Diagrams and description
 	- `nc:Person` and `j:Charge` as references in XML Schema
 	- `nc:Person` and `j:Charge` as references in XML instance
-- Associations
-	- `j:PersonChargeAssociation`
-	- Added information specific to an association
-		- `j:JuvenileAsAdultIndicator`
-	- Show `j:PersonChargeAssociation` in XML Schema
-	- Show `j:PersonChargeAssociation` in XML instance
-- Roles
+
+#### Associations
+
+- `j:PersonChargeAssociation`
+- Added information specific to an association
+	- `j:JuvenileAsAdultIndicator`
+- Show `j:PersonChargeAssociation` in XML Schema
+- Show `j:PersonChargeAssociation` in XML instance
+
+#### Roles
 	- `j:CrashPerson/nc:RoleOfPerson`
 
-#### Combining domains
+### Combining domains
 
 - Show `exch:LicenseAugmentation` in XML Schema
 - Show `exch:LicenseAugmentation` in XML instance
 - _Need to make the augmentation use better, using multiple domains_
 
-#### Information about information
+### Metadata - Information about information
 
-- Metadata
-	- Explain conceptually
-		- Document metadata as an example, that's easy in a classroom setting
-		- Image metadata might be better
-		- Image: ![[MicroUSB Cables Photo.jpg]]
-		- Metadata for image: ![[MicroUSB Cables Photo Metadata.png]]
-	- Show `j:JusticeMetadata` in XML Schema
-	- Show `j:JusticeMetadata` in XML instance
-	- Discuss pros and cons
-		- Easy to apply same metadata to many objects
-		- Can result in messy many-to-many relationships
+- Explain conceptually
+	- Document metadata as an example, that's easy in a classroom setting
+	- Image metadata might be better
+	- Image: ![[MicroUSB Cables Photo.jpg]]
+	- Metadata for image: ![[MicroUSB Cables Photo Metadata.png]]
+- Show `j:Metadata` in XML Schema
+	- [`j:Metadata`](http://niem5.org/schemas/j.html#Metadata)
+	- [`j:MetadataType`]http://niem5.org/schemas/j.html#MetadataType)
+	- [`structures:MetadataType`](http://niem5.org/schemas/structures.html#MetadataType)
+- Show `j:Metadata` in XML instance
+- Discuss pros and cons
+	- Easy to apply same metadata to many objects
+	- Can result in messy many-to-many relationships
+		- Powerful, but hard to implement
 	
-#### Creating something new
+### Creating something new
 
 - `priv:PrivacyMetadata/priv:PrivacyCode`
 - ![[Element Flow Chart.png]]
@@ -146,7 +236,7 @@ For this entire section, we'll look at various things in the mapping spreadsheet
 		- Augmentation: `exch:PersonFictionalCharacterIndicator`
 		- Implied Substitution Groups: _Not used in the IEPD, add?_
 
-#### Bringing in external standards
+### Bringing in external standards
 
 - Rationale
 	- Some folks just aren't going to change
@@ -155,13 +245,13 @@ For this entire section, we'll look at various things in the mapping spreadsheet
 - Adapters
 	- These are the wrappers
 - Show `[nc:LocationGeospatialCoordinateAbstract]/geo:LocationGeospatialPoint/gml:Point`
-	- NIEM: `nc:LocationGeospatialCoordinateAbstract`
-	- NIEM-conformant adapter: `geo:LocationGeospatialPoint`
-	- External standard: `gml:Point`
+	- NIEM: [`nc:LocationGeospatialCoordinateAbstract`](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-125z)
+	- NIEM-conformant adapter: [`geo:LocationGeospatialPoint`](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-m73)
+	- External standard: [`gml:Point`](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-fux)
 
-**Will have the complete instance document at this point.**
+**Will have the complete instance document at this point as an indented text document.**
 
-### Creating and Validating Schemas
+## Creating and Validating Schemas
 
 - Show how the schemas fit together
 	- Extension: ![[schema_import_01.png]]
@@ -172,42 +262,45 @@ For this entire section, we'll look at various things in the mapping spreadsheet
 	- External Standards: ![[schema_import_06.png]]
 	- Infrastructure: ![[schema_import_07.png]]
 - Schema subset
+	- Explain concept
 	- Create the actual subset live in the SSGT
-		- _Maybe have some of it already completed?_
-		- Export
+		- _Maybe have some of it already completed via a wantlist?_
+		- Export results
 		- Explain wantlists
 	- In-lining substitution groups by hand
 		- Caveats
-		- Point to that section in the spec
-- Extension and Document schemas
+			- You've left the garden
+			- Multiple validation passes
+		- Point to that section in the spec for other options
+- Extension and Exchange schemas
 	- Create live in oXygen
 		- Utilize pre-typed blocks
-		- Utilize [[Christina Medlin]] oXygen snippets
+		- _Utilize [[Christina Medlin]] oXygen snippets?_
 - Tips and Tricks
-	- oXygen Snippets
-	- BBEdit generation scripts
+	- oXygen Snippets via [[Christina Medlin]]
+	- BBEdit generation scripts via [[Tom Carlson]] **Need to update!**
+		- Convert the [[instance_document_text]] to XML
 	- Using Schematron to check your work as you go
+		- Do this and fix the inevitable errors
 		- [Check NDR Conformance Using Schematron Validation](https://niem.github.io/reference/tools/oxygen/ndr/)
 		- Download files from [reference.niem.gov](https://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/niem-ndr-5.0.zip)
 		- Use `ndr-rules-conformance-target-ext.sch` - Schematron rules for EXT schemas
 			- Uses `ndr-functions.xsl`, so folks should grab the entire ZIP file, not just the schematron file
 
-### Assembly
+## Assembly
 
-- Required documents
-	- catalog
-	- _Look up the rest_
+- [[Required Artifacts]]
 - Message Builder Demo [[BAH]]
 - Putting together by hand (ZIP file)
 	- Show directory structure
 
-### Publishing
+## Publishing
 
 - Reg/Repo demo? [[GTRI]] _Won't be ready in time, future addition_
-- Cover, but not demo, Restricted Reg/Repo
+- _Cover, but not demo, Restricted Reg/Repo?_
 - Show legacy repositories, for now
 
-### Implement
+## Implementation
 - The existing materials essentially ¯\\\_(ツ)\_/¯
 - This is a big issue and gap
 - We need a plan for this
@@ -222,15 +315,16 @@ For this entire section, we'll look at various things in the mapping spreadsheet
 
 ___
 
-## Concepts to still fit in
+# Todo
 
-- NIEM Conformance
-- NIEM Technical Framework
+- Fit in NIEM Conformance
+- Fit in NIEM Technical Framework?
 	- Content Models?
-- Work contact information into this IEPD
-- Show tool alternatives to expensive software like oXygen?
+- Work contact information into sample IEPD
+- Separate out an exchange schema from the extension
+- Show tool alternatives to expensive software like oXygen/XMLSpy?
 
-## Separate videos for later
+## Separate videos for later?
 
 - [[JAXB]]
 - [[CUI]]
