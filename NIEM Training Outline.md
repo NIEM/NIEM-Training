@@ -20,7 +20,7 @@
 
 - Give overview of the process
 	- Loop diagram and steps, describe each
-	- Idealized: ![[DevSequence.svg]]
+	- Idealized: ![[DevSequence.svg]] ![IEPD Development Steps/DevSequence.svg]
 	- Realistic: ![[DevSequenceRealistic.svg]]
 
 ## Scenario Planning
