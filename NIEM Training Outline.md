@@ -301,12 +301,12 @@ For this entire section, we'll look at various things in the mapping spreadsheet
 - Extension and Exchange schemas
 	- Create live in oXygen
 		- Utilize pre-typed blocks
-		- _Utilize [[Christina Medlin]] oXygen snippets?_
+		- _Utilize Christina oXygen snippets?_
 	- Required Attributes
 		- `ct` for conformance target
 		- `xmlns` for each
 - Tips and Tricks
-	- oXygen Snippets via [[Christina Medlin]]
+	- oXygen Snippets via Christina
 	- BBEdit generation scripts via [[Tom Carlson]] **Need to update!**
 		- Convert the [[instance_document_text]] to XML
 		- `make-xml-4`
@@ -358,7 +358,7 @@ ___
 - Fit in NIEM Conformance
 	- NDR
 	- IEPD Spec
-	- Add [[Christina Medlin]] checklist
+	- Add Christina checklist
 - Work contact information into sample IEPD
 - Separate out an exchange schema from the extension
 - Show tool alternatives to expensive software like oXygen/XMLSpy?
