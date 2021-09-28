@@ -1,0 +1,12 @@
+digraph metadata {
+
+
+	object1 [label="Object 1"];
+
+	metadata1 [label="Metadata 1"];
+	metadata2 [label="Metadata 2"];
+
+	object1 -> metadata1;
+	object1 -> metadata2;
+
+}

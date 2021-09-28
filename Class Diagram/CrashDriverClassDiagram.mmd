@@ -21,6 +21,7 @@ classDiagram
 	
 	class Driver{
 		+String DriverLicenseNumber
+		+String Email
 	
 	}
 
@@ -28,6 +29,7 @@ classDiagram
 		+String InjuryDescription
 		+Code SeverityCode
 		+String InjuryPrivacyCode
+		+Boolean ThroughWindow
 	}
 
 	class Charge{
@@ -40,3 +42,4 @@ classDiagram
 		+String CrashLocationCoordinates
 	}
 
+	Person <--> Charge

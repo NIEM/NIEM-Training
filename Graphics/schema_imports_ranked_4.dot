@@ -14,15 +14,17 @@ digraph schemas {
 	// extension
 
 	CrashDriver [label="CrashDriver.xsd"];
-		CrashDriver -> PrivacyMetadata;
 		CrashDriver -> niem_core;
 		CrashDriver -> jxdm;
-		CrashDriver -> geospatial;
-		CrashDriver -> niem_xs[style="invis"];
-		CrashDriver -> structures[style="invis"];
+		CrashDriver -> extension;
+		CrashDriver -> structures [style="invis"];
 
-	PrivacyMetadata [label="PrivacyMetadata.xsd"];
-		PrivacyMetadata -> structures [style="invis"];
+	extension [label="extension.xsd"];
+		extension -> niem_core;
+		extension -> jxdm;
+		extension -> geospatial;
+		extension -> niem_xs [style="invis"];
+		extension -> structures [style="invis"];
 
 	// external
 	gml [label="gml.xsd", style="invis"];
@@ -63,7 +65,8 @@ digraph schemas {
 
 	// ========================
 
-{ rank="source" CrashDriver, PrivacyMetadata }
+{ rank="source" CrashDriver }
+{ rank="same" extension }
 { rank="same" niem_core, geospatial, jxdm }
 { rank="same" aamva_d20 }
 { rank="same" gml, xlinks }

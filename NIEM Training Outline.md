@@ -1,13 +1,32 @@
+# Pre-reqs?
+
+For this class? A quiz?
+For doing the IEPD process?
+
+Scope of the class? Maybe a timeline? Explaining what a message is?
+
+Water bottle metaphor?
+
+Capture the payload.
+
+Utilize existing scope of NIEM diagrams.
+
+
 # Introduction
 
 **This can mainly pull from the existing materials**
 
+**Add a pre-req checklist for doing the development**
+
 - Basic Intro
 - What is NIEM
 	- Existing slides
-	- OSI Slide _Get from [[Aubrey Beach]]?_
-	- ![[OSI Diagram.png]]
-	- Terminology clarification
+	- Scope of NIEM
+		- OSI Slide _Get from [[Aubrey Beach]]?_
+		- ![[OSI Diagram.png]]
+		- Terminology clarification
+		- Utilize existing scope of NIEM diagrams
+		- Water bottle metaphor
 - NIEM Harmonization and Organization
 - Assumption of XML and XML Schema knowledge
 	- _Where to point folks who don't have it?_
@@ -48,10 +67,10 @@
 		- Potential for the developer to change requirements for the sake of NIEM mapping
 	- _Reference [[OJJDP]] slides on this for now?_
 	- Tools
-		- ArgoUML
+		- [ArgoUML](https://en.wikipedia.org/wiki/ArgoUML)
 		- [[BOUML]]
-		- Visio
-		- OmniGraffle
+		- Visio / OmniGraffle
+		- Mermaid / Dot
 - Business rules
 	- In whatever format you need
 		- Schematron (which we will not get into)
@@ -72,6 +91,10 @@ For this entire section, we'll look at various things in the mapping spreadsheet
 ### Intro to Mapping
 
 - Introduce the mapping spreadsheet
+	- Give options
+		- Component Mapping Template
+		- Simplified Training
+		- Custom, which we'll be using here
 	- Explain each column
 	- The more you capture while mapping, the easier schema creation is down the road
 	- Can use the template or roll your own simpler variety
@@ -220,8 +243,8 @@ For this entire section, we'll look at various things in the mapping spreadsheet
 - `priv:PrivacyMetadata/priv:PrivacyCode`
 - ![[Element Flow Chart.png]]
 - Creating simple data elements
-	- `PrivacyCode` or `PersonFictionalCharacterIndicator` (**change this**)
-	- Show hierarchical view of the simple types (_what did I man by this?_)
+	- `PrivacyCode` or `PersonDefenestrationIndicator` (**change this**)
+	- Show hierarchical view of the simple types (_what did I mean by this?_)
 - Creating complex objects
 	- By extending existing NIEM objects
 		- `PrivacyMetadata`
@@ -235,6 +258,8 @@ For this entire section, we'll look at various things in the mapping spreadsheet
 		- Concrete: `priv:PrivacyCode` is concrete but very simple
 		- Augmentation: `exch:PersonFictionalCharacterIndicator`
 		- Implied Substitution Groups: _Not used in the IEPD, add?_
+
+**Submit extensions that would be applicable to the whole model. Point to the issue tracker.**
 
 ### Bringing in external standards
 
@@ -267,6 +292,7 @@ For this entire section, we'll look at various things in the mapping spreadsheet
 		- _Maybe have some of it already completed via a wantlist?_
 		- Export results
 		- Explain wantlists
+	- Demo linter
 	- In-lining substitution groups by hand
 		- Caveats
 			- You've left the garden
@@ -276,10 +302,14 @@ For this entire section, we'll look at various things in the mapping spreadsheet
 	- Create live in oXygen
 		- Utilize pre-typed blocks
 		- _Utilize [[Christina Medlin]] oXygen snippets?_
+	- Required Attributes
+		- `ct` for conformance target
+		- `xmlns` for each
 - Tips and Tricks
 	- oXygen Snippets via [[Christina Medlin]]
 	- BBEdit generation scripts via [[Tom Carlson]] **Need to update!**
 		- Convert the [[instance_document_text]] to XML
+		- `make-xml-4`
 	- Using Schematron to check your work as you go
 		- Do this and fix the inevitable errors
 		- [Check NDR Conformance Using Schematron Validation](https://niem.github.io/reference/tools/oxygen/ndr/)
@@ -293,12 +323,20 @@ For this entire section, we'll look at various things in the mapping spreadsheet
 - Message Builder Demo [[BAH]]
 - Putting together by hand (ZIP file)
 	- Show directory structure
+	- iepd-catalog
+	- conformance
+	- changelog
+	- readme
 
 ## Publishing
 
-- Reg/Repo demo? [[GTRI]] _Won't be ready in time, future addition_
-- _Cover, but not demo, Restricted Reg/Repo?_
-- Show legacy repositories, for now
+- Now
+	- Show legacy repositories, for now
+- Coming soon
+	- Reg/Repo demo? [[GTRI]] _Won't be ready in time, future addition_
+	- _Cover, but not demo, Restricted Reg/Repo?_
+- _Maybe an area on GitHub?_
+	- In the Community Blog?
 
 ## Implementation
 - The existing materials essentially ¯\\\_(ツ)\_/¯
@@ -318,17 +356,12 @@ ___
 # Todo
 
 - Fit in NIEM Conformance
-- Fit in NIEM Technical Framework?
-	- Content Models?
+	- NDR
+	- IEPD Spec
+	- Add [[Christina Medlin]] checklist
 - Work contact information into sample IEPD
 - Separate out an exchange schema from the extension
 - Show tool alternatives to expensive software like oXygen/XMLSpy?
-
-## Separate videos for later?
-
-- [[JAXB]]
-- [[CUI]]
-
 
 
 
