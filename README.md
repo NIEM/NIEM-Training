@@ -11,4 +11,4 @@ Materials for the revamped NIEM Training presentations.
 
 ## Sample IEPD
 
-- [Crash Driver](https://github.com/NIEM/NIEM-Training/blob/main/Exchange%20Examples/Crash%20Driver.md)
+- [Crash Driver IEPD](https://github.com/NIEM/NIEM-Training/tree/main/Crash%20Driver%20IEPD)
