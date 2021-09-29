@@ -41,4 +41,17 @@
     <c:Wantlist c:pathURI="xsd/wantlist.xml"/>
     <c:ExtensionSchemaDocument c:pathURI="xsd/extension/CrashDriver.xsd"/>
     <c:ExtensionSchemaDocument c:pathURI="xsd/extension/extension.xsd"/>
+    <c:ReferenceSchemaDocument c:pathURI="xsd/niem/niem-core.xsd"/>
+    <c:ReferenceSchemaDocument c:pathURI="xsd/niem/geospatial.xsd"/>
+    <c:ReferenceSchemaDocument c:pathURI="xsd/niem/niem-xs.xsd"/>
+    <c:ReferenceSchemaDocument c:pathURI="xsd/niem/codes/aamva_d20.xsd"/>
+    <c:ReferenceSchemaDocument c:pathURI="xsd/niem/domains/jxdm.xsd"/>
+    <c:ReferenceSchemaDocument c:pathURI="xsd/niem/utility/appinfo.xsd"/>
+    <c:ReferenceSchemaDocument c:pathURI="xsd/niem/utility/code-lists-instance.xsd"/>
+    <c:ReferenceSchemaDocument c:pathURI="xsd/niem/utility/code-lists-schema-appinfo.xsd"/>
+    <c:ReferenceSchemaDocument c:pathURI="xsd/niem/utility/conformanceTargets.xsd"/>
+    <c:ReferenceSchemaDocument c:pathURI="xsd/niem/utility/structures.xsd"/>
+    <c:ExternalSchemaDocument c:pathURI="xsd/niem/external/ogc/gml/3.2.1/gml.xsd"/>
+    <c:ExternalSchemaDocument c:pathURI="xsd/niem/external/ogc/ols/1.1.0/dhs-gmo/2.1.0/ols.xsd"/>
+    <c:ExternalSchemaDocument c:pathURI="xsd/niem/external/ogc/xlink/1.0.0/xlinks.xsd"/>
 </c:IEPDCatalog>

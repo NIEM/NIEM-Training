@@ -4,7 +4,7 @@ Changes:
 
 - `nc:IncidentLocation` is now just `nc:Location`
 - `j:JusticeMetadata` is now just `j:Metadata`
-- `@sequenceID` is gone now
+- `sequenceID` is now in structures
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>

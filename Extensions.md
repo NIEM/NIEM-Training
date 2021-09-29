@@ -19,3 +19,9 @@ Add local charge code table via sub group.
 ___
 
 Add the passenger to show many-to-many with charges?
+      
+
+
+
+exch:LicenseAugmentation Add nc:ContactInformation to it? Maybe bringing in current tech like email address that wouldn't normally be there. Like [nc:ContactEmailID](http://niem5.org/wayfarer/nc/ContactEmailID.html)?
+

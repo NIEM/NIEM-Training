@@ -162,7 +162,7 @@ For this entire section, we'll look at various things in the mapping spreadsheet
 	- Because you start to really see them here
 	- Don't have to be too detailed because this is just XML Schema
 	- ![[Namespaces.png]]
-- Inheritance **update to NIEM 5.0 using `j:Crash`**
+- Inheritance
 	- Each type has objects it contains: ![[Inheritance 01.png]]
 	- No inheritance: ![[Inheritance 02.png]]
 	- One level of inheritance: ![[Inheritance 03.png]]
