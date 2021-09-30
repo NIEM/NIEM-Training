@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema
     ct:conformanceTargets="http://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/#ExtensionSchemaDocument"
-    targetNamespace="http://example.com/CrashDriver/1.0/extension" version="1"
+    targetNamespace="http://example.com/CrashDriver/1.0/extension" version="1" xml:lang="en-US"
     xmlns:ext="http://example.com/CrashDriver/1.0/extension"
     xmlns:j="http://release.niem.gov/niem/domains/jxdm/7.0/"
     xmlns:nc="http://release.niem.gov/niem/niem-core/5.0/"
@@ -58,8 +58,15 @@
         </xs:annotation>
     </xs:element>
 
-    <xs:element name="PrivacyMetadata" type="ext:PrivacyMetadataType"/>
+    <xs:element name="PrivacyMetadata" type="ext:PrivacyMetadataType">
+        <xs:annotation>
+            <xs:documentation>Privacy Metadata</xs:documentation>
+        </xs:annotation>
+    </xs:element>
     <xs:complexType name="PrivacyMetadataType">
+        <xs:annotation>
+            <xs:documentation>A datatype for Privacy Metadata</xs:documentation>
+        </xs:annotation>
         <xs:complexContent>
             <xs:extension base="structures:MetadataType">
                 <xs:sequence>
@@ -69,8 +76,16 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:element name="PrivacyCode" type="ext:PrivacyCodeType"/>
+    <xs:element name="PrivacyCode" type="ext:PrivacyCodeType">
+        <xs:annotation>
+            <xs:documentation>A code representing a kind of property.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
     <xs:complexType name="PrivacyCodeType">
+        <xs:annotation>
+            <xs:documentation>A data type for a code representing a kind of
+                property.</xs:documentation>
+        </xs:annotation>
         <xs:simpleContent>
             <xs:extension base="ext:PrivacyCodeSimpleType">
                 <xs:attributeGroup ref="structures:SimpleObjectAttributeGroup"/>
@@ -79,9 +94,21 @@
     </xs:complexType>
 
     <xs:simpleType name="PrivacyCodeSimpleType">
+        <xs:annotation>
+            <xs:documentation>A data type for a code representing a kind of
+                property.</xs:documentation>
+        </xs:annotation>
         <xs:restriction base="xs:token">
-            <xs:enumeration value="PII"/>
-            <xs:enumeration value="MEDICAL"/>
+            <xs:enumeration value="PII">
+                <xs:annotation>
+                    <xs:documentation>Personally Identifiable Information</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="MEDICAL">
+                <xs:annotation>
+                    <xs:documentation>Medical Information</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
         </xs:restriction>
     </xs:simpleType>
 
