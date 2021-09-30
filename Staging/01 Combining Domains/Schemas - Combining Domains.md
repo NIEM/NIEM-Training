@@ -69,6 +69,19 @@ Creates a bag called `LicenseAugmentation` with [`nc:ContactInformation`](http:/
 </xs:complexType>
 
 ```
+
+```xml
+<xs:complexType name="AugmentationType" abstract="true">
+	<xs:annotation>
+		<xs:documentation>A data type for a set of properties to be applied to a base type.</xs:documentation>
+	</xs:annotation>
+	<xs:attribute ref="structures:id"/>
+	<xs:attribute ref="structures:ref"/>
+	<xs:attribute ref="structures:uri"/>
+	<xs:anyAttribute namespace="urn:us:gov:ic:ism urn:us:gov:ic:ntk" processContents="lax"/>
+</xs:complexType>
+```
+
 ## j:DriverLicense XML Instance Document
 
 ```xml
