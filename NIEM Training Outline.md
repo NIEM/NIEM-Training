@@ -243,8 +243,7 @@ For this entire section, we'll look at various things in the mapping spreadsheet
 - `priv:PrivacyMetadata/priv:PrivacyCode`
 - ![[Element Flow Chart.png]]
 - Creating simple data elements
-	- `PrivacyCode` or `PersonDefenestrationIndicator` (**change this**)
-	- Show hierarchical view of the simple types (_what did I mean by this?_)
+	- `PrivacyCode` or `PersonDefenestrationIndicator`
 - Creating complex objects
 	- By extending existing NIEM objects
 		- `PrivacyMetadata`

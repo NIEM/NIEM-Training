@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema 
+<xs:schema
     ct:conformanceTargets="http://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/#ExtensionSchemaDocument"
     targetNamespace="http://example.com/CrashDriver/1.0/extension" version="1"
     xmlns:ext="http://example.com/CrashDriver/1.0/extension"
@@ -7,36 +7,40 @@
     xmlns:nc="http://release.niem.gov/niem/niem-core/5.0/"
     xmlns:geo="http://release.niem.gov/niem/adapters/geospatial/5.0/"
     xmlns:gml="http://www.opengis.net/gml/3.2"
-    xmlns:niem-xs="http://release.niem.gov/niem/proxy/niem-xs/5.0/" 
-    xmlns:structures="http://release.niem.gov/niem/structures/5.0/" 
-    xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-    xmlns:appinfo="http://release.niem.gov/niem/appinfo/5.0/" 
-    xmlns:ct="http://release.niem.gov/niem/conformanceTargets/3.0/" 
-    elementFormDefault="qualified"> 
+    xmlns:niem-xs="http://release.niem.gov/niem/proxy/niem-xs/5.0/"
+    xmlns:structures="http://release.niem.gov/niem/structures/5.0/"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:appinfo="http://release.niem.gov/niem/appinfo/5.0/"
+    xmlns:ct="http://release.niem.gov/niem/conformanceTargets/3.0/" elementFormDefault="qualified">
 
     <xs:annotation>
-        <xs:documentation>
-            This is the extension schema for an example IEPD used to illustrate guidance 
-            for representing an IEP in JSON-LD syntax.
-        </xs:documentation>
+        <xs:documentation> This is the extension schema for an example IEPD used to illustrate
+            guidance for representing an IEP in JSON-LD syntax. </xs:documentation>
     </xs:annotation>
-    
-    <xs:import schemaLocation="../niem/domains/jxdm.xsd" namespace="http://release.niem.gov/niem/domains/jxdm/7.0/"/>
-    <xs:import schemaLocation="../niem/niem-core.xsd" namespace="http://release.niem.gov/niem/niem-core/5.0/"/>
-    <xs:import schemaLocation="../niem/adapters/geospatial.xsd" namespace="http://release.niem.gov/niem/adapters/geospatial/5.0/"/>
-    <xs:import schemaLocation="../niem/adapters/niem-xs.xsd" namespace="http://release.niem.gov/niem/proxy/niem-xs/5.0/"/>
-    <xs:import schemaLocation="../niem/utility/structures.xsd" namespace="http://release.niem.gov/niem/structures/5.0/"/>
 
-    <xs:element name="LicenseAugmentation" type="ext:LicenseAugmentationType" substitutionGroup="j:DriverLicenseAugmentationPoint">
-        <xs:annotation><xs:documentation>
-            Additional information about a license.
-        </xs:documentation></xs:annotation>
+    <xs:import schemaLocation="../niem/domains/jxdm.xsd"
+        namespace="http://release.niem.gov/niem/domains/jxdm/7.0/"/>
+    <xs:import schemaLocation="../niem/niem-core.xsd"
+        namespace="http://release.niem.gov/niem/niem-core/5.0/"/>
+    <xs:import schemaLocation="../niem/adapters/geospatial.xsd"
+        namespace="http://release.niem.gov/niem/adapters/geospatial/5.0/"/>
+    <xs:import schemaLocation="../niem/adapters/niem-xs.xsd"
+        namespace="http://release.niem.gov/niem/proxy/niem-xs/5.0/"/>
+    <xs:import schemaLocation="../niem/utility/structures.xsd"
+        namespace="http://release.niem.gov/niem/structures/5.0/"/>
+
+    <xs:element name="LicenseAugmentation" type="ext:LicenseAugmentationType"
+        substitutionGroup="j:DriverLicenseAugmentationPoint">
+        <xs:annotation>
+            <xs:documentation> Additional information about a license. </xs:documentation>
+        </xs:annotation>
     </xs:element>
 
     <xs:complexType name="LicenseAugmentationType">
-        <xs:annotation><xs:documentation>
-            A data type for additional information about a license.
-        </xs:documentation></xs:annotation>
+        <xs:annotation>
+            <xs:documentation> A data type for additional information about a license.
+            </xs:documentation>
+        </xs:annotation>
         <xs:complexContent>
             <xs:extension base="structures:AugmentationType">
                 <xs:sequence>
@@ -45,13 +49,15 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
-    <xs:element name="PersonDefenestrationIndicator" type="niem-xs:boolean" substitutionGroup="j:CrashPersonAugmentationPoint">
-        <xs:annotation><xs:documentation>
-            True if this person was thrown through a window; false otherwise.
-        </xs:documentation></xs:annotation>     
+
+    <xs:element name="PersonDefenestrationIndicator" type="niem-xs:boolean"
+        substitutionGroup="j:CrashPersonAugmentationPoint">
+        <xs:annotation>
+            <xs:documentation>True if this person was thrown through a window; false otherwise.
+            </xs:documentation>
+        </xs:annotation>
     </xs:element>
- 
+
     <xs:element name="PrivacyMetadata" type="ext:PrivacyMetadataType"/>
     <xs:complexType name="PrivacyMetadataType">
         <xs:complexContent>
@@ -62,7 +68,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    
+
     <xs:element name="PrivacyCode" type="ext:PrivacyCodeType"/>
     <xs:complexType name="PrivacyCodeType">
         <xs:simpleContent>
@@ -71,13 +77,13 @@
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
-    
+
     <xs:simpleType name="PrivacyCodeSimpleType">
         <xs:restriction base="xs:token">
             <xs:enumeration value="PII"/>
             <xs:enumeration value="MEDICAL"/>
         </xs:restriction>
     </xs:simpleType>
-    
- 
+
+
 </xs:schema>
