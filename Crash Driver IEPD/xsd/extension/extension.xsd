@@ -60,12 +60,12 @@
 
     <xs:element name="PrivacyMetadata" type="ext:PrivacyMetadataType">
         <xs:annotation>
-            <xs:documentation>Privacy Metadata</xs:documentation>
+            <xs:documentation>Metadata about Privacy.</xs:documentation>
         </xs:annotation>
     </xs:element>
     <xs:complexType name="PrivacyMetadataType">
         <xs:annotation>
-            <xs:documentation>A datatype for Privacy Metadata</xs:documentation>
+            <xs:documentation>A data type for metadata about Privacy.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="structures:MetadataType">

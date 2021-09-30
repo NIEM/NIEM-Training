@@ -10,7 +10,7 @@ This example IEPD is designed for the training program. It exercises most of the
 - Elements with attributes
 	- With simple content
 	- With complex content
-	 Metadata
+	- Metadata
 	- Single metadata pointer
 	- Multiple metadata pointers
 - References
