@@ -5,7 +5,7 @@
 ## Purpose
 
 A technical webinar focused on developers and implementers who are interested in a deep-dive of the National Information Exchange Model.
-
+___
 ## Agenda
 
 - Logistics
@@ -23,7 +23,7 @@ A technical webinar focused on developers and implementers who are interested in
 	- Publishing
 	- Implementation
 - Resources
-
+___
 ## Logistics
 
 - Three days, 1-4pm each day
@@ -32,13 +32,13 @@ A technical webinar focused on developers and implementers who are interested in
 	- Someone is monitoring chat
 - This document and supporting materials at:
 	- https://github.com/niem/niem-training
-
+___
 ## Introduction to NIEM
 
 - What is NIEM?
 - The Scope of NIEM
 - NIEM Harmonization and Organization
-
+___
 ### What is NIEM? - Framework
 - NIEM is a community-driven, government and jurisdiction-wide, standards-based approach to exchanging information
 - Diverse communities can collectively leverage NIEM to increase efficiencies and improve decision-making
@@ -46,13 +46,13 @@ A technical webinar focused on developers and implementers who are interested in
 - NIEM includes a data model, governance, training, tools, technical support services, and an active community to assist users in adopting a standards-based approach to exchanging data
 
 ![NIEM Framework](Intro_Graphics/NIEM_Framework.png)
-
+___
 ### What is NIEM? – Interop Problem
 - If we don’t understand what each other means, we won’t be able to exchange info
 - Need a common language for defining things
 
 ![Interop Problem](Intro_Graphics/Interop_Problem.png)
-
+___
 ### What is NIEM? And what not?
 **NIEM is:**
 - a common vocabulary
@@ -67,5 +67,10 @@ ___
 - When additional organizations are added to the information exchange, the initial NIEM exchange can be reused, saving time and money
 
 ![Exchanging Data and Components](Intro_Graphics/Exch_Data_Components.png)
+___
+### What is NIEM? – Simplified Exchanges
+- When using NIEM, you only need to “speak” two languages: your own and NIEM
 
-
+| Without NIEM | With NIEM |
+| --- | --- |
+|![Scrambled Exchanges](Intro_Graphics/Scrambled_Exchanges.png)|![Centralized Exchanges](Intro_Graphics/Centralized_Exchanges.png)|
