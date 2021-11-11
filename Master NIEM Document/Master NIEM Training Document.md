@@ -1,5 +1,5 @@
 # Master NIEM Training Document
-
+<!-- TOC -->
 # Introduction
 
 ## Purpose
@@ -137,5 +137,159 @@ ___
 | Screening                                     |                              |
 | Surface Transportation                        |                              |
 
+**NIEM Versioning**
+
+TODO: Add versioning information
+
+**NIEM Administration Organization**
+
 ![Org Chart](Intro_Graphics/Org_Chart.png)
 ___
+
+# Message Spec / IEPD Overview
+- "Information Exchange Package Documentation"
+- Slowly changing to "Message Specification"
+- Defines an exchange
+- Made up of a bunch of documents, "artifacts"
+	- Some meant for humans
+	- Some meant for computers
+___
+## Message Spec Process
+Creating a Message Spec is a multi-step process
+1. Scenario Planning
+2. Requirements Analysis
+3. Mapping
+4. Assembly
+5. Publishing
+6. (Implementation)
+
+![IEPD Process](IEPD_Process_Graphics/IEPD_Process.png)
+
+Each step produces artifacts used by subsequent steps:
+
+1. A clue as to what you're doing...
+2. UML Diagrams
+3. Mapping Spreadsheet
+4. Schemas and Instance Documents
+5. Textual Documents
+6. Code
+
+![Message Spec / IEPD Process](IEPD_Process_Graphics/Process_Artifacts.png)
+
+**Message Spec / IEPD Process – Idealized**
+
+![Message Spec Seq Ideal](IEPD_Process_Graphics/Process_Seq_Ideal.png)
+
+**Message Spec / IEPD Process – Real Life**
+
+![Message Spec Seq Ideal](IEPD_Process_Graphics/Process_Seq_Real.png)
+
+### IEPD Artifacts - Documentation
+- Master Documentation (Word)
+- IEPD catalog document (`iepd-catalog.xml`)
+- Change log (text)
+- README (text)
+- Conformance assertion (text)
+
+### IEPD Artifacts - Definitional
+- Wantlist (`wantlist.xml`)
+- Schema subset schemas
+- Extension schemas
+- Exchange schemas
+- Sample instances
+- XML catalogs
+
+## Scenario Planning
+- Decide what the exchange is about
+- Who are the exchange partners?
+- Who are stakeholders?
+- Communication is key
+- Existing exchanges or other documentation can help
+	- Within your organization
+	- From NIEM repositories (_huge caveat_)
+![Participants](Scenario_Planning_Graphics/Participants.png)
+
+### Existing Documentation
+
+- Current technical architecture documents of all exchange partners
+- Stakeholders that will be involved in the exchange
+- Security, privacy, and other policy-related concerns associated with the exchange
+- Technical characteristics of the exchange:
+- Types of data being shared
+- Number of data objects
+	- Current structure of the data (logical, physical)
+	- Use of external standards
+
+## Requirements Analysis
+- Diagrams
+	- Use Case Diagrams
+	- Business Process Diagrams
+	- Sequence Diagrams
+- Class Diagrams
+- Spreadsheets
+- Other documents
+
+**Use Case Diagrams**
+
+![Use Case Diagram](Req_Analysis_Graphics/Use_Case_Diagram.png)
+
+**Business Process Diagrams**
+
+![Business Process Diagram](Req_Analysis_Graphics/Business_Process_Diagram.png)
+
+**Sequence Diagrams**
+
+![Sequence Diagram](Req_Analysis_Graphics/Seq_Diagram.png)
+
+### UML Class Diagrams
+
+- The bread and butter of IEPD business requirements
+- Can be oriented towards business terms and objects
+	- Better for consensus
+- Can be oriented towards NIEM terms and objects
+	- Pre-loads the mapping step
+
+### Business Oriented Class Diagram
+![Business Oriented Class Diagram](Req_Analysis_Graphics/CrashDriverClassDiagram.png)
+
+
+### NIEM Oriented Class Diagram
+
+![NIEM Oriented Class Diagram](Req_Analysis_Graphics/CrashDriverClassDiagram-NIEM.png)
+
+**Close-ups:**
+
+![NIEM Oriented Class Diagram](Req_Analysis_Graphics/CrashDriverClassDiagram-NIEM-crop01.png)
+![NIEM Oriented Class Diagram](Req_Analysis_Graphics/CrashDriverClassDiagram-NIEM-crop02.png)
+
+### UML Tools
+- ArgoUML
+- BOUML
+- MagicDraw / Rational Rose (\$\$\$)
+- Visio / OmniGraffle
+- Mermaid / Graphviz
+- Many more…
+
+### Business Rules
+- Some rules aren’t easily represented in UML
+- You can use whatever works for your needs
+- Schematron for XML
+- Plain old textual descriptions are great!
+
+### The Process from Here On…
+
+We have choices on how to proceed:
+
+- Step-by-step
+	- Finish mapping entirely before starting schemas
+- Concurrent
+	- Building schemas and instances as you go
+- We'll use something in-between
+	- Build an ersatz matching instance document as we map
+	- Sorta like YAML without data values
+	- Save schemas for the end
+
+(Will use a super secret tool to help with some of this!)
+
+## Mapping
+
