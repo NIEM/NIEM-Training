@@ -74,3 +74,68 @@ ___
 | Without NIEM | With NIEM |
 | --- | --- |
 |![Scrambled Exchanges](Intro_Graphics/Scrambled_Exchanges.png)|![Centralized Exchanges](Intro_Graphics/Centralized_Exchanges.png)|
+___
+### Scope of NIEM
+- NIEM is a data layer standard and intentionally does not address all the necessary technologies needed for information sharing
+- Exchange partners decide how to store and process the NIEM-conformant data being exchanged
+![Scope of NIEM 01](Intro_Graphics/Scope_NIEM_01.png)
+![Scope of NIEM 02](Intro_Graphics/Scope_NIEM_02.png)
+___
+### Scope of NIEM - Open Source Interconnection (OSI) model
+
+**Detailed:**
+
+![OSI Detailed](Intro_Graphics/OSI_01.png)
+
+**Simplified:**
+
+![OSI Simplified](Intro_Graphics/OSI_02.png)
+___
+### Bottle of Liquid
+**A bottle of liquid:**
+
+- Has a shape
+- Made of certain materials
+- Can be opaque or transparent
+- Has some combination of liquids inside
+- Is moved around by various means
+
+![Bottle 01](Intro_Graphics/Bottle_01.png)
+
+- NIEM is the liquid inside, the payload document
+- NIEM doesn’t care about how you filled the bottle, how the bottle is constructed, how the bottle is transported, whether you can see into the bottle, and what you do with the liquid after you pour it out
+
+![Bottle 02](Intro_Graphics/Bottle_02.png)
+___
+
+### NIEM Harmonization and Organization
+
+- Think of the NIEM data model as a mature and stable data dictionary of agreed-upon terms, definitions, relationships and formats independent of how information is stored in individual agency systems
+- The data model consists of two sets of closely related vocabularies:
+	- NIEM core
+	- Individual NIEM domains
+- NIEM core includes data elements commonly agreed upon across all NIEM domains (i.e., person, activity, location, and item, etc.)
+- Individual NIEM domains contain mission-specific data components that build upon NIEM core concepts
+
+![Domain Diagram](Intro_Graphics/Domain_Diagram.png)
+
+| Existing Domains                              | Upcoming Domains             |
+| --------------------------------------------- | ---------------------------- |
+| Agriculture                                   | Learning and Development     |
+| Biometrics                                    | International Human Services |
+| Chemical, Biological, Radiological, & Nuclear |                              |
+| Cyber                                         |                              |
+| Emergency Management                          |                              |
+| Human Services                                |                              |
+| Immigration                                   |                              |
+| Infrastructure Protection                     |                              |
+| Intelligence                                  |                              |
+| International Trade                           |                              |
+| Justice                                       |                              |
+| Maritime                                      |                              |
+| Military Operations                           |                              |
+| Screening                                     |                              |
+| Surface Transportation                        |                              |
+
+![Org Chart](Intro_Graphics/Org_Chart.png)
+___
