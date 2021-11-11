@@ -66,6 +66,6 @@ ___
 - Using NIEM, organizations come together to agree on a common vocabulary
 - When additional organizations are added to the information exchange, the initial NIEM exchange can be reused, saving time and money
 
-![Exchanging Data and Components](Exch_Data_Components.png)
+![Exchanging Data and Components](Intro_Graphics/Exch_Data_Components.png)
 
 
