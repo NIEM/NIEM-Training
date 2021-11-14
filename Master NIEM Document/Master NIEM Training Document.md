@@ -132,7 +132,7 @@ ___
 | Agriculture                                   | Learning and Development     |
 | Biometrics                                    | International Human Services |
 | Chemical, Biological, Radiological, & Nuclear |                              |
-| Cyber                                         |                              |
+| Cyber (coming in 5.1)                                         |                              |
 | Emergency Management                          |                              |
 | Human Services                                |                              |
 | Immigration                                   |                              |
@@ -144,6 +144,40 @@ ___
 | Military Operations                           |                              |
 | Screening                                     |                              |
 | Surface Transportation                        |                              |
+
+**Domains hold objects specific to their domains:**
+
+| Agriculture | Biometrics |
+| --- | --- |
+| ![Agriculture](Domain_Graphics/ag.png) | ![Biometrics](Domain_Graphics/biom.png) |
+
+| Chemical, Biological, Radiological, & Nuclear | Emergency Management |
+| --- | --- |
+| ![CBRN](Domain_Graphics/cbrn.png) | ![Emergency Management](Domain_Graphics/em.png) |
+
+| Human Services | Immigration |
+| --- | --- |
+| ![Human Services](Domain_Graphics/hs.png) | ![Immigration](Domain_Graphics/im.png) |
+
+| Infrastructure Protection | Intelligence |
+| --- | --- |
+| ![Infrastructure Protection](Domain_Graphics/ip.png) | ![Intelligence](Domain_Graphics/intel.png) |
+
+| International Trade | Justice |
+| --- | --- |
+| ![International Trade](Domain_Graphics/it.png) | ![Justice](Domain_Graphics/j.png) |
+
+| Maritime | Military Operations |
+| --- | --- |
+| ![Maritime](Domain_Graphics/m.png) | ![Military Operations](Domain_Graphics/mo.png) |
+
+| Screening  | Surface Transportation |
+| --- | --- |
+| ![Screening ](Domain_Graphics/scr.png) | ![Surface Transportation](Domain_Graphics/st.png) |
+
+
+
+
 
 **NIEM Versioning**
 
@@ -539,6 +573,7 @@ ___
 - Examples:
 	- `nc:PersonBirthDate` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-11r)/[Wayfarer](http://niem5.org/wayfarer/nc/PersonBirthDate.html))
 	- Heads follow the form of: `SomethingRepresentation` or `WhateverAbstract`
+TODO Add examples
 ___
 ## Namespaces
 - Namespaces organize elements by context
