@@ -888,7 +888,7 @@ ___
 
 ### Schemas
 
-[`j:PersonChargeAssociation`](http://niem5.org/schemas/j.html#PersonChargeAssociation) is used, as the name suggests, to link together a Person and a Charge.
+[`j:PersonChargeAssociation`](http://niem5.org/schemas/j.html#PersonChargeAssociation) is used, as the name suggests, to link together a Person and a Charge. It's of `j:PersonChargeAssociationType`:
 
 ```xml
 <xs:element name="PersonChargeAssociation" type="j:PersonChargeAssociationType" nillable="true">
@@ -897,6 +897,9 @@ ___
 	</xs:annotation>
 </xs:element>
 ```
+
+[`j:PersonChargeAssociationType`](http://niem5.org/schemas/j.html#PersonChargeAssociationType) includes a [`nc:Person`](http://niem5.org/schemas/nc.html#Person) and a [`j:Charge`](http://niem5.org/schemas/j.html#Charge), but also includes information _about_ the association itself, in this case [`j:JuvenileAsAdultIndicator`](http://niem5.org/schemas/j.html#JuvenileAsAdultIndicator). `PersonChargeAssociationType` extends `nc:AssociationType`:
+
 ```xml
 <xs:complexType name="PersonChargeAssociationType">
 	<xs:annotation>
@@ -914,6 +917,8 @@ ___
 	</xs:complexContent>
 </xs:complexType>
 ```
+[`nc:AssociationType`](http://niem5.org/schemas/nc.html#AssociationType) adds in generic association information like a start and end date and a description. Remember that these are inherited by any type based on `nc:AssociationType`, so things of `j:PersonChargeAssociationType` automatically get these common objects.
+
 ```xml
 <xs:complexType name="AssociationType">
 	<xs:annotation>
@@ -932,6 +937,18 @@ ___
 ```
 
 ### Instance Documents
+
+In the instance document, the association object can specify the objects being associated together by pointing to then with `ref` attributes, or by including the object inside the association object.
+
+First, here's the association using referencing. The applicable `nc:Person` and `j:Charge` objects are external to `j:PersonChargeAssociation`. While shown next to the `j:PersonChargeAssociation` object, they could be _anywhere_ in the instance document.
+
+This method is useful when the same `nc:Person` object is being used in multiple contexts. In the example IEPD, this `nc:Person` is also the `j:CrashDriver` and the `j:CrashPerson`. This method allows us to define the `nc:Person` once and refer to it multiple times.
+
+This beings with it two advantages:
+
+1. This `nc:Person` object is not being replicated; there is no duplication of data
+2. We know that the `nc:Person` in the Association _and_ the `j:CrashDriver` _and_ the `j:CrashPerson` are the exact same person, and not three people with the same name
+
 ```xml
 <j:PersonChargeAssociation>
 	<nc:Person structures:ref="P01" xsi:nil="true"/>
@@ -948,6 +965,11 @@ ___
 	<j:ChargeFelonyIndicator>false</j:ChargeFelonyIndicator>
 </j:Charge>
 ```
+
+The disadvantage with using referencing is that it can be more difficult to implement. Implementations need to look for `ref` attributes and find matching `id` attributes.
+
+The alternative to referencing is to just include the `nc:Person` and `j:Charge` information inside the association:
+
 ```xml
 <j:PersonChargeAssociation>
 	<nc:Person>
@@ -962,6 +984,11 @@ ___
 	<j:JuvenileAsAdultIndicator>true</j:JuvenileAsAdultIndicator>
 </j:PersonChargeAssociation>
 ```
+You can also mix and match. You could reference a `nc:Person` while including the `j:Charge` inside the association.
+
+NIEM _never_ requires you to do referencing. If the trade-offs of duplicated data aren't an issue, you can have multiple identical `nc:Person` objects.
+
+JSON-LD works similarly. `j:PersonChargeAssociation` contains a `nc:Person` object with an `@id`. `j:Charge` is the same. These IDs match the `@id` objects in the actual `nc:Person` and `j:Charge` object outside the association:
 
 ```json
 "j:PersonChargeAssociation": {
@@ -987,6 +1014,9 @@ ___
 	"j:CriminalInformationIndicator": true
 }
 ```
+
+As with the XML version, you can also just include the `nc:Person` and `j:Charge` objects inside the association:
+
 ```json
 "j:PersonChargeAssociation": {
 	"nc:Person": {
@@ -1004,6 +1034,9 @@ ___
 }
 
 ```
+
+The same trade-offs apply as in XML, but JSON developers may lean more towards inclusion rather than referencing based on implementation effort required. Again, NIEM _never_ requires you to do referencing.
+
 ___
 ## Roles
 - Modeling some objects as specialized things gets complicated
