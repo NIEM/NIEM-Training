@@ -1047,8 +1047,8 @@ ___
 - Roles can also just include the object playing the role
 - Roles contain other information about the role
 - Examples:
-	- `j:CrashPerson` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-SearchSubmit.iepd)/[Wayfarer](http://niem5.org/wayfarer/j/CrashPerson.html))
-	- Anything containing an nc:RoleOfPerson, Org, or Item
+	- `j:CrashPerson` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-45q)/[Wayfarer](http://niem5.org/wayfarer/j/CrashPerson.html))
+	- Anything containing an `nc:RoleOfPerson`([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-1ro)/[Wayfarer](http://niem5.org/wayfarer/nc/RoleOfPerson.html)), `nc:RoleOfOrganization` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-1rn)/[Wayfarer](http://niem5.org/wayfarer/nc/RoleOfOrganization.html)), or `nc:RoleOfItem` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-1rp)/[Wayfarer](http://niem5.org/wayfarer/nc/RoleOfItem.html)), plus a few lesser used ones ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-1rm)/[Wayfarer](http://niem5.org/wayfarer/nc/RoleOfAbstract.html))
 
 ### Roles - Not Special Kinds of People
 
@@ -1069,6 +1069,9 @@ Roles Contain Info About the Role
 ![Role Hats](Mapping_Graphics/Role_Hats_05.png)
 
 ### Schemas
+
+[`j:CrashPerson`](http://niem5.org/schemas/j.html#CrashPerson) is of `j:CrashPersonType`:
+
 ```xml
 <xs:element name="CrashPerson" type="j:CrashPersonType" nillable="true">
 	<xs:annotation>
@@ -1076,6 +1079,9 @@ Roles Contain Info About the Role
 	</xs:annotation>
 </xs:element>
 ```
+
+[`j:CrashPersonType`](http://niem5.org/schemas/j.html#CrashPersonType) contains a `nc:RoleOfPerson` object, along with information specific to this role. In the sample IEPD, we're also using `j:CrashPersonInjury`:
+
 ```xml
 <xs:complexType name="CrashPersonType">
 	<xs:annotation>
@@ -1084,27 +1090,19 @@ Roles Contain Info About the Role
 	<xs:complexContent>
 		<xs:extension base="structures:ObjectType">
 			<xs:sequence>
-				<xs:element ref="nc:RoleOfPerson" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="v" minOccurs="0" maxOccurs="unbounded"/>
 				<xs:element ref="j:CrashPersonEMSTransportation" minOccurs="0" maxOccurs="unbounded"/>
 				<xs:element ref="j:CrashPersonInjury" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element ref="j:AlcoholTestResultQuantityText" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element ref="j:EmergencyMedicalServiceCall" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element ref="nc:PatientMedicalFacility" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element ref="j:AlcoholInvolvementSuspicionAbstract" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element ref="j:AlcoholTestCategoryAbstract" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element ref="j:AlcoholTestResultAbstract" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element ref="j:AlcoholTestStatusAbstract" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element ref="j:DrugInvolvementSuspicionAbstract" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element ref="j:DrugTestCategoryAbstract" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element ref="j:DrugTestResultAbstract" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element ref="j:DrugTestStatusAbstract" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element ref="j:InjuredTransportationSourceAbstract" minOccurs="0" maxOccurs="unbounded"/>
+				<!-- A whole slew of objects removed for clarity -->
 				<xs:element ref="j:CrashPersonAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
 			</xs:sequence>
 		</xs:extension>
 	</xs:complexContent>
 </xs:complexType>
 ```
+
+[`nc:RoleOfPerson`](http://niem5.org/schemas/nc.html#RoleOfPerson) is of `nc:PersonType`. That means it can hold person-specific information, but like everything in NIEM, it can also point at other objects:
+
 ```xml
 <xs:element name="RoleOfPerson" type="nc:PersonType" substitutionGroup="nc:RoleOfAbstract" nillable="true">
 	<xs:annotation>
@@ -1115,16 +1113,20 @@ Roles Contain Info About the Role
 
 ### Instance Documents
 
+As with associations, we can implement the role in two different ways. Here we see it used as a reference. `j:CrashDriver` contains a `nc:RoleOfPerson`, which uses the `ref` attribute to point to the `nc:Person` object playing that role:
+
 ```xml
 <j:CrashDriver>
 	<nc:RoleOfPerson structures:ref="P01" xsi:nil="true"/>
 </j:CrashDriver>
 <nc:Person structures:id="P01">
 	<nc:PersonName>
-		<nc:PersonGivenName structures:sequenceID="1">Peter</nc:PersonGivenName>
+		<nc:PersonGivenName>Peter</nc:PersonGivenName>
 	</nc:PersonName>
 </nc:Person>
 ```
+
+As with associations, `nc:RoleOfPerson` can also simply contain the Person-specific information. So it can contain `nc:PersonName` instead of referencing an object elsewhere:
 
 ```xml
 <j:CrashDriver>
@@ -1135,6 +1137,10 @@ Roles Contain Info About the Role
 	</nc:RoleOfPerson>
 </j:CrashDriver>
 ```
+
+As with associations, the choice comes down to a balance between how often the Person is used, whether you care about duplicate data in an exchange, and implementation effort.
+
+The JSON-LD versions are, again, similar to the ones for associations. Here the `nc:RoleOfPerson` object has an `@id` that matches the one in the `nc:Person` object:
 
 ```json
 "j:CrashPerson": {
@@ -1149,6 +1155,9 @@ Roles Contain Info About the Role
 	}
 }
 ```
+
+And, again as with associations, you can simply include the Person-specific information inside `nc:RoleOfPerson`:
+
 ```json
 "j:CrashPerson": {
 	"nc:RoleOfPerson": {
@@ -1158,6 +1167,7 @@ Roles Contain Info About the Role
 }
 ```
 
+The choices here are also a balance, although inclusion will likely be more attractive to most JSON developers.
 
 ___
 ## Metadata
