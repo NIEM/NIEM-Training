@@ -267,6 +267,7 @@ ___
 - Existing exchanges or other documentation can help
 	- Within your organization
 	- From NIEM repositories (_huge caveat_)
+
 ![Participants](Scenario_Planning_Graphics/Participants.png)
 ___
 ### Existing Documentation
