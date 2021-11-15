@@ -808,7 +808,7 @@ ___
 - Examples:
 	- `j:InjurySeverityCode` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-45s)/[Wayfarer](http://niem5.org/wayfarer/j/InjurySeverityCode.html))
 		- In the SSGT, the actual codes are viewable on the page for the base simple type, e.g. [`aamva_d20:AccidentSeverityCodeSimpleType`](https://tools.niem.gov/niemtools/ssgt/SSGT-GetType.iepd?typeKey=o3-c)
-		- In Wayfarer, there should be a link on the element page bringing up the codes in a separate window, e.g. [`aamva_d20:AccidentSeverityCodeSimpleType`]((http://niem5.org/wayfarer/aamva_d20/AccidentSeverityCodeSimpleType_codes.html)
+		- In Wayfarer, there should be a link on the element page bringing up the codes in a separate window, e.g. [`aamva_d20:AccidentSeverityCodeSimpleType`](http://niem5.org/wayfarer/aamva_d20/AccidentSeverityCodeSimpleType_codes.html)
 	- Anything ending in “Code”
 
 ___
@@ -820,6 +820,18 @@ ___
 
 ### NIEM Structural "Layers"
 
+NIEM has several conceptual layers which build on top of each other:
+
+- `structures` provides infrastructure
+	- All namespaces draw from it
+- `niem-core` provides common objects to be used or built upon
+	- Domains draw from it
+- Domains provide domain-specific content, often built from `niem-core`
+	- Domains can draw from each other, although this is limited in practice
+- Code table namespaces define many of the code tables, built with infrastructure from `structures`
+	- 
+- wrappers for external standards
+
 ![Structural Diagram](Mapping_Graphics/Structural_Diagram.png)
 
 ## Referencing - XML Schema
@@ -830,15 +842,33 @@ ___
 	- `ref`
 	- `metadata`
 - These leverage built-in XML Schema attributes `ID`, `IDREF`, and `IDREFS`
+- `id` assigns an ID to an object
+	- Just a string
+	- _Must_ be unique within an instance document
+	- Can't include a space
+- `ref` references an ID of another object
+	- Contains a single `id` to match
+	- The matching `id` _must_ exist in the instance document
+	- Validators do _not_ check that the linking makes sense
+- `metadata` references IDs of metadata object
+	- Conceptually, an object is saying that this is the metadata that applies to itself
+	- Can contain multiple IDs, separated with spaces
+	- The matching `id`s must exist in the instance document
+
+Examples of how NIEM uses these are the next few sections.
+
 ___
 ## Referencing - JSON-LD
 
 TODO: Add JSON-LD linking here.
 
+JSON itself doesn't provide a means of linking objects together. NIEM leverages [JSON-LD](https://en.wikipedia.org/wiki/JSON-LD) to provide that functionality. We've seen earlier how the `@context` section provides a mapping from a JSON instance back to NIEM object. NIEM also uses `@id` objects to both mark objects with an ID as well as refer to IDs applied to other objects.
 
+Again, we will see example throughout the next few sections.
 
 ___
 ## Associations
+
 - Relationships can be complex
 - NIEM provides powerful Association objects
 - Trade-off can be implementation complexity
@@ -857,6 +887,8 @@ ___
 	- Anything ending in “Association”
 
 ### Schemas
+
+[`j:PersonChargeAssociation`](http://niem5.org/schemas/j.html#PersonChargeAssociation) is used, as the name suggests, to link together a Person and a Charge.
 
 ```xml
 <xs:element name="PersonChargeAssociation" type="j:PersonChargeAssociationType" nillable="true">
