@@ -829,8 +829,8 @@ NIEM has several conceptual layers which build on top of each other:
 - Domains provide domain-specific content, often built from `niem-core`
 	- Domains can draw from each other, although this is limited in practice
 - Code table namespaces define many of the code tables, built with infrastructure from `structures`
-	- 
-- wrappers for external standards
+	- Domains draw from it for code definitions
+- Wrappers for external standards, built with infrastructure from `structures`
 
 ![Structural Diagram](Mapping_Graphics/Structural_Diagram.png)
 
