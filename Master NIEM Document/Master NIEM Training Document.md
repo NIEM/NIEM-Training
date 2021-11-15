@@ -176,12 +176,30 @@ ___
 | ![Screening ](Domain_Graphics/scr.png) | ![Surface Transportation](Domain_Graphics/st.png) |
 
 
-
-
-
 **NIEM Versioning**
 
-TODO: Add versioning information
+- NIEM has major and minor versions, plus domain updates
+- Major version releases, e.g. 4.2 to 5.0
+	- All bets are off
+	- NIEM-Core can and will change
+		- Underlying infrastructure can also change
+	- Domains can change
+	- Domains are harmonized
+		- Repeated content is collapsed
+		- Misplaced content is moved, either to other domains or to core
+		- New content is added
+	- _Nothing_ in a major version change is guaranteed to be backwards compatible with earlier major releases
+- Minor version releases:
+	- **NIEM-Core does not change!**
+		- **Neither does the underlying infrastructure**
+	- Domains can change
+	- Domains can be harmonized
+	- Domains are not guaranteed to be backwards compatible with earlier minor releases
+		- But they often are
+- Domain updates are done per-domain
+	- Domains can update their content in between minor releases
+	- Those updates then are normally folded into the next minor release
+
 
 **NIEM Administration Organization**
 
@@ -397,7 +415,7 @@ ___
 
 ### XML Schema
 
-**The XML Schema defining [`nc:Person`](http://niem5.org/schemas/nc.html#Person) and [`nc:PersonType`](http://niem5.org/schemas/nc.html#PersonType) looks like:**
+The XML Schema defining [`nc:Person`](http://niem5.org/schemas/nc.html#Person) and [`nc:PersonType`](http://niem5.org/schemas/nc.html#PersonType) looks like:
 
 ```xml
 <xs:element name="Person" type="nc:PersonType" nillable="true">
@@ -427,7 +445,7 @@ ___
 
 ```
 
-**The XML Schema defining [`nc:PersonName`](http://niem5.org/schemas/nc.html#PersonName) and [`nc:PersonNameType`](http://niem5.org/schemas/nc.html#PersonNameType) looks like:**
+The XML Schema defining [`nc:PersonName`](http://niem5.org/schemas/nc.html#PersonName) and [`nc:PersonNameType`](http://niem5.org/schemas/nc.html#PersonNameType) looks like:
 
 ```xml
 <xs:element name="PersonName" type="nc:PersonNameType" nillable="true">
@@ -464,7 +482,7 @@ ___
 </xs:complexType>
 ```
 
-**The XML Schema defining [`nc:PersonGivenName`](http://niem5.org/schemas/nc.html#PersonGivenName), [`PersonNameTextType`](http://niem5.org/schemas/nc.html#PersonNameTextType), and supporting types looks like:**
+The XML Schema defining [`nc:PersonGivenName`](http://niem5.org/schemas/nc.html#PersonGivenName), [`PersonNameTextType`](http://niem5.org/schemas/nc.html#PersonNameTextType), and supporting types looks like:
 
 ```xml
 <xs:element name="PersonGivenName" type="nc:PersonNameTextType" nillable="true">
@@ -508,7 +526,7 @@ ___
 
 ```
 
-**The resulting instance document that all this creates might look like this:**
+The resulting instance document that all this creates might look like this:
 
 ```xml
 <nc:Person>
@@ -561,6 +579,8 @@ ___
 	- `nc:Person`, `nc:PersonName`, `nc:PersonGivenName`, etc.
 	- Search for `nc:Person` in the [SSGT](http://niem5.org/ssgt_redirect.php?query=person)
 	- Search for `nc:Person` in [Wayfarer](http://niem5.org/wayfarer/search.php?option=exact&query=person)
+
+
 ___
 ## Substitution Groups
 
@@ -571,18 +591,105 @@ ___
 	- The single concept, and
 	- Multiple representations of that concept
 - Examples:
-	- `nc:PersonBirthDate` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-11r)/[Wayfarer](http://niem5.org/wayfarer/nc/PersonBirthDate.html))
-	- Heads follow the form of: `SomethingRepresentation` or `WhateverAbstract`
-TODO Add examples
+	- `nc:PersonBirthDate` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-11r)/[Wayfarer](http://niem5.org/wayfarer/nc/PersonBirthDate.html)) contains a `nc:DateRepresentation` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-92a)/[Wayfarer](http://niem5.org/wayfarer/nc/DateRepresentation.html))
+	- substitution group heads follow the form of: `SomethingRepresentation` or `WhateverAbstract`
+
+## Schemas
+
+Here we see [`nc:PersonBirthDate`](http://niem5.org/schemas/nc.html#PersonBirthDate) and its type, `nc:DateType`:
+
+```xml
+<xs:element name="PersonBirthDate" type="nc:DateType" nillable="true">
+	<xs:annotation>
+		<xs:documentation>A date a person was born.</xs:documentation>
+	</xs:annotation>
+</xs:element>
+```
+
+[`nc:DateType`](http://niem5.org/schemas/nc.html#DateType) contains `nc:DateRepresentation`, along with other date properties:
+
+```xml
+<xs:complexType name="DateType">
+	<xs:annotation>
+		<xs:documentation>A data type for a calendar date.</xs:documentation>
+	</xs:annotation>
+	<xs:complexContent>
+		<xs:extension base="structures:ObjectType">
+			<xs:sequence>
+				<xs:element ref="nc:DateRepresentation" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="nc:DateAccuracyAbstract" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="nc:DateMarginOfErrorDuration" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="nc:DateAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:extension>
+	</xs:complexContent>
+</xs:complexType>
+```
+[`nc:DateRepresentation`](http://niem5.org/schemas/nc.html#DateRepresentation) is _abstract_, meaning it has no type and must be substituted with another object:
+
+```xml
+<xs:element name="DateRepresentation" abstract="true">
+	<xs:annotation>
+		<xs:documentation>A data concept for a representation of a date.</xs:documentation>
+	</xs:annotation>
+</xs:element>
+```
+Those other objects are identified by having a `substitutionGroup` attribute set to the name of the substitution group head. The most common one you'll see for `nc:DateRepresentation` is [`nc:Date`](http://niem5.org/schemas/nc.html#Date):
+
+```xml
+<xs:element name="Date" type="niem-xs:date" substitutionGroup="nc:DateRepresentation" nillable="true">
+	<xs:annotation>
+		<xs:documentation>A full date.</xs:documentation>
+	</xs:annotation>
+</xs:element>
+```
+
+### Instance Documents
+
+In the resulting instance document, you don't see `nc:DateRepresentation` at all. You just see `nc:Date`, which is taking its place:
+
+```xml
+<j:Crash>
+	<nc:ActivityDate>
+		<nc:Date>1900-05-04</nc:Date>
+	</nc:ActivityDate>
+</j:Crash>
+```
+
+The matching JSON similarly just shows `nc:Date`:
+
+```json
+"j:Crash": {
+	"nc:ActivityDate": {
+		"nc:Date": "1900-05-04"
+	}
+}
+```
 ___
 ## Namespaces
+
+Above you can see object with different prefixes, `j:Crash` and `nc:ActivityDate`. The `j` and `nc` refer to different namespaces in XML Schema.
+
 - Namespaces organize elements by context
 - Identified by prefix, a nickname for the namespace
 - NIEM governance is organized along these lines
 
 ![Namespaces and Case](Mapping_Graphics/Namespace_Case.png)
 
-JSON-LD maps JSON objects to NIEM namespaces in the `@context`.
+JSON-LD maps JSON objects to NIEM namespaces in the `@context`. Each of these entries maps a prefix to a NIEM namespace, providing a link back to the NIEM object. 
+
+```json
+"@context": {
+	"rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+	"nc": "http://release.niem.gov/niem/niem-core/5.0/#",
+	"exch": "http://example.com/CrashDriver/1.0/#",
+	"ext": "http://example.com/CrashDriver/1.0/extension#",
+	"j": "http://release.niem.gov/niem/domains/jxdm/7.0/#"
+}
+```
+
+As mentioned earlier, NIEM doesn't support JSON Schema well yet. Using NIEM with JSON is currently focused on creating matching instance documents. Upcoming NIEM developments will greatly enhance the ability to work in JSON as a similar level as with XML and XML Schema.
+
 ___
 ## Inherited Properties
 - NIEM is a model, not a flat data dictionary
@@ -590,6 +697,105 @@ ___
 - Instead, properties are inherited
 - There is no “Crash Date” in NIEM ([SSGT](http://niem5.org/ssgt_redirect.php?query=crash+date)/[Wayfarer](http://niem5.org/wayfarer/search.php?option=both&query=crash+date))
 - There _is_ an `ActivityDate` which can be inside a `Crash` object ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-44f)/[Wayfarer](http://niem5.org/wayfarer/j/Crash.html))
+
+Here's [`j:Crash`](http://niem5.org/schemas/j.html#Crash) and its type, `j:CrashType`:
+
+```xml
+<xs:element name="Crash" type="j:CrashType" nillable="true">
+	<xs:annotation>
+		<xs:documentation>A traffic accident.</xs:documentation>
+	</xs:annotation>
+</xs:element>
+```
+[`j:CrashType`](http://niem5.org/schemas/j.html#CrashType) contains several things, but the important thing here is what it's based on, `j:DrivingIncidentType`:
+
+```xml
+<xs:complexType name="CrashType">
+	<xs:annotation>
+		<xs:documentation>A data type for a traffic accident.</xs:documentation>
+	</xs:annotation>
+	<xs:complexContent>
+		<xs:extension base="j:DrivingIncidentType">
+			<xs:sequence>
+				<xs:element ref="j:CrashServiceCall" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="j:CrashInformationSource" minOccurs="0" maxOccurs="unbounded"/>
+				<!-- A whole slew of objects removed for clarity -->
+				<xs:element ref="j:CrashAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:extension>
+	</xs:complexContent>
+</xs:complexType>
+```
+
+[`j:DrivingIncidentType`](http://niem5.org/schemas/j.html#DrivingIncidentType) is, in turn, based on an even more generic type, `nc:IncidentType`:
+
+```xml
+<xs:complexType name="DrivingIncidentType">
+	<xs:annotation>
+		<xs:documentation>A data type for details of an incident involving a vehicle.</xs:documentation>
+	</xs:annotation>
+	<xs:complexContent>
+		<xs:extension base="nc:IncidentType">
+			<xs:sequence>
+				<xs:element ref="j:DrivingAccidentSeverityAbstract" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="j:DrivingIncidentCMVAbstract" minOccurs="0" maxOccurs="unbounded"/>
+				<!-- A whole slew of objects removed for clarity -->
+				<xs:element ref="j:DrivingIncidentAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:extension>
+	</xs:complexContent>
+</xs:complexType>
+```
+
+[`nc:IncidentType`](http://niem5.org/schemas/nc.html#IncidentType) is, also in turn, based on a very generic type, `nc:ActivityType`:
+
+```xml
+<xs:complexType name="IncidentType">
+	<xs:annotation>
+		<xs:documentation>A data type for an occurrence or an event that may require a response.</xs:documentation>
+	</xs:annotation>
+	<xs:complexContent>
+		<xs:extension base="nc:ActivityType">
+			<xs:sequence>
+				<xs:element ref="nc:IncidentEvent" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="nc:IncidentJurisdictionalOrganization" minOccurs="0" maxOccurs="unbounded"/>
+				<!-- A whole slew of objects removed for clarity -->
+				<xs:element ref="nc:IncidentAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:extension>
+	</xs:complexContent>
+</xs:complexType>
+```
+
+And we finally get to [`nc:ActivityType`](http://niem5.org/schemas/nc.html#ActivityType), which contains [`nc:ActivityDate`](http://niem5.org/schemas/nc.html#ActivityDate):
+
+```xml
+<xs:complexType name="ActivityType">
+	<xs:annotation>
+		<xs:documentation>A data type for a single or set of related actions, events, or process steps.</xs:documentation>
+	</xs:annotation>
+	<xs:complexContent>
+		<xs:extension base="structures:ObjectType">
+			<xs:sequence>
+				<xs:element ref="nc:ActivityIdentification" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="nc:ActivityActualDuration" minOccurs="0" maxOccurs="unbounded"/>
+				<!-- A whole slew of objects removed for clarity -->
+				<xs:element ref="nc:ActivityDate" minOccurs="0" maxOccurs="unbounded"/>
+				<!-- A whole slew of objects removed for clarity -->
+				<xs:element ref="nc:ActivityAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:extension>
+	</xs:complexContent>
+</xs:complexType>
+```
+
+What this all means is that a `j:Crash` object can contain a `nc:ActivityDate`, which is, contextually, a Crash Date.
+
+You need to understand this concept in order to know to look for these cases, which are very common, but just use tools to figure out the details, e.g:
+
+- [`j:Crash` in the SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-44f)
+- [`j:Crash` in Wayfarer](http://niem5.org/wayfarer/j/Crash.html)
+
 ___
 ## Code Tables
 - Codes help ensure accurate information
@@ -630,8 +836,6 @@ TODO: Add JSON-LD linking here.
 
 
 
-
-Combining Domains is where we start to have content.
 ___
 ## Associations
 - Relationships can be complex
@@ -650,6 +854,123 @@ ___
 - Examples:
 	- `j:PersonChargeAssociation` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-4qf)/[Wayfarer](http://niem5.org/wayfarer/j/PersonChargeAssociation.html))
 	- Anything ending in “Association”
+
+### Schemas
+
+```xml
+<xs:element name="PersonChargeAssociation" type="j:PersonChargeAssociationType" nillable="true">
+	<xs:annotation>
+		<xs:documentation>An association between a person and a charge issued to that person.</xs:documentation>
+	</xs:annotation>
+</xs:element>
+```
+```xml
+<xs:complexType name="PersonChargeAssociationType">
+	<xs:annotation>
+		<xs:documentation>A data type for an association between a person and a charge.</xs:documentation>
+	</xs:annotation>
+	<xs:complexContent>
+		<xs:extension base="nc:AssociationType">
+			<xs:sequence>
+				<xs:element ref="nc:Person" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="j:Charge" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="j:JuvenileAsAdultIndicator" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="j:PersonChargeAssociationAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:extension>
+	</xs:complexContent>
+</xs:complexType>
+```
+```xml
+<xs:complexType name="AssociationType">
+	<xs:annotation>
+		<xs:documentation>A data type for an association, connection, relationship, or involvement somehow linking people, things, and/or activities together.</xs:documentation>
+	</xs:annotation>
+	<xs:complexContent>
+		<xs:extension base="structures:AssociationType">
+			<xs:sequence>
+				<xs:element ref="nc:AssociationDateRange" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="nc:AssociationDescriptionText" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="nc:AssociationAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:extension>
+	</xs:complexContent>
+</xs:complexType>
+```
+
+### Instance Documents
+```xml
+<j:PersonChargeAssociation>
+	<nc:Person structures:ref="P01" xsi:nil="true"/>
+	<j:Charge structures:ref="CH01" xsi:nil="true"/>
+	<j:JuvenileAsAdultIndicator>true</j:JuvenileAsAdultIndicator>
+</j:PersonChargeAssociation>
+<nc:Person structures:id="P01">
+	<nc:PersonName>
+		<nc:PersonGivenName>Tommy</nc:PersonGivenName>
+	</nc:PersonName>
+</nc:Person>
+<j:Charge structures:id="CH01">
+	<j:ChargeDescriptionText>Furious Driving</j:ChargeDescriptionText>
+	<j:ChargeFelonyIndicator>false</j:ChargeFelonyIndicator>
+</j:Charge>
+```
+```xml
+<j:PersonChargeAssociation>
+	<nc:Person>
+		<nc:PersonName>
+			<nc:PersonGivenName>Tommy</nc:PersonGivenName>
+		</nc:PersonName>
+	</nc:Person>
+	<j:Charge>
+		<j:ChargeDescriptionText>Furious Driving</j:ChargeDescriptionText>
+		<j:ChargeFelonyIndicator>false</j:ChargeFelonyIndicator>
+	</j:Charge>
+	<j:JuvenileAsAdultIndicator>true</j:JuvenileAsAdultIndicator>
+</j:PersonChargeAssociation>
+```
+
+```json
+"j:PersonChargeAssociation": {
+	"nc:Person": {
+		"@id": "#P01"
+	},
+	"j:Charge": {
+		"@id": "#CH01"
+	},
+	"j:JuvenileAsAdultIndicator": true,
+	"j:CriminalInformationIndicator": true
+},
+"nc:Person": {
+	"@id": "#P01",
+	"nc:PersonName": {
+		"nc:PersonGivenName": "Tommy"
+	}
+},
+"j:Charge": {
+	"@id": "#CH01",
+	"j:ChargeDescriptionText": "Furious Driving",
+	"j:ChargeFelonyIndicator": false,
+	"j:CriminalInformationIndicator": true
+}
+```
+```json
+"j:PersonChargeAssociation": {
+	"nc:Person": {
+		"nc:PersonName": {
+			"nc:PersonGivenName": "Tommy"
+		}
+	},
+	"j:Charge": {
+		"j:ChargeDescriptionText": "Furious Driving",
+		"j:ChargeFelonyIndicator": false,
+		"j:CriminalInformationIndicator": true
+	},
+	"j:JuvenileAsAdultIndicator": true,
+	"j:CriminalInformationIndicator": true
+}
+
+```
 ___
 ## Roles
 - Modeling some objects as specialized things gets complicated
@@ -680,6 +1001,98 @@ Roles Point to the Object Playing the Role:
 Roles Contain Info About the Role
 
 ![Role Hats](Mapping_Graphics/Role_Hats_05.png)
+
+### Schemas
+```xml
+<xs:element name="CrashPerson" type="j:CrashPersonType" nillable="true">
+	<xs:annotation>
+		<xs:documentation>A person involved in a traffic accident.</xs:documentation>
+	</xs:annotation>
+</xs:element>
+```
+```xml
+<xs:complexType name="CrashPersonType">
+	<xs:annotation>
+		<xs:documentation>A data type for any person involved in a traffic accident.</xs:documentation>
+	</xs:annotation>
+	<xs:complexContent>
+		<xs:extension base="structures:ObjectType">
+			<xs:sequence>
+				<xs:element ref="nc:RoleOfPerson" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="j:CrashPersonEMSTransportation" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="j:CrashPersonInjury" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="j:AlcoholTestResultQuantityText" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="j:EmergencyMedicalServiceCall" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="nc:PatientMedicalFacility" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="j:AlcoholInvolvementSuspicionAbstract" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="j:AlcoholTestCategoryAbstract" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="j:AlcoholTestResultAbstract" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="j:AlcoholTestStatusAbstract" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="j:DrugInvolvementSuspicionAbstract" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="j:DrugTestCategoryAbstract" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="j:DrugTestResultAbstract" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="j:DrugTestStatusAbstract" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="j:InjuredTransportationSourceAbstract" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="j:CrashPersonAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:extension>
+	</xs:complexContent>
+</xs:complexType>
+```
+```xml
+<xs:element name="RoleOfPerson" type="nc:PersonType" substitutionGroup="nc:RoleOfAbstract" nillable="true">
+	<xs:annotation>
+		<xs:documentation>A person of whom the role object is a function.</xs:documentation>
+	</xs:annotation>
+</xs:element>
+```
+
+### Instance Documents
+
+```xml
+<j:CrashDriver>
+	<nc:RoleOfPerson structures:ref="P01" xsi:nil="true"/>
+</j:CrashDriver>
+<nc:Person structures:id="P01">
+	<nc:PersonName>
+		<nc:PersonGivenName structures:sequenceID="1">Peter</nc:PersonGivenName>
+	</nc:PersonName>
+</nc:Person>
+```
+
+```xml
+<j:CrashDriver>
+	<nc:RoleOfPerson>
+		<nc:PersonName>
+			<nc:PersonGivenName structures:sequenceID="1">Peter</nc:PersonGivenName>
+		</nc:PersonName>
+	</nc:RoleOfPerson>
+</j:CrashDriver>
+```
+
+```json
+"j:CrashPerson": {
+	"nc:RoleOfPerson": {
+		"@id": "#P01"
+	}
+},
+"nc:Person": {
+	"@id": "#P01",
+	"nc:PersonName": {
+		"nc:PersonGivenName": "Tommy"
+	}
+}
+```
+```json
+"j:CrashPerson": {
+	"nc:RoleOfPerson": {
+	"nc:PersonName": {
+		"nc:PersonGivenName": "Tommy"
+	}
+}
+```
+
+
 ___
 ## Metadata
 ### Metadata is Data about Data
@@ -708,6 +1121,58 @@ ___
 
 **Powerful, but can be difficult to implement**
 
+### Schemas
+
+```xml
+<xs:element name="Metadata" type="j:MetadataType" nillable="true" appinfo:appliesToTypes="structures:AssociationType structures:ObjectType">
+	<xs:annotation>
+		<xs:documentation>Information that further qualifies the kind of data represented.</xs:documentation>
+	</xs:annotation>
+</xs:element>
+```
+```xml
+<xs:complexType name="MetadataType">
+	<xs:annotation>
+		<xs:documentation>A data type for information that further qualifies the kind of data represented.</xs:documentation>
+	</xs:annotation>
+	<xs:complexContent>
+		<xs:extension base="structures:MetadataType">
+			<xs:sequence>
+				<xs:element ref="j:CriminalInformationIndicator" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="j:IntelligenceInformationIndicator" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:extension>
+	</xs:complexContent>
+</xs:complexType>
+```
+
+
+### Instance Documents
+```xml
+<j:Metadata structures:id="JMD01">
+	<j:CriminalInformationIndicator>true</j:CriminalInformationIndicator>
+</j:Metadata>
+```
+```xml
+<j:Charge structures:id="CH01" structures:metadata="JMD01">
+	<j:ChargeDescriptionText>Furious Driving</j:ChargeDescriptionText>
+	<j:ChargeFelonyIndicator>false</j:ChargeFelonyIndicator>
+</j:Charge>
+```
+
+JSON-LD doesn't support a specific metadata link, so for JSON we just include the metadata inside the object to which it applies.
+
+```json
+"j:Charge": {
+	"@id": "#CH01",
+	"j:ChargeDescriptionText": "Furious Driving",
+	"j:ChargeFelonyIndicator": false,
+	"j:CriminalInformationIndicator": true
+}
+
+```
+
+
 ## Combining Domains
 - Sometimes you just want to add properties from other domains to an object without making a special kind of thing
 - Augmentations are bags of stuff
@@ -719,7 +1184,7 @@ ___
 
 ### Schemas
 
-**`j:DriverLicense` is defined to be of `j:DriverLicenseType`:**
+`j:DriverLicense` is defined to be of `j:DriverLicenseType`:
 
 ```xml
 <xs:element name="DriverLicense" type="j:DriverLicenseType" nillable="true">
@@ -729,7 +1194,7 @@ ___
 </xs:element>
 ```
 
-**`j:DriverLicenseType` contains `j:DriverLicenseAugmentationPoint` as a hook for a augmentation bags:**
+`j:DriverLicenseType` contains `j:DriverLicenseAugmentationPoint` as a hook for a augmentation bags:
 
 ```xml
 <xs:complexType name="DriverLicenseType">
@@ -758,7 +1223,7 @@ ___
 </xs:complexType>
 ```
 
-**While NIEM does have some augmentations pre-defined, they're particularly useful for adding new object. Here we create a bag called `LicenseAugmentation` with `nc:ContactInformation` inside. We can now "hang" it on the `j:DriverLicenseAugmentationPoint` hook:**
+While NIEM does have some augmentations pre-defined, they're particularly useful for adding new object. Here we create a bag called `LicenseAugmentation` with `nc:ContactInformation` inside. We can now "hang" it on the `j:DriverLicenseAugmentationPoint` hook:
 
 ```xml
 <xs:complexType name="LicenseAugmentationType">
@@ -785,7 +1250,7 @@ ___
 </xs:element>
 ```
 
-**Our new `ext:LicenseAugmentationType` is based on the built-in `structures:AugmentationType`. That base type merely adds in infrastructure support for linking objects together:**
+Our new `ext:LicenseAugmentationType` is based on the built-in `structures:AugmentationType`. That base type merely adds in infrastructure support for linking objects together:
 
 ```xml
 <xs:complexType name="AugmentationType" abstract="true">
@@ -799,7 +1264,7 @@ ___
 </xs:complexType>
 ```
 
-**The resulting XML Instance Document looks like:**
+The resulting XML Instance Document looks like:
 
 ```xml
 <j:DriverLicense>
@@ -814,7 +1279,7 @@ ___
 </j:DriverLicense>
 ```
 
-**The equivalent JSON-LD would be:**
+The equivalent JSON-LD would be:
 
 ```json
 "j:DriverLicense": {
@@ -839,9 +1304,9 @@ ___
 - You’ll probably never use this, but should know it’s there
 - SSGT supports them; Wayfarer does not
 
-### Schema Example
+### Schemas
 
-**`LocationType` contains a `nc:LocationGeospatialCoordinateAbstract`:**
+`LocationType` contains a `nc:LocationGeospatialCoordinateAbstract`:
 
 ```xml
 <xs:complexType name="LocationType">
@@ -874,7 +1339,7 @@ ___
 	</xs:complexContent>
 </xs:complexType>
 ```
-**`nc:LocationGeospatialCoordinateAbstract` is the head of a substitution group:**
+`nc:LocationGeospatialCoordinateAbstract` is the head of a substitution group:
 
 ```xml
 <xs:element name="LocationGeospatialCoordinateAbstract" abstract="true">
@@ -884,7 +1349,7 @@ ___
 </xs:element>
 ```
 
-**One of the members of that substitution group is `geo:LocationGeospatialPoint`, which is an adapter to the external standard:**
+One of the members of that substitution group is `geo:LocationGeospatialPoint`, which is an adapter to the external standard:
 
 ```xml
 <xs:element name="LocationGeospatialPoint" type="geo:PointType" substitutionGroup="nc:LocationGeospatialCoordinateAbstract" nillable="true">
@@ -893,7 +1358,7 @@ ___
 	</xs:annotation>
 </xs:element>
 ```
-**Its type is `geo:PointType`. We're still in NIEM, but `gml:Point` isn't:**
+Its type is `geo:PointType`. We're still in NIEM, but `gml:Point` isn't:
 
 ```xml
 <xs:complexType name="PointType" appinfo:externalAdapterTypeIndicator="true">
@@ -913,7 +1378,7 @@ ___
 	</xs:complexContent>
 </xs:complexType>
 ```
-**And here is the `gml:Point` object from the external standard.**
+And here is the `gml:Point` object from the external standard.
 
 ```xml
 <element name="Point" type="gml:PointType" substitutionGroup="gml:AbstractGeometricPrimitive">
@@ -937,7 +1402,7 @@ ___
 
 ```
 
-**The resulting XML instance looks like this:**
+The resulting XML instance looks like this:
 
 ```xml
 <nc:Location>
@@ -949,7 +1414,7 @@ ___
 </nc:Location>
 ```
 
-**It doesn't make much sense to try and represent this in JSON in a NIEM-conformant way. NIEM doesn't (can't) provide rules for converting non-NIEM XML to JSON. This was auto-generated with an XML editor.**
+It doesn't make much sense to try and represent this in JSON in a NIEM-conformant way. NIEM doesn't (can't) provide rules for converting non-NIEM XML to JSON. This was auto-generated with an XML editor:
 
 ```json
 "nc:Location": {
@@ -977,7 +1442,7 @@ ___
 	- Folks generally do this anyway, for consistency
 - Follow the naming format of existing NIEM elements of that type, especially regarding the last term, e.g. “Text”, “Code”, etc.
 
-**Create `PersonDefenestrationIndicator` using the existing NIEM type `niem-xs:boolean`. By giving it `j:CrashPersonAugmentationPoint` as a substitution group head, it can go inside of the `j:CrashPerson`.**
+Create `PersonDefenestrationIndicator` using the existing NIEM type `niem-xs:boolean`. By giving it `j:CrashPersonAugmentationPoint` as a substitution group head, it can go inside of the `j:CrashPerson`:
 
 ```xml
 <xs:element name="PersonDefenestrationIndicator" type="niem-xs:boolean"
@@ -988,7 +1453,7 @@ ___
 	</xs:annotation>
 </xs:element>
 ```
-**The resulting XML instance is then:**
+The resulting XML instance is then:
 
 ```xml
 <j:CrashPerson>
@@ -1000,7 +1465,7 @@ ___
 	<ext:PersonDefenestrationIndicator>false</ext:PersonDefenestrationIndicator>
 </j:CrashPerson>
 ```
-**And the equivalent JSON-LD is:**
+And the equivalent JSON-LD is:
 
 ```json
 "j:CrashPerson": {
@@ -1019,9 +1484,9 @@ ___
 ```
 Note the `@id` that links to an identical `@id` in the nc:Person object.
 
-**For a more complicated example, we can create the `ext:PrivacyCode` element along with a `ext:PrivacyMetadata` to hold it.**
+For a more complicated example, we can create the `ext:PrivacyCode` element along with a `ext:PrivacyMetadata` to hold it.
 
-**The actual codes are defined in the simple type, `ext:PrivacyCodeSimpleType`. Each `enumeration` defines a code. The `documentation` tags provide a longer text description of the code.**
+The actual codes are defined in the simple type, `ext:PrivacyCodeSimpleType`. Each `enumeration` defines a code. The `documentation` tags provide a longer text description of the code:
 
 ```xml
 <xs:simpleType name="PrivacyCodeSimpleType">
@@ -1045,7 +1510,7 @@ Note the `@id` that links to an identical `@id` in the nc:Person object.
 
 ```
 
-**The complex type `ext:PrivacyCodeType` is then extended from `ext:PrivacyCodeSimpleType`. All this does is add infrastructure attributes to allow things of this type to refer to other elements, or be referred to in turn.**
+The complex type `ext:PrivacyCodeType` is then extended from `ext:PrivacyCodeSimpleType`. All this does is add infrastructure attributes to allow things of this type to refer to other elements, or be referred to in turn:
 
 ```xml
 <xs:complexType name="PrivacyCodeType">
@@ -1060,7 +1525,7 @@ Note the `@id` that links to an identical `@id` in the nc:Person object.
 	</xs:simpleContent>
 </xs:complexType>
 ```
-**Then `ext:PrivacyCode` is created to be of `ext:PrivacyCodeType`.**
+Then `ext:PrivacyCode` is created to be of `ext:PrivacyCodeType`:
 
 ```xml
 <xs:element name="PrivacyCode" type="ext:PrivacyCodeType">
@@ -1070,7 +1535,7 @@ Note the `@id` that links to an identical `@id` in the nc:Person object.
 </xs:element>
 ```
 
-**In this exchange, this code is metadata to be applied to other objects, so we can create `ext:PrivacyMetadata` to hold it.**
+In this exchange, this code is metadata to be applied to other objects, so we can create `ext:PrivacyMetadata` to hold it:
 
 ```xml
 <xs:element name="PrivacyMetadata" type="ext:PrivacyMetadataType">
@@ -1092,7 +1557,9 @@ Note the `@id` that links to an identical `@id` in the nc:Person object.
 </xs:complexType>
 ```
 
-**The resulting XML instance document is:**
+### Instance Documents
+
+The resulting XML instance document is:
 
 ```xml
 <ext:PrivacyMetadata structures:id="PMD01">
@@ -1100,7 +1567,7 @@ Note the `@id` that links to an identical `@id` in the nc:Person object.
 </ext:PrivacyMetadata>
 ```
 
-**An equivalent JSON document would be:**
+An equivalent JSON document would be:
 
 Instead of linking to separate metadata objects, we've embedded those into the `j:CrashPeson`.
 
@@ -1121,15 +1588,16 @@ Instead of linking to separate metadata objects, we've embedded those into the `
 ```
 
 ### Creating Complex Objects
+
 - If you’re making a special kind of existing NIEM type:
 	- Use that type as a base to extend from and add things to it, or
 	- Create an Augmentation to hold your new things
 - If you’re starting from scratch:
 	- Use structures:ObjectType as a base to extend from and add things to it
 
-**Here we're making the root element that will hold everything else. We create `CrashDriverInfoType`, basing it on `structures:ObjectType` so that it's just an empty object.**
+Here we're making the root element that will hold everything else. We create `CrashDriverInfoType`, basing it on `structures:ObjectType` so that it's just an empty object.
 
-**To that empty object, we add all the major objects in our exchange, `nc:Person`, `j:Crash`, and `j:Charge`. We also add a `j:PersonChargeAssociation` which lets us link together people and charges. Finally, we add a couple metadata object, the built-in `j:Metadata`, and `ext:PrivacyMetadata`, which we create in the extension schema and is in the prior example.**
+To that empty object, we add all the major objects in our exchange, `nc:Person`, `j:Crash`, and `j:Charge`. We also add a `j:PersonChargeAssociation` which lets us link together people and charges. Finally, we add a couple metadata object, the built-in `j:Metadata`, and `ext:PrivacyMetadata`, which we create in the extension schema and is in the prior example.
 
 ```xml
 <xs:element name="CrashDriverInfo" type="exch:CrashDriverInfoType">
@@ -1309,7 +1777,8 @@ Step 7: Infrastructure
 	- Free tools can perform most of the conformance checking
 
 # Exercises
-   
+
+TODO: Add exercises
 
 For Inherited Properties, use j:CommercialVehicle
 
