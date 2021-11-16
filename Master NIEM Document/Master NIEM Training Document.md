@@ -87,7 +87,9 @@ ___
 ### Scope of NIEM
 - NIEM is a data layer standard and intentionally does not address all the necessary technologies needed for information sharing
 - Exchange partners decide how to store and process the NIEM-conformant data being exchanged
+
 ![Scope of NIEM 01](Intro_Graphics/Scope_NIEM_01.png)
+
 ![Scope of NIEM 02](Intro_Graphics/Scope_NIEM_02.png)
 ___
 ### Scope of NIEM - Open Source Interconnection (OSI) model
@@ -245,21 +247,26 @@ Each step produces artifacts used by subsequent steps:
 ![Message Spec Seq Ideal](IEPD_Process_Graphics/Process_Seq_Real.png)
 ___
 ### IEPD Artifacts - Documentation
+
 - Master Documentation (Word)
 - IEPD catalog document (`iepd-catalog.xml`)
 - Change log (text)
 - README (text)
 - Conformance assertion (text)
+
 ___
 ### IEPD Artifacts - Definitional
+
 - Wantlist (`wantlist.xml`)
 - Schema subset schemas
 - Extension schemas
 - Exchange schemas
 - Sample instances
 - XML catalogs
+
 ___
 ## Scenario Planning
+
 - Decide what the exchange is about
 - Who are the exchange partners?
 - Who are stakeholders?
@@ -416,7 +423,7 @@ ___
 
 ### XML Schema
 
-The XML Schema defining [`nc:Person`](http://niem5.org/schemas/nc.html#Person) and [`nc:PersonType`](http://niem5.org/schemas/nc.html#PersonType) looks like:
+The XML Schema defining [`nc:Person`](http://niem5.org/schemas/nc.html#Person) includes a definition and a type. It looks like:
 
 ```xml
 <xs:element name="Person" type="nc:PersonType" nillable="true">
@@ -424,7 +431,11 @@ The XML Schema defining [`nc:Person`](http://niem5.org/schemas/nc.html#Person) a
 		<xs:documentation>A human being.</xs:documentation>
 	</xs:annotation>
 </xs:element>
+```
 
+Its type, [`nc:PersonType`](http://niem5.org/schemas/nc.html#PersonType), has a little more information. It also includes a definition, one similar to [`nc:Person`]. It also includes a `base` that tells us what sort of thing it is. In this case, the base is `structures:ObjectType`, which is just an empty object (that has a few infrastructure pieces we'll learn about later). To that `base` it adds several objects. These are objects that go _inside_ an `nc:Person` object. Each one is a reference to a declaration of each of those objects. Each also has cardinality defined, which tells us how many of each can go inside of an `nc:Person`. `minOccurs` is the minimum number of times. Any non-negative integer can go here, but 0 and 1 are what you'll usually find. Zero essentially means "optional." `maxOccurs` is the maximum number of times. This can also be any non-negative number, but can also be "unbounded", which means "as many as you want." Typical values are 1 and unbounded. Here's the schema for `nc:PersonType` with some of the contained objects removed for clarity:
+
+```xml
 <xs:complexType name="PersonType">
 	<xs:annotation>
 		<xs:documentation>A data type for a human being.</xs:documentation>
@@ -581,7 +592,7 @@ ___
 	- Search for `nc:Person` in the [SSGT](http://niem5.org/ssgt_redirect.php?query=person)
 	- Search for `nc:Person` in [Wayfarer](http://niem5.org/wayfarer/search.php?option=exact&query=person)
 
-
+We've already seen the schema for these in detail.
 ___
 ## Substitution Groups
 
@@ -798,20 +809,6 @@ You need to understand this concept in order to know to look for these cases, wh
 - [`j:Crash` in Wayfarer](http://niem5.org/wayfarer/j/Crash.html)
 
 ___
-## Code Tables
-- Codes help ensure accurate information
-- Codes are, essentially, strings, simple data
-	- Elements in the domains
-	- Types are often in their own namespaces
-- NIEM wraps them in a complex type in order to apply some attributes needed for infrastructure
-	- Which we will need in the next section…
-- Examples:
-	- `j:InjurySeverityCode` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-45s)/[Wayfarer](http://niem5.org/wayfarer/j/InjurySeverityCode.html))
-		- In the SSGT, the actual codes are viewable on the page for the base simple type, e.g. [`aamva_d20:AccidentSeverityCodeSimpleType`](https://tools.niem.gov/niemtools/ssgt/SSGT-GetType.iepd?typeKey=o3-c)
-		- In Wayfarer, there should be a link on the element page bringing up the codes in a separate window, e.g. [`aamva_d20:AccidentSeverityCodeSimpleType`](http://niem5.org/wayfarer/aamva_d20/AccidentSeverityCodeSimpleType_codes.html)
-	- Anything ending in “Code”
-
-___
 ## Linking Things Together
 - NIEM is relational in many senses
 - Objects can refer to each other across an XML hierarchy
@@ -860,8 +857,6 @@ Examples of how NIEM uses these are the next few sections.
 ___
 ## Referencing - JSON-LD
 
-TODO: Add JSON-LD linking here.
-
 JSON itself doesn't provide a means of linking objects together. NIEM leverages [JSON-LD](https://en.wikipedia.org/wiki/JSON-LD) to provide that functionality. We've seen earlier how the `@context` section provides a mapping from a JSON instance back to NIEM object. NIEM also uses `@id` objects to both mark objects with an ID as well as refer to IDs applied to other objects.
 
 Again, we will see example throughout the next few sections.
@@ -884,7 +879,7 @@ ___
 - Associations can also just include them, if applicable
 - Examples:
 	- `j:PersonChargeAssociation` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-4qf)/[Wayfarer](http://niem5.org/wayfarer/j/PersonChargeAssociation.html))
-	- Anything ending in “Association”
+	- Anything ending in “Association” ([SSGT](http://niem5.org/ssgt_redirect.php?query=association)/[Wayfarer](http://niem5.org/wayfarer/search.php?option=names&query=association))
 
 ### Schemas
 
@@ -1119,6 +1114,7 @@ As with associations, we can implement the role in two different ways. Here we s
 <j:CrashDriver>
 	<nc:RoleOfPerson structures:ref="P01" xsi:nil="true"/>
 </j:CrashDriver>
+
 <nc:Person structures:id="P01">
 	<nc:PersonName>
 		<nc:PersonGivenName>Peter</nc:PersonGivenName>
@@ -1148,6 +1144,7 @@ The JSON-LD versions are, again, similar to the ones for associations. Here the 
 		"@id": "#P01"
 	}
 },
+
 "nc:Person": {
 	"@id": "#P01",
 	"nc:PersonName": {
@@ -1168,10 +1165,23 @@ And, again as with associations, you can simply include the Person-specific info
 ```
 
 The choices here are also a balance, although inclusion will likely be more attractive to most JSON developers.
-
+___
+## Code Tables
+- Codes help ensure accurate information
+- Codes are, essentially, strings, simple data
+	- Elements in the domains
+	- Types are often in their own namespaces
+- NIEM wraps them in a complex type in order to apply some attributes needed for infrastructure
+	- Which we will need in the next section…
+- Examples:
+	- `j:InjurySeverityCode` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-45s)/[Wayfarer](http://niem5.org/wayfarer/j/InjurySeverityCode.html))
+		- In the SSGT, the actual codes are viewable on the page for the base simple type, e.g. [`aamva_d20:AccidentSeverityCodeSimpleType`](https://tools.niem.gov/niemtools/ssgt/SSGT-GetType.iepd?typeKey=o3-c)
+		- In Wayfarer, there should be a link on the element page bringing up the codes in a separate window, e.g. [`aamva_d20:AccidentSeverityCodeSimpleType`](http://niem5.org/wayfarer/aamva_d20/AccidentSeverityCodeSimpleType_codes.html)
+	- Anything ending in "Code" ([SSGT](http://niem5.org/ssgt_redirect.php?query=code)/[Wayfarer](http://niem5.org/wayfarer/search.php?option=names&query=code))
+TODO: Add schemas
 ___
 ## Metadata
-### Metadata is Data about Data
+Metadata is Data about Data. What does that mean? Here's an example:
 
 ![Jett](Mapping_Graphics/Jett.png)
 
@@ -1249,7 +1259,7 @@ JSON-LD doesn't support a specific metadata link, so for JSON we just include th
 ```
 
 
-## Combining Domains
+## Combining Domains (Augmentations)
 - Sometimes you just want to add properties from other domains to an object without making a special kind of thing
 - Augmentations are bags of stuff
 - Augmentation Points are hooks onto which to hang the bags of stuff
