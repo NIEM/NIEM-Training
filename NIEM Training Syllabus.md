@@ -49,12 +49,12 @@
 - Substitution Groups
 - Inherited Properties
 - Namespaces
-- Code Tables
 - Linking Things Together
-	- Associations
-	- Roles
-	- Combining Domains with Augmentations
-	- Metadata
+- Associations
+- Roles
+- Code Tables
+- Metadata
+- Combining Domains with Augmentations
 
 ### Creating New Objects
 

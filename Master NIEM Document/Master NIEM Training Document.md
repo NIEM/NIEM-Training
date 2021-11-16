@@ -8,13 +8,16 @@ Tom Carlson
 tom@tomcarlsonconsulting.com
 GTRI / NIEM Consultant
 
-<!-- TOC -->
 # Introduction
 
 ## Purpose
 
 A technical webinar focused on developers and implementers who are interested in a deep-dive of the National Information Exchange Model.
-___
+
+## Supporting Documents
+
+
+
 ## Agenda
 
 - Logistics
@@ -35,7 +38,7 @@ ___
 ___
 ## Logistics
 
-- Three days, 1-4pm each day
+- Three days, 1-5pm each day
 - Short breaks on the hour
 - Ask questions via chat when you have them
 	- Someone is monitoring chat
