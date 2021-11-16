@@ -45,14 +45,18 @@ All materials are available on the NIEM Training Github repo at [https://github.
 	- Assembly
 	- Publishing
 	- Implementation
+- Exercises
 - Resources
 ___
-## Logistics
+## Logistics and Background
 
+- Second live session
+	- Major revamp of prior training programs
+	- Materials revamped from first live session
 - Three days, 1-5pm each day
 - Short breaks on the hour
-- Ask questions via chat when you have them
-	- Someone is monitoring chat
+- Ask questions via chat _when you have them_
+	- Someone is monitoring chat and will interrupt me as needed
 - This document and supporting materials at:
 	- https://github.com/niem/niem-training
 ___
@@ -196,6 +200,7 @@ ___
 
 - NIEM has major and minor versions, plus domain updates
 - Major version releases, e.g. 4.2 to 5.0
+	- Every 3 years
 	- All bets are off
 	- NIEM-Core can and will change
 		- Underlying infrastructure can also change
@@ -206,6 +211,7 @@ ___
 		- New content is added
 	- _Nothing_ in a major version change is guaranteed to be backwards compatible with earlier major releases
 - Minor version releases:
+	- Annually
 	- **NIEM-Core does not change!**
 		- **Neither does the underlying infrastructure**
 	- Domains can change
@@ -215,7 +221,11 @@ ___
 - Domain updates are done per-domain
 	- Domains can update their content in between minor releases
 	- Those updates then are normally folded into the next minor release
-
+- Older versions never go away
+	- You can still use NIEM 1.0 (but shouldn't)
+- Migration
+	- Don't have to migrate
+	- May want to if a newer version gives you functionality you need (and you're already making changes)
 
 **NIEM Administration Organization**
 
