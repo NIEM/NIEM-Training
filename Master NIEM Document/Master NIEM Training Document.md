@@ -1953,10 +1953,47 @@ Step 7: Infrastructure
 	- Free tools can perform most of the conformance checking
 
 # Exercises
+Cardinality? What happens if maxOccurs is set to zero? Why might you want to do that?
 
-TODO: Add exercises
+## Native Properties
 
-For Inherited Properties, use j:CommercialVehicle
+## Substitution Groups
+
+## Inherited Properties
+
+Find out some information about commercial vehicles by finding the properties that answer these questions:
+
+1. How could you indicate a vehicle is a commercial vehicle? Can you find a second way?
+2. How could you describe the brand name of a commercial vehicle as text rather than a code?
+3. How could you indicate the primary color of a commercial vehicle? Can you find a second way? A third? A fourth?
+
+## Associations
+
+1. How might you associate a person with their aunt or uncle? (Hint: "Facet" is the term the SSGT uses for code table codes. Play with the search options there to find this.)
+2. Write up a little XML or JSON, or even YAML, showing this object.
+
+## Roles
+
+1. How many kinds of roles can an item play? What are they? (Hint: Kinds of roles refers to types.)
+2. How many different elements can represent these kinds of roles? What are they? (Hint: Wayfarer is the best tool for this.)
+
+## Code Tables
+
+1. Going back to the primary color of a commercial vehicle, is there any difference between the different code table options?
+2. Why might there be all these different code tables for this? (You won't be expected to actually know this, but it's good to ponder it.)
+3. Find all the values for a person's eye color.
+4. What if you wanted to describe the eye color as "Faded Blue Jean".
+5. What do you think happens if a code table has no enumerations defined? What will validate and what wont?
+
+## Metadata
+
+## Combining Domains - Augmentations
+
+## External Standards
+
+## Creating New Objects - Simple Data
+
+## Creating New Objects - Complex Objects
 
 # Resources
 
