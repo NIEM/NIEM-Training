@@ -16,6 +16,17 @@ A technical webinar focused on developers and implementers who are interested in
 
 ## Supporting Documents
 
+All materials are available on the NIEM Training Github repo at [https://github.com/NIEM/NIEM-Training](https://github.com/NIEM/NIEM-Training). Specific materials used are listed on the README page and include:
+
+- [NIEM Training Syllabus](https://github.com/NIEM/NIEM-Training/blob/main/NIEM%20Training%20Syllabus.md)
+- [**Master NIEM Training Document**](https://github.com/NIEM/NIEM-Training/blob/main/Master%20NIEM%20Document/Master%20NIEM%20Training%20Document.md)
+- [Mapping Spreadsheets](https://github.com/NIEM/NIEM-Training/tree/main/Master%20NIEM%20Document/Mapping_Spreadsheets)
+- [Ersatz Textual Instances](https://github.com/NIEM/NIEM-Training/tree/main/Master%20NIEM%20Document/Text_Document)
+
+## Sample IEPD
+
+- [Crash Driver IEPD](https://github.com/NIEM/NIEM-Training/tree/main/Crash%20Driver%20IEPD)
+
 
 
 ## Agenda
@@ -401,19 +412,25 @@ ___
 	- The IEPD Spec doesn’t specify a required format, by design
 ___
 ### Basics of Searching NIEM
+
 **Tools**
-- SSGT
-- Wayfarer
+
+- [SSGT](https://tools.niem.gov/niemtools/ssgt/index.iepd)
+- [Wayfarer](http://niem5.org/wayfarer/)
 - NIEM Schemas
-- Spreadsheet
+	- [Official Releases](https://niem.github.io/niem-releases/)
+	- [HyperNIEM](http://niem5.org/schemas/)
+- Spreadsheet (included in the official releases)
 
 **Techniques**
+
 - Search for Terms
 	- Simple vs Advanced
 - Search for Synonyms
 - Search for Word Roots
 - Search for Containers
 - Search for Properties
+
 ___
 # Mapping and NIEM Technical Details
 
@@ -1181,6 +1198,9 @@ ___
 		- In the SSGT, the actual codes are viewable on the page for the base simple type, e.g. [`aamva_d20:AccidentSeverityCodeSimpleType`](https://tools.niem.gov/niemtools/ssgt/SSGT-GetType.iepd?typeKey=o3-c)
 		- In Wayfarer, there should be a link on the element page bringing up the codes in a separate window, e.g. [`aamva_d20:AccidentSeverityCodeSimpleType`](http://niem5.org/wayfarer/aamva_d20/AccidentSeverityCodeSimpleType_codes.html)
 	- Anything ending in "Code" ([SSGT](http://niem5.org/ssgt_redirect.php?query=code)/[Wayfarer](http://niem5.org/wayfarer/search.php?option=names&query=code))
+- Codes nearly always have a text alternative
+
+![The color of her hair](Code_Table_Graphics/PBF252-Carolyn.jpg)
 
 ### Schemas
 
@@ -1956,11 +1976,29 @@ Step 7: Infrastructure
 	- Free tools can perform most of the conformance checking
 
 # Exercises
-Cardinality? What happens if maxOccurs is set to zero? Why might you want to do that?
+
+## Understanding NIEM Objects
+
+Let's think about cardinality a little:
+
+1. What happens if maxOccurs is less than minOccurs? (You can try this out in an editor, or just think about what _should_ happen.)
+2. What do you think happens if maxOccurs is set to zero? Why might you want to do that?
+3. What are some cases where you might want a maxOccurs that is greater than 1, but not unbounded?
 
 ## Native Properties
 
+This is an open-ended exercise. There's no answer. The idea is to get a little familiar with the tools and some of the major NIEM objects. Try using both the SSGT and Wayfarer:
+
+1. Search for, then look around at some common NIEM elements:
+	- nc:Activity
+	- nc:Identification
+	- nc:Location
+	- nc:Organization
+	- nc:Person
+
 ## Substitution Groups
+
+1. What are all the different ways that NIEM can represent a date?
 
 ## Inherited Properties
 
@@ -1972,12 +2010,12 @@ Find out some information about commercial vehicles by finding the properties th
 
 ## Associations
 
-1. How might you associate a person with their aunt or uncle? (Hint: "Facet" is the term the SSGT uses for code table codes. Play with the search options there to find this.)
+1. How might you associate a person with their aunt or uncle? (Hint: "Facet" is the term the SSGT uses for code table codes. Play with the search options there to find this. Wayfarer won't be a help with this.)
 2. Write up a little XML or JSON, or even YAML, showing this object.
 
 ## Roles
 
-1. How many kinds of roles can an item play? What are they? (Hint: Kinds of roles refers to types.)
+1. How many kinds of roles can an "item" play? What are they? (Hint: Kinds of roles refers to types.)
 2. How many different elements can represent these kinds of roles? What are they? (Hint: Wayfarer is the best tool for this.)
 
 ## Code Tables
@@ -1985,18 +2023,28 @@ Find out some information about commercial vehicles by finding the properties th
 1. Going back to the primary color of a commercial vehicle, is there any difference between the different code table options?
 2. Why might there be all these different code tables for this? (You won't be expected to actually know this, but it's good to ponder it.)
 3. Find all the values for a person's eye color.
-4. What if you wanted to describe the eye color as "Faded Blue Jean".
-5. What do you think happens if a code table has no enumerations defined? What will validate and what wont?
+4. What if you wanted to describe the eye color as "The color of my favorite pair of faded blue jeans"?
+5. What do you think happens if a code table has no enumerations defined? What will validate and what won't?
 
 ## Metadata
 
+1. What does the Human Services domain count as metadata?
+2. What about the Screening domain?
+3. Think up an example of metadata about this class.
+
 ## Combining Domains - Augmentations
 
-## External Standards
+1. Can you mix and match NIEM elements into your own Augmentation?
 
 ## Creating New Objects - Simple Data
 
+1. Write up XML Schema (sorry JSON folks) to create a pair of elements to rate this class on a scale of 1-5 and provide a comment.
+2. Write up the XML or JSON that matches.
+
 ## Creating New Objects - Complex Objects
+
+1. Write up XML Schema to create an evaluation object, holding the pair of elements from the prior exercise.
+2. Write up the XML or JSON that matches.
 
 # Resources
 
