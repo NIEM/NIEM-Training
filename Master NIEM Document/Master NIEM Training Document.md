@@ -584,7 +584,7 @@ JSON-LD and JSON Schema are separate concepts. NIEM does not _yet_ support JSON 
 Throughout the training, matching JSON instances will be included with XML instances.
 
 ___
-## Mapping to Native Properties
+## Native Properties
 - Some things will be easy to find
 - Will map directly to NIEM objects
 - Examples:
