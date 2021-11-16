@@ -9,7 +9,7 @@
 			"nc:PersonName": {
 				"nc:PersonGivenName": "Peter",
 				"nc:PersonMiddleName": [
-				    "Death",
+					"Death",
 					"Bredon"
 				],
 				"nc:PersonSurName": "Wimsey"
