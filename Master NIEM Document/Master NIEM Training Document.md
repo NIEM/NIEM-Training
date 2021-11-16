@@ -206,6 +206,7 @@ ___
 		- Underlying infrastructure can also change
 	- Domains can change
 	- Domains are harmonized
+		- Combination of tools and human collaboration to reach consensus
 		- Repeated content is collapsed
 		- Misplaced content is moved, either to other domains or to core
 		- New content is added
@@ -226,6 +227,8 @@ ___
 - Migration
 	- Don't have to migrate
 	- May want to if a newer version gives you functionality you need (and you're already making changes)
+	- NIEM provides tools for migrating the NIEM objects, ~90% effective
+	- Manual work is needed for things you've added for your exchange
 
 **NIEM Administration Organization**
 
