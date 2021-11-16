@@ -1,99 +1,89 @@
 {
-  "exch:CrashDriverInfo": {
-    "nc:Person": {
-      "@id": "#P01",
-      "nc:PersonBirthDate": {
-        "nc:Date": "1890-05-04",
-        "ext:PrivacyCode": "PII"
-      },
-      "nc:PersonName": {
-        "nc:personNameCommentText": "copied",
-        "nc:PersonGivenName": {
-          "nc:sequenceID": 1,
-          "rdf:value": "Peter"
-        },
-        "nc:PersonMiddleName": [
-          {
-            "nc:sequenceID": 2,
-            "rdf:value": "Death"
-          },
-          {
-            "nc:sequenceID": 3,
-            "rdf:value": "Bredon"
-          }
-        ],
-        "nc:PersonSurName": "Wimsey"
-      }
-    },
-    "j:Crash": {
-      "nc:ActivityDate": {
-        "nc:Date": "1900-05-04"
-      },
-      "nc:IncidentLocation": {
-        "nc:Location2DGeospatialCoordinate": {
-          "nc:GeographicCoordinateLatitude": {
-            "nc:LatitudeDegreeValue": "51",
-            "nc:LatitudeMinuteValue": "52"
-          },
-          "nc:GeographicCoordinateLongitude": {
-            "nc:LongitudeDegreeValue": "-1",
-            "nc:LongitudeMinuteValue": "17"
-          }
-        }
-      },
-      "j:CrashVehicle": {
-        "j:CrashDriver": {
-          "nc:RoleOfPerson": {
-            "@id": "#P01"
-          },
-          "j:DriverLicense": {
-            "j:DriverLicenseCardIdentification": {
-              "nc:IdentificationID": "A1234567"
-            },
-            "ext:LicenseAugmentation": {
-              "nc:ContactInformation": {
-                "nc:ContactEmailID": "peter@wimsey.org"
-              }
-            }
-          }
-        }
-      },
-      "j:CrashPerson": {
-        "nc:RoleOfPerson": {
-          "@id": "#P01"
-        },
-        "j:CrashPersonInjury": {
-          "nc:InjuryDescriptionText": "Broken Arm",
-          "j:InjurySeverityCode": "3",
-          "ext:PrivacyCode": [
-            "PII", "MEDICAL"
-          ]
-        },
-        "ext:PersonDefenestrationIndicator": "false"
-      }
-    },
-    "j:PersonChargeAssociation": {
-      "nc:Person": {
-        "@id": "#P01"
-      },
-      "j:Charge": {
-        "@id": "#CH01"
-      },
-      "j:JuvenileAsAdultIndicator": true,
-      "j:CriminalInformationIndicator": true
-    },
-    "j:Charge": {
-      "@id": "#CH01",
-      "j:ChargeDescriptionText": "Furious Driving",
-      "j:ChargeFelonyIndicator": false,
-      "j:CriminalInformationIndicator": true
-    }
-  },
-  "@context": {
-    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-    "nc": "http://release.niem.gov/niem/niem-core/5.0/#",
-    "exch": "http://example.com/CrashDriver/1.0/#",
-    "ext": "http://example.com/CrashDriver/1.0/extension#",
-    "j": "http://release.niem.gov/niem/domains/jxdm/7.0/#"
-  }
+	"exch:CrashDriverInfo": {
+		"nc:Person": {
+			"@id": "#P01",
+			"nc:PersonBirthDate": {
+				"nc:Date": "1890-05-04",
+				"ext:PrivacyCode": "PII"
+			},
+			"nc:PersonName": {
+				"nc:PersonGivenName": "Peter",
+				"nc:PersonMiddleName": [
+				    "Death",
+					"Bredon"
+				],
+				"nc:PersonSurName": "Wimsey"
+			}
+		},
+		"j:Crash": {
+			"nc:ActivityDate": {
+				"nc:Date": "1900-05-04"
+			},
+			"nc:Location": {
+				"nc:Location2DGeospatialCoordinate": {
+					"nc:GeographicCoordinateLatitude": {
+						"nc:LatitudeDegreeValue": "51",
+						"nc:LatitudeMinuteValue": "52"
+					},
+					"nc:GeographicCoordinateLongitude": {
+						"nc:LongitudeDegreeValue": "-1",
+						"nc:LongitudeMinuteValue": "17"
+					}
+				}
+			},
+			"j:CrashVehicle": {
+				"j:CrashDriver": {
+					"nc:RoleOfPerson": {
+						"@id": "#P01"
+					},
+					"j:DriverLicense": {
+						"j:DriverLicenseCardIdentification": {
+							"nc:IdentificationID": "A1234567"
+						},
+						"ext:LicenseAugmentation": {
+							"nc:ContactInformation": {
+								"nc:ContactEmailID": "peter@wimsey.org"
+							}
+						}
+					}
+				}
+			},
+			"j:CrashPerson": {
+				"nc:RoleOfPerson": {
+					"@id": "#P01"
+				},
+				"j:CrashPersonInjury": {
+					"nc:InjuryDescriptionText": "Broken Arm",
+					"j:InjurySeverityCode": "3",
+					"ext:PrivacyCode": [
+						"PII", "MEDICAL"
+					]
+				},
+				"ext:PersonDefenestrationIndicator": "false"
+			}
+		},
+		"j:PersonChargeAssociation": {
+			"nc:Person": {
+				"@id": "#P01"
+			},
+			"j:Charge": {
+				"@id": "#CH01"
+			},
+			"j:JuvenileAsAdultIndicator": true,
+			"j:CriminalInformationIndicator": true
+		},
+		"j:Charge": {
+			"@id": "#CH01",
+			"j:ChargeDescriptionText": "Furious Driving",
+			"j:ChargeFelonyIndicator": false,
+			"j:CriminalInformationIndicator": true
+		}
+	},
+	"@context": {
+		"rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+		"nc": "http://release.niem.gov/niem/niem-core/5.0/#",
+		"exch": "http://example.com/CrashDriver/1.0/#",
+		"ext": "http://example.com/CrashDriver/1.0/extension#",
+		"j": "http://release.niem.gov/niem/domains/jxdm/7.0/#"
+	}
 }
