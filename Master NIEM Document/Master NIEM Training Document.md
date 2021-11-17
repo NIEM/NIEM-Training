@@ -1152,7 +1152,7 @@ Roles Contain Info About the Role
 	<xs:complexContent>
 		<xs:extension base="structures:ObjectType">
 			<xs:sequence>
-				<xs:element ref="v" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="nc:RoleOfPerson" minOccurs="0" maxOccurs="unbounded"/>
 				<xs:element ref="j:CrashPersonEMSTransportation" minOccurs="0" maxOccurs="unbounded"/>
 				<xs:element ref="j:CrashPersonInjury" minOccurs="0" maxOccurs="unbounded"/>
 				<!-- A whole slew of objects removed for clarity -->
@@ -1195,7 +1195,7 @@ As with associations, `nc:RoleOfPerson` can also simply contain the Person-speci
 <j:CrashDriver>
 	<nc:RoleOfPerson>
 		<nc:PersonName>
-			<nc:PersonGivenName structures:sequenceID="1">Peter</nc:PersonGivenName>
+			<nc:PersonGivenName>Peter</nc:PersonGivenName>
 		</nc:PersonName>
 	</nc:RoleOfPerson>
 </j:CrashDriver>
@@ -1225,8 +1225,9 @@ And, again as with associations, you can simply include the Person-specific info
 ```json
 "j:CrashPerson": {
 	"nc:RoleOfPerson": {
-	"nc:PersonName": {
-		"nc:PersonGivenName": "Tommy"
+		"nc:PersonName": {
+			"nc:PersonGivenName": "Tommy"
+		}
 	}
 }
 ```
@@ -1264,53 +1265,53 @@ ___
 The actual codes are defined in a pair of types. The first, [`aamva_d20:AccidentSeverityCodeSimpleType`](http://niem5.org/schemas/aamva_d20.html#AccidentSeverityCodeSimpleType), defines the actual codes and their definitions, one per `enumeration` below. This simple type is then wrapped in a complex type, [`aamva_d20:AccidentSeverityCodeType`](http://niem5.org/schemas/aamva_d20.html#AccidentSeverityCodeType), to add infrastructure attributes that we've seen used in associations and roles. The two types are grouped together in the [`aamva_d20`](http://niem5.org/schemas/aamva_d20.html) namespace so they can be governed by AAMVA without needing to change the `j` domain:
 
 ```xml
-	<xs:simpleType name="AccidentSeverityCodeSimpleType">
-		<xs:annotation>
-			<xs:documentation>A data type for severity levels of an accident.</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:token">
-			<xs:enumeration value="1">
-				<xs:annotation>
-					<xs:documentation>Fatal Accident</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="2">
-				<xs:annotation>
-					<xs:documentation>Incapacitating Injury Accident</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="3">
-				<xs:annotation>
-					<xs:documentation>Non-incapacitating Evident Injury</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="4">
-				<xs:annotation>
-					<xs:documentation>Possible Injury Accident</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="5">
-				<xs:annotation>
-					<xs:documentation>Non-injury Accident</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="9">
-				<xs:annotation>
-					<xs:documentation>Unknown</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:complexType name="AccidentSeverityCodeType">
-		<xs:annotation>
-			<xs:documentation>A data type for severity levels of an accident.</xs:documentation>
-		</xs:annotation>
-		<xs:simpleContent>
-			<xs:extension base="aamva_d20:AccidentSeverityCodeSimpleType">
-				<xs:attributeGroup ref="structures:SimpleObjectAttributeGroup"/>
-			</xs:extension>
-		</xs:simpleContent>
-	</xs:complexType>
+<xs:simpleType name="AccidentSeverityCodeSimpleType">
+	<xs:annotation>
+		<xs:documentation>A data type for severity levels of an accident.</xs:documentation>
+	</xs:annotation>
+	<xs:restriction base="xs:token">
+		<xs:enumeration value="1">
+			<xs:annotation>
+				<xs:documentation>Fatal Accident</xs:documentation>
+			</xs:annotation>
+		</xs:enumeration>
+		<xs:enumeration value="2">
+			<xs:annotation>
+				<xs:documentation>Incapacitating Injury Accident</xs:documentation>
+			</xs:annotation>
+		</xs:enumeration>
+		<xs:enumeration value="3">
+			<xs:annotation>
+				<xs:documentation>Non-incapacitating Evident Injury</xs:documentation>
+			</xs:annotation>
+		</xs:enumeration>
+		<xs:enumeration value="4">
+			<xs:annotation>
+				<xs:documentation>Possible Injury Accident</xs:documentation>
+			</xs:annotation>
+		</xs:enumeration>
+		<xs:enumeration value="5">
+			<xs:annotation>
+				<xs:documentation>Non-injury Accident</xs:documentation>
+			</xs:annotation>
+		</xs:enumeration>
+		<xs:enumeration value="9">
+			<xs:annotation>
+				<xs:documentation>Unknown</xs:documentation>
+			</xs:annotation>
+		</xs:enumeration>
+	</xs:restriction>
+</xs:simpleType>
+<xs:complexType name="AccidentSeverityCodeType">
+	<xs:annotation>
+		<xs:documentation>A data type for severity levels of an accident.</xs:documentation>
+	</xs:annotation>
+	<xs:simpleContent>
+		<xs:extension base="aamva_d20:AccidentSeverityCodeSimpleType">
+			<xs:attributeGroup ref="structures:SimpleObjectAttributeGroup"/>
+		</xs:extension>
+	</xs:simpleContent>
+</xs:complexType>
 ```
 ### Instance Documents
 
@@ -1328,10 +1329,7 @@ And here's the JSON. Note that NIEM does not yet support JSON Schema, so there's
 ```json
 "j:CrashPersonInjury": {
 	"nc:InjuryDescriptionText": "Broken Arm",
-	"j:InjurySeverityCode": "3",
-	"ext:PrivacyCode": [
-		"PII", "MEDICAL"
-	]
+	"j:InjurySeverityCode": "3"
 }
 ```
 ___
