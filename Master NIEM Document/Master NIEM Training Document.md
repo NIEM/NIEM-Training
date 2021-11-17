@@ -27,8 +27,6 @@ All materials are available on the NIEM Training Github repo at [https://github.
 
 - [Crash Driver IEPD](https://github.com/NIEM/NIEM-Training/tree/main/Crash%20Driver%20IEPD)
 
-
-
 ## Agenda
 
 - Logistics
@@ -466,7 +464,7 @@ The XML Schema defining [`nc:Person`](http://niem5.org/schemas/nc.html#Person) i
 </xs:element>
 ```
 
-Its type, [`nc:PersonType`](http://niem5.org/schemas/nc.html#PersonType), has a little more information. It also includes a definition, one similar to [`nc:Person`]. It also includes a `base` that tells us what sort of thing it is. In this case, the base is `structures:ObjectType`, which is just an empty object (that has a few infrastructure pieces we'll learn about later). To that `base` it adds several objects. These are objects that go _inside_ an `nc:Person` object. Each one is a reference to a declaration of each of those objects. Each also has cardinality defined, which tells us how many of each can go inside of an `nc:Person`. `minOccurs` is the minimum number of times. Any non-negative integer can go here, but 0 and 1 are what you'll usually find. Zero essentially means "optional." `maxOccurs` is the maximum number of times. This can also be any non-negative number, but can also be "unbounded", which means "as many as you want." Typical values are 1 and unbounded. Here's the schema for `nc:PersonType` with some of the contained objects removed for clarity:
+Its type, [`nc:PersonType`](http://niem5.org/schemas/nc.html#PersonType), has a little more information. It also includes a definition, one similar to `nc:Person`. It also includes a `base` that tells us what sort of thing it is. In this case, the base is `structures:ObjectType`, which is just an empty object (that has a few infrastructure pieces we'll learn about later). To that `base` it adds several objects. These are objects that go _inside_ an `nc:Person` object. Each one is a reference to a declaration of each of those objects. Each also has cardinality defined, which tells us how many of each can go inside of an `nc:Person`. `minOccurs` is the minimum number of times. Any non-negative integer can go here, but 0 and 1 are what you'll usually find. Zero essentially means "optional." `maxOccurs` is the maximum number of times. This can also be any non-negative number, but can also be "unbounded", which means "as many as you want." Typical values are 1 and unbounded. Here's the schema for `nc:PersonType` with some of the contained objects removed for clarity:
 
 ```xml
 <xs:complexType name="PersonType">
@@ -637,7 +635,7 @@ ___
 	- Multiple representations of that concept
 - Examples:
 	- `nc:PersonBirthDate` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-11r)/[Wayfarer](http://niem5.org/wayfarer/nc/PersonBirthDate.html)) contains a `nc:DateRepresentation` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-92a)/[Wayfarer](http://niem5.org/wayfarer/nc/DateRepresentation.html))
-	- substitution group heads follow the form of: `SomethingRepresentation` or `WhateverAbstract`
+	- Substitution group heads follow the form of: `SomethingRepresentation` or `WhateverAbstract`
 
 ## Schemas
 
@@ -1648,6 +1646,7 @@ ___
 ![New Element Flowchart](Mapping_Graphics/New_Element_Flowchart.png)
 
 ### Creating Simple Data Elements
+
 - Base them on whichever XML Schema type is appropriate
 - Follow the flowchart for help
 - Base on the `niem-xs` adapters if you need referencing
@@ -1805,7 +1804,7 @@ Instead of linking to separate metadata objects, we've embedded those into the `
 	- Use that type as a base to extend from and add things to it, or
 	- Create an Augmentation to hold your new things
 - If you’re starting from scratch:
-	- Use structures:ObjectType as a base to extend from and add things to it
+	- Use `structures:ObjectType` as a base to extend from and add things to it
 
 Here we're making the root element that will hold everything else. We create `CrashDriverInfoType`, basing it on `structures:ObjectType` so that it's just an empty object.
 
@@ -1836,6 +1835,26 @@ To that empty object, we add all the major objects in our exchange, `nc:Person`,
 	</xs:complexContent>
 </xs:complexType>
 ```
+
+Another example is when we created `ext:LicenseAugmentation` and `ext:LicenseAugmentationType` when talking about augmentations.
+
+### Adding New Content to the Exchange
+
+To summarize, there are two major ways to add new content to an exchange. We've seen them both above.
+
+If you're _already_ creating a new complex object and type, like `CrashDriverInfo` and `CrashDriverInfoType` above, you can simply add new elements to the new type, as we did with `ext:PrivacyMetadata`. This is called "concrete extension."
+
+But if you're not already creating the new type for other reasons, you should use augmentations. We used added `j:CrashPersonAugmentationPoint` to our exchange and used it as a hook on which we hung `ext:PersonDefenestrationIndicator`.
+
+### Problems with Concrete Extensions
+
+The issue with concrete extensions is that if the extension is happening deep inside an object, all the surrounding objects will also need to be extended. For example, if instead of using `j:DriverLicenseAugmentationPoint`, suppose we extended `j:DriverLicenseType`, making a new `ext:DriverLicenseType` to hold our new object. Now we need a new element for it, `ext:DriverLicense`.
+
+But `j:CrashDriver` doesn't hold an `ext:DriverLicense`, so we need to make a new `ext:CrashDriverType` and `ext:CrashDriver` that can hold an `ext:DriverLicense`.
+
+But `j:Crash` doesn't hold an `ext:CrashDriver`, so we need to make a new `ext:CrashType` and `ext:Crash` that can hold `ext:CrashDriver`.
+
+That's a lot of extra work and muddies the semantics of the elements.
 
 ## Creating and Validating Schemas
 - Conformance
@@ -1994,24 +2013,30 @@ Step 7: Infrastructure
 
 Let's think about cardinality a little:
 
-1. What happens if maxOccurs is less than minOccurs? (You can try this out in an editor, or just think about what _should_ happen.)
-2. What do you think happens if maxOccurs is set to zero? Why might you want to do that?
-3. What are some cases where you might want a maxOccurs that is greater than 1, but not unbounded?
+1. What happens if `maxOccurs` is less than `minOccurs`? (You can try this out in an editor, or just think about what _should_ happen.)
+2. What do you think happens if `maxOccurs` is set to zero? Why might you want to do that?
+3. What are some cases where you might want a `maxOccurs` that is greater than 1, but not unbounded?
 
 ## Native Properties
 
 This is an open-ended exercise. There's no answer. The idea is to get a little familiar with the tools and some of the major NIEM objects. Try using both the SSGT and Wayfarer:
 
 1. Search for, then look around at some common NIEM elements:
-	- nc:Activity
-	- nc:Identification
-	- nc:Location
-	- nc:Organization
-	- nc:Person
+	- `nc:Activity`
+	- `nc:Identification`
+	- `nc:Location`
+	- `nc:Organization`
+	- `nc:Person`
 
 ## Substitution Groups
 
 1. What are all the different ways that NIEM can represent a date?
+2. Take a look at the following elements and how they fit together via substitution groups. What do you think the reason for all this might be?
+	- nc:Entity ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-8ow)/[Wayfarer](http://niem5.org/wayfarer/nc/Entity.html))
+	- nc:EntityRepresentation ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-8ox)/[Wayfarer](http://niem5.org/wayfarer/nc/EntityRepresentation.html))
+	- nc:EntityOrganization ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-8oz)/[Wayfarer](http://niem5.org/wayfarer/nc/EntityOrganization.html))
+	- nc:EntityPerson ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-8oy)/[Wayfarer](http://niem5.org/wayfarer/nc/EntityPerson.html))
+
 
 ## Inherited Properties
 
@@ -2028,7 +2053,7 @@ Find out some information about commercial vehicles by finding the properties th
 
 ## Roles
 
-1. How many kinds of roles can an "item" play? What are they? (Hint: Kinds of roles refers to types.)
+1. How many kinds of roles can an "item" play? What are they? (Hint: "Kinds of roles" refers to types.)
 2. How many different elements can represent these kinds of roles? What are they? (Hint: Wayfarer is the best tool for this.)
 
 ## Code Tables
@@ -2058,7 +2083,7 @@ Find out some information about commercial vehicles by finding the properties th
 
 1. Write up XML Schema to create an evaluation object, holding the pair of elements from the prior exercise.
 2. Write up the XML or JSON that matches.
-
+___
 # Resources
 
 ## Documentation
@@ -2069,7 +2094,8 @@ Find out some information about commercial vehicles by finding the properties th
 	- [http://niem.github.io/reference/specifications/](http://niem.github.io/reference/specifications/)
 - Materials from this course:
 	- [https://github.com/NIEM/NIEM-Training](https://github.com/NIEM/NIEM-Training)
-	- These are internal work products
+	- Some of these are internal work products
+	- `README` has links to the good stuff
 
 ## Tools
 - SSGT:
@@ -2090,6 +2116,6 @@ Find out some information about commercial vehicles by finding the properties th
 ## Repositories
 - IEPD Clearinghouse
 	- [https://bja.ojp.gov/program/it/policy-implementation/clearinghouse](https://bja.ojp.gov/program/it/policy-implementation/clearinghouse)
-- IEPD Repository (Work with IEPDs)
+- IEPD Repository (Work with IEPDs) - _currently inoperative_
 	- [https://tools.niem.gov/niemtools/iepdt/index.iepd](https://tools.niem.gov/niemtools/iepdt/index.iepd)
 
