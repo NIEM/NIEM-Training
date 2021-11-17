@@ -692,19 +692,32 @@ Those other objects are identified by having a `substitutionGroup` attribute set
 In the resulting instance document, you don't see `nc:DateRepresentation` at all. You just see `nc:Date`, which is taking its place:
 
 ```xml
-<j:Crash>
-	<nc:ActivityDate>
-		<nc:Date>1900-05-04</nc:Date>
-	</nc:ActivityDate>
-</j:Crash>
+<nc:Person>
+	<nc:PersonBirthDate>
+		<nc:Date>1890-05-04</nc:Date>
+	</nc:PersonBirthDate>
+	<nc:PersonName>
+		<nc:PersonGivenName>Peter</nc:PersonGivenName>
+		<nc:PersonMiddleName>Death</nc:PersonMiddleName>
+		<nc:PersonMiddleName>Bredon</nc:PersonMiddleName>
+		<nc:PersonSurName>Wimsey</nc:PersonSurName>
+	</nc:PersonName>
+</nc:Person>
 ```
-
 The matching JSON similarly just shows `nc:Date`:
 
 ```json
-"j:Crash": {
-	"nc:ActivityDate": {
-		"nc:Date": "1900-05-04"
+"nc:Person": {
+	"nc:PersonBirthDate": {
+		"nc:Date": "1890-05-04"
+	},
+	"nc:PersonName": {
+		"nc:PersonGivenName": "Peter",
+		"nc:PersonMiddleName": [
+			"Death",
+			"Bredon"
+		],
+		"nc:PersonSurName": "Wimsey"
 	}
 }
 ```
@@ -740,6 +753,8 @@ ___
 - Instead, properties are inherited
 - There is no “Crash Date” in NIEM ([SSGT](http://niem5.org/ssgt_redirect.php?query=crash+date)/[Wayfarer](http://niem5.org/wayfarer/search.php?option=both&query=crash+date))
 - There _is_ an `ActivityDate` which can be inside a `Crash` object ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-44f)/[Wayfarer](http://niem5.org/wayfarer/j/Crash.html))
+
+### Schemas
 
 Here's [`j:Crash`](http://niem5.org/schemas/j.html#Crash) and its type, `j:CrashType`:
 
@@ -833,6 +848,27 @@ And we finally get to [`nc:ActivityType`](http://niem5.org/schemas/nc.html#Activ
 ```
 
 What this all means is that a `j:Crash` object can contain a `nc:ActivityDate`, which is, contextually, a Crash Date.
+
+### Instance Documents
+
+Instance in XML:
+
+```xml
+<j:Crash>
+	<nc:ActivityDate>
+		<nc:Date>1900-05-04</nc:Date>
+	</nc:ActivityDate>
+</j:Crash>
+```
+Instance in JSON:
+
+```json
+"j:Crash": {
+	"nc:ActivityDate": {
+		"nc:Date": "1900-05-04"
+	}
+}
+```
 
 You need to understand this concept in order to know to look for these cases, which are very common, but just use tools to figure out the details, e.g:
 
@@ -1900,7 +1936,7 @@ Step 7: Infrastructure
 ![Schema Import 7](Schema_Graphics/Schema_Import_7.png)
 
 ### Schema Subsets
-- NIEM has ~14,000 elements
+- NIEM has ~13,000 elements
 - You don’t want them all
 - NIEM supports mini versions of NIEM
 	- With the elements / types you want
