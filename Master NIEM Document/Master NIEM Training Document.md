@@ -250,7 +250,7 @@ Creating a Message Spec is a multi-step process
 5. Publishing
 6. (Implementation)
 
-![IEPD Process](IEPD_Process_Graphics/IEPD_Process.png)
+![IEPD Process](IEPD_Process_Graphics/Process_Diagram.png)
 
 Each step produces artifacts used by subsequent steps:
 
@@ -290,6 +290,7 @@ ___
 - XML catalogs
 
 ___
+
 ## Scenario Planning
 
 - Decide what the exchange is about
@@ -313,6 +314,9 @@ ___
 	- Current structure of the data (logical, physical)
 	- Use of external standards
 ___
+
+![Requirements Analysis](IEPD_Process_Graphics/Process_Artifacts_1.png)
+
 ## Requirements Analysis
 - Diagrams
 	- Use Case Diagrams
@@ -387,6 +391,9 @@ We have choices on how to proceed:
 
 (Will use a super secret tool to help with some of this!)
 ___
+
+![Mapping](IEPD_Process_Graphics/Process_Artifacts_2.png)
+
 ## Mapping
 For this entire section, we'll look at various things in the mapping spreadsheet and show how to map them to NIEM or to new elements that we'll create later. As we move through, we'll cover all the major aspects of how NIEM works.
 ___
@@ -1467,7 +1474,7 @@ JSON-LD doesn't support a specific metadata link, so for JSON we just include th
 </xs:complexType>
 ```
 
-While NIEM does have some augmentations pre-defined, they're particularly useful for adding new object. Here we create a bag called `LicenseAugmentation` with `nc:ContactInformation` inside. We can now "hang" it on the `j:DriverLicenseAugmentationPoint` hook:
+While NIEM does have some augmentations pre-defined, they're particularly useful for adding new objects, or just putting existing NIEM objects somewhere else. Here we do the latter, creating a bag called `LicenseAugmentation` with `nc:ContactInformation` inside. We can now "hang" it on the `j:DriverLicenseAugmentationPoint` hook:
 
 ```xml
 <xs:complexType name="LicenseAugmentationType">
@@ -1681,7 +1688,8 @@ ___
 
 ### Creating Simple Data Elements
 
-- Base them on whichever XML Schema type is appropriate
+- Base them on whichever XML Schema data type is appropriate
+	- They're all in the [niem-xs](http://niem5.org/schemas/niem-xs.html) schema
 - Follow the flowchart for help
 - Base on the `niem-xs` adapters if you need referencing
 	- Folks generally do this anyway, for consistency
@@ -1890,18 +1898,46 @@ But `j:Crash` doesn't hold an `ext:CrashDriver`, so we need to make a new `ext:C
 
 That's a lot of extra work and muddies the semantics of the elements.
 
+![Creating and Validating Schemas](IEPD_Process_Graphics/Process_Artifacts_3.png)
+
 ## Creating and Validating Schemas
 - Conformance
-- How things fit together
 - Subsets
 - Extension and Exchange Schemas
+- How things fit together
 
 ### NIEM Conformance
-- Follow the rules in the Naming and Design Rules (NDR)
-- Follow the rules in the IEPD Spec
+- Follow the rules in the [Naming and Design Rules (NDR)](http://niem.github.io/reference/specifications/ndr/)
+- Follow the rules in the [IEPD Spec](http://niem.github.io/reference/specifications/iepd/)
 - Many NDR rules exist as Schematron
 	- Can check these via the Conformance Testing Assistant (ConTesA)
 	- Can run the Schematron directly oXygen, with a plug-in in XMLSpy
+
+### Schema Subsets
+- NIEM has ~13,000 elements
+- You don’t want them all
+- NIEM supports mini versions of NIEM
+	- With the elements / types you want
+	- Plus things needed to make the elements / types you want work
+- Use the [SSGT](https://tools.niem.gov/niemtools/ssgt/index.iepd) for this! **Demo Time!**
+
+### Extension Schema(s)
+- Create new elements for your exchange
+- Emulate how NIEM does it
+- Utilize Augmentations to add your new objects to existing NIEM objects
+	- Concrete extension is an alternative
+- Can have multiple extension schemas
+- Some folks put code tables into a separate extension schema
+
+### Exchange Schema
+- Entry point to the exchange
+- Defines the root element of the exchange
+- Some put the definition for the root element here
+- Some put that in the extension schema
+- Some lump exchange and extension together
+- An exchange with multiple messages can have multiple exchange schemas, one per
+	- Can share a common extension
+	- Or not
 
 ### How Schemas Fit Together
 
@@ -1933,34 +1969,13 @@ Step 7: Infrastructure
 
 ![Schema Import 7](Schema_Graphics/Schema_Import_7.png)
 
-### Schema Subsets
-- NIEM has ~13,000 elements
-- You don’t want them all
-- NIEM supports mini versions of NIEM
-	- With the elements / types you want
-	- Plus things needed to make the elements / types you want work
-- Use the [SSGT](https://tools.niem.gov/niemtools/ssgt/index.iepd) for this!
-
-### Extension Schema(s)
-- Create new elements for your exchange
-- Emulate how NIEM does it
-- Utilize Augmentations to add your new objects to existing NIEM objects
-	- Concrete extension is an alternative
-- Can have multiple extension schemas
-- Some folks put code tables into a separate extension schema
-
-### Exchange Schema
-- Entry point to the exchange
-- Defines the root element of the exchange
-- Some put the definition for the root element here
-- Some put that in the extension schema
-- Some lump exchange and extension together
-- An exchange with multiple messages can have multiple exchange schemas, one per
-	- Can share a common extension
-	- Or not
 
 ### Help with Schemas
 - Use a good XML editor
+	- XMLSpy
+		- Windows
+	- oXygen
+		- Windows, macOS, Linux
 - Declare a conformance target
 	- Just use the same one I am
 - Declare and import all schemas used
@@ -1978,12 +1993,17 @@ Step 7: Infrastructure
 - Other tools are out there…
 
 ### Tips and Tricks
-- Christina’s oXygen Snippets
-- Use Schematron to check your work as you go
+- Christina’s [oXygen Snippets](https://niem.github.io/reference/tools/oxygen/snippets/)
+	- oXygen only
+- Use [Schematron](https://niem.github.io/reference/tools/oxygen/ndr/) to check your work as you go
+	- oXygen
+	- XMLSpy with plug-in
 - Tom’s BBEdit instance generation scripts
-- Tom’s Mapping Spreadsheet Linter
+- Tom’s [Mapping Spreadsheet Linter](http://niem5.org/linter/)
 
-### Other Artifacts
+![Other Artifacts](IEPD_Process_Graphics/Process_Artifacts_4.png)
+
+## Other Artifacts
 - IEPD Catalog
 	- Metadata about the IEPD
 	- What file is what
@@ -2020,6 +2040,8 @@ Step 7: Infrastructure
 - New repositories are coming
 	- Restricted (coming soon)
 	- Unrestricted (coming later)
+
+![Implementation](IEPD_Process_Graphics/Process_Artifacts_5.png)
 
 # Implementation
 - Remember that NIEM is just the payload
@@ -2126,6 +2148,8 @@ ___
 	- [http://niem.github.io/niem-releases/](http://niem.github.io/niem-releases/)
 - NIEM Specifications
 	- [http://niem.github.io/reference/specifications/](http://niem.github.io/reference/specifications/)
+- NIEM JSON Spec
+	- [https://niem.github.io/NIEM-JSON-Spec/v5.0/](https://niem.github.io/NIEM-JSON-Spec/v5.0/)
 - Materials from this course:
 	- [https://github.com/NIEM/NIEM-Training](https://github.com/NIEM/NIEM-Training)
 	- Some of these are internal work products
