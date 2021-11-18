@@ -1354,8 +1354,8 @@ Metadata is Data about Data. What does that mean? Here's an example:
 
 | Connections | Diagram |
 | --- | --- |
-| Easy to apply same metadata to many objects | ![One to Many](Mapping_Graphics/Metadata_One_to_Many.png) |
-| Easy to apply multiple metadata objects to one object | ![Many to One](Mapping_Graphics/Metadata_Many_to_One.png) |
+| Easy to apply multiple metadata objects to one object | ![One to Many](Mapping_Graphics/Metadata_One_to_Many.png) |
+| Easy to apply same metadata to many objects | ![Many to One](Mapping_Graphics/Metadata_Many_to_One.png) |
 | Many-to-many relationships can get messy | ![Many to Many](Mapping_Graphics/Metadata_Many_to_Many.png) |
 
 **Powerful, but can be difficult to implement**
