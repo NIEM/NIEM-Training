@@ -43,5 +43,5 @@
 		j:ChargeFelonyIndicator
 	j:Metadata
 		j:CriminalInformationIndicator
-+	priv:PrivacyMetadata
-+		priv:PrivacyCode
++	ext:PrivacyMetadata
++		ext:PrivacyCode

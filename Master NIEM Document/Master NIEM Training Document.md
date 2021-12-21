@@ -1728,9 +1728,6 @@ And the equivalent JSON-LD is:
 	"j:CrashPersonInjury": {
 	  "nc:InjuryDescriptionText": "Broken Arm",
 	  "j:InjurySeverityCode": "3",
-	  "ext:PrivacyCode": [
-		"PII", "MEDICAL"
-	  ]
 	},
 	"ext:PersonDefenestrationIndicator": "false"
 }
@@ -1817,6 +1814,7 @@ The resulting XML instance document is:
 ```xml
 <ext:PrivacyMetadata structures:id="PMD01">
 	<ext:PrivacyCode>PII</ext:PrivacyCode>
+	<ext:PrivacyCode>MEDICAL</ext:PrivacyCode>
 </ext:PrivacyMetadata>
 ```
 
