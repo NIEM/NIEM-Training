@@ -2,7 +2,7 @@
 
 # Master NIEM Training Document
 NIEM Training
-November 16-18, 2021
+2022 January 11-13
 
 Tom Carlson
 tom@tomcarlsonconsulting.com
@@ -76,7 +76,7 @@ ___
 - If we don’t understand what each other means, we won’t be able to exchange info
 - Need a common language for defining things
 
-![Interop Problem](Intro_Graphics/Interop_Problem.png)
+![Interop Problem](Intro_Graphics/Interop_Problem_scaled.png)
 ___
 ### What is NIEM? And what not?
 **NIEM is:**
@@ -121,18 +121,15 @@ ___
 ### Bottle of Liquid
 **A bottle of liquid:**
 
-- Has a shape
-- Made of certain materials
-- Can be opaque or transparent
-- Has some combination of liquids inside
-- Is moved around by various means
+| ![Bottle 01](Intro_Graphics/Bottle_01.png) | ![Bottle 02](Intro_Graphics/Bottle_02.png) |
+| --- | --- |
+| Has some combination of liquids inside | NIEM is the liquid inside, the payload document |
+| Has a shape | NIEM doesn’t care about the shape |
+| Made of certain materials | NIEM doesn’t care about what the bottle is made out of or how it's constructed |
+| Can be opaque or transparent | NIEM doesn’t care about whether you can see into the bottle |
+| Is moved around by various means | NIEM doesn’t care about how you move the bottle around |
+| Can be filled and emptied | NIEM doesn’t care about how you filled it or what you do with the liquid later |
 
-![Bottle 01](Intro_Graphics/Bottle_01.png)
-
-- NIEM is the liquid inside, the payload document
-- NIEM doesn’t care about how you filled the bottle, how the bottle is constructed, how the bottle is transported, whether you can see into the bottle, and what you do with the liquid after you pour it out
-
-![Bottle 02](Intro_Graphics/Bottle_02.png)
 ___
 ### NIEM Harmonization and Organization
 
@@ -143,14 +140,14 @@ ___
 - NIEM core includes data elements commonly agreed upon across all NIEM domains (i.e., person, activity, location, and item, etc.)
 - Individual NIEM domains contain mission-specific data components that build upon NIEM core concepts
 
-![Domain Diagram](Intro_Graphics/Domain_Diagram.png)
+![Domain Diagram](Intro_Graphics/Domain_Diagram_scaled.png)
 
 | Existing Domains                              | Upcoming Domains             |
 | --------------------------------------------- | ---------------------------- |
 | Agriculture                                   | Learning and Development     |
 | Biometrics                                    | International Human Services |
 | Chemical, Biological, Radiological, & Nuclear |                              |
-| Cyber (coming in 5.1)                                         |                              |
+| Cyber (new in 5.1)                            |                              |
 | Emergency Management                          |                              |
 | Human Services                                |                              |
 | Immigration                                   |                              |
@@ -215,6 +212,7 @@ ___
 		- **Neither does the underlying infrastructure**
 	- Domains can change
 	- Domains can be harmonized
+	- Domains can be added
 	- Domains are not guaranteed to be backwards compatible with earlier minor releases
 		- But they often are
 - Domain updates are done per-domain
@@ -224,7 +222,7 @@ ___
 	- You can still use NIEM 1.0 (but shouldn't)
 - Migration
 	- Don't have to migrate
-	- May want to if a newer version gives you functionality you need (and you're already making changes)
+	- May want to migrate if a newer version gives you functionality you need (and you're already making changes)
 	- NIEM provides tools for migrating the NIEM objects, ~90% effective
 	- Manual work is needed for things you've added for your exchange
 
@@ -242,7 +240,8 @@ ___
 	- Some meant for computers
 ___
 ## Message Spec Process
-Creating a Message Spec is a multi-step process
+Creating a Message Spec is a multi-step process:
+
 1. Scenario Planning
 2. Requirements Analysis
 3. Mapping
@@ -250,7 +249,7 @@ Creating a Message Spec is a multi-step process
 5. Publishing
 6. (Implementation)
 
-![IEPD Process](IEPD_Process_Graphics/Process_Diagram.png)
+![IEPD Process](IEPD_Process_Graphics/IEPD_Process_scaled.png)
 
 Each step produces artifacts used by subsequent steps:
 
@@ -261,7 +260,7 @@ Each step produces artifacts used by subsequent steps:
 5. Textual Documents
 6. Code
 
-![Message Spec / IEPD Process](IEPD_Process_Graphics/Process_Artifacts.png)
+![Message Spec / IEPD Process](IEPD_Process_Graphics/Process_Artifacts_scaled.png)
 
 **Message Spec / IEPD Process – Idealized**
 
@@ -315,7 +314,7 @@ ___
 	- Use of external standards
 ___
 
-![Requirements Analysis](IEPD_Process_Graphics/Process_Artifacts_1.png)
+![Requirements Analysis](IEPD_Process_Graphics/Process_Artifacts_1_scaled.png)
 
 ## Requirements Analysis
 - Diagrams
@@ -328,15 +327,15 @@ ___
 
 **Use Case Diagrams**
 
-![Use Case Diagram](Req_Analysis_Graphics/Use_Case_Diagram.png)
+![Use Case Diagram](Req_Analysis_Graphics/Use_Case_Diagram_scaled.png)
 
 **Business Process Diagrams**
 
-![Business Process Diagram](Req_Analysis_Graphics/Business_Process_Diagram.png)
+![Business Process Diagram](Req_Analysis_Graphics/Business_Process_Diagram_scaled.png)
 
 **Sequence Diagrams**
 
-![Sequence Diagram](Req_Analysis_Graphics/Seq_Diagram.png)
+![Sequence Diagram](Req_Analysis_Graphics/Seq_Diagram_scaled.png)
 ___
 ### UML Class Diagrams
 
@@ -392,7 +391,7 @@ We have choices on how to proceed:
 (Will use a super secret tool to help with some of this!)
 ___
 
-![Mapping](IEPD_Process_Graphics/Process_Artifacts_2.png)
+![Mapping](IEPD_Process_Graphics/Process_Artifacts_2_scaled.png)
 
 ## Mapping
 For this entire section, we'll look at various things in the mapping spreadsheet and show how to map them to NIEM or to new elements that we'll create later. As we move through, we'll cover all the major aspects of how NIEM works.
@@ -641,7 +640,7 @@ ___
 	- The single concept, and
 	- Multiple representations of that concept
 - Examples:
-	- `nc:PersonBirthDate` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-11r)/[Wayfarer](http://niem5.org/wayfarer/nc/PersonBirthDate.html)) contains a `nc:DateRepresentation` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-92a)/[Wayfarer](http://niem5.org/wayfarer/nc/DateRepresentation.html))
+	- `nc:PersonBirthDate` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-11r)/[Wayfarer](http://niem5.org/wayfarer/nc/PersonBirthDate.html)) contains a `nc:DateRepresentation` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-92a)/[Wayfarer](http://niem5.org/wayfarer/nc/DateRepresentation.html))
 	- Substitution group heads follow the form of: `SomethingRepresentation` or `WhateverAbstract`
 
 ## Schemas
@@ -759,7 +758,7 @@ ___
 - Some concepts don’t exist as elements using the terms for the concept
 - Instead, properties are inherited
 - There is no “Crash Date” in NIEM ([SSGT](http://niem5.org/ssgt_redirect.php?query=crash+date)/[Wayfarer](http://niem5.org/wayfarer/search.php?option=both&query=crash+date))
-- There _is_ an `ActivityDate` which can be inside a `Crash` object ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-44f)/[Wayfarer](http://niem5.org/wayfarer/j/Crash.html))
+- There _is_ an `ActivityDate` which can be inside a `Crash` object ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-44f)/[Wayfarer](http://niem5.org/wayfarer/j/Crash.html))
 
 ### Schemas
 
@@ -879,7 +878,7 @@ Instance in JSON:
 
 You need to understand this concept in order to know to look for these cases, which are very common, but just use tools to figure out the details, e.g:
 
-- [`j:Crash` in the SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-44f)
+- [`j:Crash` in the SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-44f)
 - [`j:Crash` in Wayfarer](http://niem5.org/wayfarer/j/Crash.html)
 
 ___
@@ -903,7 +902,7 @@ NIEM has several conceptual layers which build on top of each other:
 	- Domains draw from it for code definitions
 - Wrappers for external standards, built with infrastructure from `structures`
 
-![Structural Diagram](Mapping_Graphics/Structural_Diagram.png)
+![Structural Diagram](Mapping_Graphics/Structural_Diagram_scaled.png)
 
 ## Referencing - XML Schema
 - NIEM lets you assign unique IDs to object
@@ -952,7 +951,7 @@ ___
 	- `Date` or `DateRange` is a common example
 - Associations can also just include them, if applicable
 - Examples:
-	- `j:PersonChargeAssociation` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-4qf)/[Wayfarer](http://niem5.org/wayfarer/j/PersonChargeAssociation.html))
+	- `j:PersonChargeAssociation` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-4qf)/[Wayfarer](http://niem5.org/wayfarer/j/PersonChargeAssociation.html))
 	- Anything ending in “Association” ([SSGT](http://niem5.org/ssgt_redirect.php?query=association)/[Wayfarer](http://niem5.org/wayfarer/search.php?option=names&query=association))
 
 ### Schemas
@@ -1116,8 +1115,8 @@ ___
 - Roles can also just include the object playing the role
 - Roles contain other information about the role
 - Examples:
-	- `j:CrashPerson` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-45q)/[Wayfarer](http://niem5.org/wayfarer/j/CrashPerson.html))
-	- Anything containing an `nc:RoleOfPerson`([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-1ro)/[Wayfarer](http://niem5.org/wayfarer/nc/RoleOfPerson.html)), `nc:RoleOfOrganization` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-1rn)/[Wayfarer](http://niem5.org/wayfarer/nc/RoleOfOrganization.html)), or `nc:RoleOfItem` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-1rp)/[Wayfarer](http://niem5.org/wayfarer/nc/RoleOfItem.html)), plus a few lesser used ones ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-1rm)/[Wayfarer](http://niem5.org/wayfarer/nc/RoleOfAbstract.html))
+	- `j:CrashPerson` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-45q)/[Wayfarer](http://niem5.org/wayfarer/j/CrashPerson.html))
+	- Anything containing an `nc:RoleOfPerson`([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-1ro)/[Wayfarer](http://niem5.org/wayfarer/nc/RoleOfPerson.html)), `nc:RoleOfOrganization` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-1rn)/[Wayfarer](http://niem5.org/wayfarer/nc/RoleOfOrganization.html)), or `nc:RoleOfItem` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-1rp)/[Wayfarer](http://niem5.org/wayfarer/nc/RoleOfItem.html)), plus a few lesser used ones ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-1rm)/[Wayfarer](http://niem5.org/wayfarer/nc/RoleOfAbstract.html))
 
 ### Roles - Not Special Kinds of People
 
@@ -1244,13 +1243,14 @@ ___
 ## Code Tables
 - Codes help ensure accurate information
 - Codes are, essentially, strings, simple data
-	- Elements in the domains
-	- Types are often in their own namespaces
+- A few in NIEM are integers
+	- Elements defined in the domains
+	- Types are often defined in their own namespaces
 - NIEM wraps them in a complex type in order to apply some attributes needed for infrastructure
 	- Which we will need in the next section…
 - Examples:
-	- `j:InjurySeverityCode` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-45s)/[Wayfarer](http://niem5.org/wayfarer/j/InjurySeverityCode.html))
-		- In the SSGT, the actual codes are viewable on the page for the base simple type, e.g. [`aamva_d20:AccidentSeverityCodeSimpleType`](https://tools.niem.gov/niemtools/ssgt/SSGT-GetType.iepd?typeKey=o3-c)
+	- `j:InjurySeverityCode` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-45s)/[Wayfarer](http://niem5.org/wayfarer/j/InjurySeverityCode.html))
+		- In the SSGT, the actual codes are viewable on the page for the base simple type, e.g. [`aamva_d20:AccidentSeverityCodeSimpleType`](https://tools.niem.gov/niemtools/ssgt/SSGT-GetType.iepd?typeKey=o4-c)
 		- In Wayfarer, there should be a link on the element page bringing up the codes in a separate window, e.g. [`aamva_d20:AccidentSeverityCodeSimpleType`](http://niem5.org/wayfarer/aamva_d20/AccidentSeverityCodeSimpleType_codes.html)
 	- Anything ending in "Code" ([SSGT](http://niem5.org/ssgt_redirect.php?query=code)/[Wayfarer](http://niem5.org/wayfarer/search.php?option=names&query=code))
 - Codes nearly always have a text alternative
@@ -1343,7 +1343,7 @@ ___
 ## Metadata
 Metadata is Data about Data. What does that mean? Here's an example:
 
-![Jett](Mapping_Graphics/Jett.png)
+![Jett](Mapping_Graphics/Jett_scaled.png)
 
 | Data | Metadata |
 | --- | --- |
@@ -1355,7 +1355,7 @@ Metadata is Data about Data. What does that mean? Here's an example:
 - Objects reference the metadata objects that apply to them
 - An objects can reference more than one metadata object
 - More than one object can reference the same metadata object
-- Example: `j:Metadata` (containing `j:CriminalInformationIndicator`) ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-4qr)/[Wayfarer](http://niem5.org/wayfarer/j/Metadata.html))
+- Example: `j:Metadata` (containing `j:CriminalInformationIndicator`) ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-4qr)/[Wayfarer](http://niem5.org/wayfarer/j/Metadata.html))
 
 ### Connecting Metadata to Objects
 
@@ -1430,8 +1430,8 @@ JSON-LD doesn't support a specific metadata link, so for JSON we just include th
 - Augmentation Points are hooks onto which to hang the bags of stuff
 - Augmentations are an easy way to extend objects to meet your exchange needs
 - Examples:
-	- `j:DriverLicense` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-lb))
-	- `j:DriverLicenseAugmentationPoint` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-11rg))
+	- `j:DriverLicense` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-lb))
+	- `j:DriverLicenseAugmentationPoint` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-11rg))
 
 ### Schemas
 
@@ -1549,9 +1549,9 @@ The equivalent JSON-LD would be:
 - NIEM supports external standards, if they’re XML
 - Wraps them in NIEM-conformant adapters
 - Example:
-	- NIEM: `nc:LocationGeospatialCoordinateAbstract` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-125z)/[Wayfarer](http://niem5.org/wayfarer/nc/LocationGeospatialCoordinateAbstract.html))
-	- NIEM-conformant adapter: geo:LocationGeospatialPoint ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-m73))
-	- External standard: `gml:Point` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-fux))
+	- NIEM: `nc:LocationGeospatialCoordinateAbstract` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-125z)/[Wayfarer](http://niem5.org/wayfarer/nc/LocationGeospatialCoordinateAbstract.html))
+	- NIEM-conformant adapter: `geo:LocationGeospatialPoint` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-m73))
+	- External standard: `gml:Point` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-fux))
 - You’ll probably never use this, but should know it’s there
 - SSGT supports them; Wayfarer does not
 
@@ -1896,7 +1896,7 @@ But `j:Crash` doesn't hold an `ext:CrashDriver`, so we need to make a new `ext:C
 
 That's a lot of extra work and muddies the semantics of the elements.
 
-![Creating and Validating Schemas](IEPD_Process_Graphics/Process_Artifacts_3.png)
+![Creating and Validating Schemas](IEPD_Process_Graphics/Process_Artifacts_3_scaled.png)
 
 ## Creating and Validating Schemas
 - Conformance
@@ -1941,31 +1941,31 @@ That's a lot of extra work and muddies the semantics of the elements.
 
 Step 1: Exchange Schema
 
-![Schema Import 1](Schema_Graphics/Schema_Import_1.png)
+![Schema Import 1](Schema_Graphics/Schema_Import_1_scaled.png)
 
 Step 2: Extension Schema
 
-![Schema Import 2](Schema_Graphics/Schema_Import_2.png)
+![Schema Import 2](Schema_Graphics/Schema_Import_2_scaled.png)
 
 Step 3: NIEM Core
 
-![Schema Import 3](Schema_Graphics/Schema_Import_3.png)
+![Schema Import 3](Schema_Graphics/Schema_Import_3_scaled.png)
 
 Step 4: Domains
 
-![Schema Import 4](Schema_Graphics/Schema_Import_4.png)
+![Schema Import 4](Schema_Graphics/Schema_Import_4_scaled.png)
 
 Step 5: Code Tables
 
-![Schema Import 5](Schema_Graphics/Schema_Import_5.png)
+![Schema Import 5](Schema_Graphics/Schema_Import_5_scaled.png)
 
 Step 6: External Standards
 
-![Schema Import 6](Schema_Graphics/Schema_Import_6.png)
+![Schema Import 6](Schema_Graphics/Schema_Import_6_scaled.png)
 
 Step 7: Infrastructure
 
-![Schema Import 7](Schema_Graphics/Schema_Import_7.png)
+![Schema Import 7](Schema_Graphics/Schema_Import_7_scaled.png)
 
 
 ### Help with Schemas
@@ -1999,7 +1999,7 @@ Step 7: Infrastructure
 - Tom’s BBEdit instance generation scripts
 - Tom’s [Mapping Spreadsheet Linter](http://niem5.org/linter/)
 
-![Other Artifacts](IEPD_Process_Graphics/Process_Artifacts_4.png)
+![Other Artifacts](IEPD_Process_Graphics/Process_Artifacts_4_scaled.png)
 
 ## Other Artifacts
 - IEPD Catalog
@@ -2039,7 +2039,7 @@ Step 7: Infrastructure
 	- Restricted (coming soon)
 	- Unrestricted (coming later)
 
-![Implementation](IEPD_Process_Graphics/Process_Artifacts_5.png)
+![Implementation](IEPD_Process_Graphics/Process_Artifacts_5_scaled.png)
 
 # Implementation
 - Remember that NIEM is just the payload
@@ -2086,10 +2086,10 @@ This is an open-ended exercise. There's no answer. The idea is to get a little f
 
 1. What are all the different ways that NIEM can represent a date?
 2. Take a look at the following elements and how they fit together via substitution groups. What do you think the reason for all this might be?
-	- nc:Entity ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-8ow)/[Wayfarer](http://niem5.org/wayfarer/nc/Entity.html))
-	- nc:EntityRepresentation ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-8ox)/[Wayfarer](http://niem5.org/wayfarer/nc/EntityRepresentation.html))
-	- nc:EntityOrganization ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-8oz)/[Wayfarer](http://niem5.org/wayfarer/nc/EntityOrganization.html))
-	- nc:EntityPerson ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o3-8oy)/[Wayfarer](http://niem5.org/wayfarer/nc/EntityPerson.html))
+	- nc:Entity ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-8ow)/[Wayfarer](http://niem5.org/wayfarer/nc/Entity.html))
+	- nc:EntityRepresentation ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-8ox)/[Wayfarer](http://niem5.org/wayfarer/nc/EntityRepresentation.html))
+	- nc:EntityOrganization ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-8oz)/[Wayfarer](http://niem5.org/wayfarer/nc/EntityOrganization.html))
+	- nc:EntityPerson ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-8oy)/[Wayfarer](http://niem5.org/wayfarer/nc/EntityPerson.html))
 
 
 ## Inherited Properties
