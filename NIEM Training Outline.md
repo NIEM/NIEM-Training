@@ -29,6 +29,7 @@ Utilize existing scope of NIEM diagrams.
 		- Water bottle metaphor
 - NIEM Harmonization and Organization
 - Assumption of XML and XML Schema knowledge
+	- Or JSON and JSON-LD
 	- _Where to point folks who don't have it?_
 	- _Reference [[OJJDP]] slides on this for now?_
 	- _IJIS still intends to do this?_
@@ -112,11 +113,8 @@ For this entire section, we'll look at various things in the mapping spreadsheet
 ### Mapping to Existing Objects
 
 - What you are defines what you hold
-	- ![[Type Hierarchy 01.png]]
-	- ![[Type Hierarchy 02.png]]
-	- ![[Type Hierarchy 03.png]]
-	- ![[Type Hierarchy 04.png]]
-	- ![[Type Hierarchy 05.png]]
+
+![[What You Are Defines What You Hold]]
 
 #### Native properties
 
@@ -199,10 +197,12 @@ For this entire section, we'll look at various things in the mapping spreadsheet
 	- This is where the infrastructure come in
 	- This shows the relationship between infrastructure, core, and domains
 	- ![[NIEM Layers.png]]
-- Referencing with `id` and `idref`
+- Referencing in XML and XML Schema with `id` and `idref`
 	- Diagrams and description
 	- `nc:Person` and `j:Charge` as references in XML Schema
 	- `nc:Person` and `j:Charge` as references in XML instance
+- Referencing in JSON and JSON-LD with
+	- @id
 
 #### Associations
 
@@ -214,12 +214,6 @@ For this entire section, we'll look at various things in the mapping spreadsheet
 
 #### Roles
 	- `j:CrashPerson/nc:RoleOfPerson`
-
-### Combining domains
-
-- Show `exch:LicenseAugmentation` in XML Schema
-- Show `exch:LicenseAugmentation` in XML instance
-- _Need to make the augmentation use better, using multiple domains_
 
 ### Metadata - Information about information
 
@@ -238,6 +232,12 @@ For this entire section, we'll look at various things in the mapping spreadsheet
 	- Can result in messy many-to-many relationships
 		- Powerful, but hard to implement
 	
+### Combining domains
+
+- Show `exch:LicenseAugmentation` in XML Schema
+- Show `exch:LicenseAugmentation` in XML instance
+- _Need to make the augmentation use better, using multiple domains_
+
 ### Creating something new
 
 - `priv:PrivacyMetadata/priv:PrivacyCode`

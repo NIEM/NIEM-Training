@@ -2031,6 +2031,8 @@ Step 7: Infrastructure
 	- Generally, keep it simple
 - MEP Builder will help with this (coming soon)
 
+___
+
 # Publishing
 - Existing repositories are out of date
 	- IEPD Clearinghouse
@@ -2040,6 +2042,8 @@ Step 7: Infrastructure
 	- Unrestricted (coming later)
 
 ![Implementation](IEPD_Process_Graphics/Process_Artifacts_5_scaled.png)
+
+___
 
 # Implementation
 - Remember that NIEM is just the payload
@@ -2086,10 +2090,10 @@ This is an open-ended exercise. There's no answer. The idea is to get a little f
 
 1. What are all the different ways that NIEM can represent a date?
 2. Take a look at the following elements and how they fit together via substitution groups. What do you think the reason for all this might be?
-	- nc:Entity ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-8ow)/[Wayfarer](http://niem5.org/wayfarer/nc/Entity.html))
-	- nc:EntityRepresentation ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-8ox)/[Wayfarer](http://niem5.org/wayfarer/nc/EntityRepresentation.html))
-	- nc:EntityOrganization ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-8oz)/[Wayfarer](http://niem5.org/wayfarer/nc/EntityOrganization.html))
-	- nc:EntityPerson ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-8oy)/[Wayfarer](http://niem5.org/wayfarer/nc/EntityPerson.html))
+	- `nc:Entity` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-8ow)/[Wayfarer](http://niem5.org/wayfarer/nc/Entity.html))
+	- `nc:EntityRepresentation` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-8ox)/[Wayfarer](http://niem5.org/wayfarer/nc/EntityRepresentation.html))
+	- `nc:EntityOrganization` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-8oz)/[Wayfarer](http://niem5.org/wayfarer/nc/EntityOrganization.html))
+	- `nc:EntityPerson` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-8oy)/[Wayfarer](http://niem5.org/wayfarer/nc/EntityPerson.html))
 
 
 ## Inherited Properties
