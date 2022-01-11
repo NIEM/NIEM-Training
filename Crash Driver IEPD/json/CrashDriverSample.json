@@ -3,8 +3,7 @@
 		"nc:Person": {
 			"@id": "#P01",
 			"nc:PersonBirthDate": {
-				"nc:Date": "1890-05-04",
-				"ext:PrivacyCode": "PII"
+				"nc:Date": "1890-05-04"
 			},
 			"nc:PersonName": {
 				"nc:PersonGivenName": "Peter",
