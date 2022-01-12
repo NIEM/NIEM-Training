@@ -23,9 +23,9 @@ All materials are available on the NIEM Training Github repo at [https://github.
 - [Mapping Spreadsheets](https://github.com/NIEM/NIEM-Training/tree/main/Master%20NIEM%20Document/Mapping_Spreadsheets)
 - [Ersatz Textual Instances](https://github.com/NIEM/NIEM-Training/tree/main/Master%20NIEM%20Document/Text_Document)
 
-## Sample IEPD
+## Sample Message Specification
 
-- [Crash Driver IEPD](https://github.com/NIEM/NIEM-Training/tree/main/Crash%20Driver%20IEPD)
+- [Crash Driver Message Specification](https://github.com/NIEM/NIEM-Training/tree/main/Crash%20Driver%20IEPD)
 
 ## Agenda
 
@@ -48,7 +48,7 @@ All materials are available on the NIEM Training Github repo at [https://github.
 ___
 ## Logistics and Background
 
-- Second live session
+- Third live session
 	- Major revamp of prior training programs
 	- Materials revamped from first live session
 - Three days, 1-5pm each day
@@ -206,13 +206,13 @@ ___
 		- Misplaced content is moved, either to other domains or to core
 		- New content is added
 	- _Nothing_ in a major version change is guaranteed to be backwards compatible with earlier major releases
-- Minor version releases:
+- Minor version releases, e.g. 5.0 to 5.1:
 	- Annually
 	- **NIEM-Core does not change!**
 		- **Neither does the underlying infrastructure**
 	- Domains can change
 	- Domains can be harmonized
-	- Domains can be added
+	- Domains can be added, like Cyber in 5.1
 	- Domains are not guaranteed to be backwards compatible with earlier minor releases
 		- But they often are
 - Domain updates are done per-domain
@@ -389,6 +389,11 @@ We have choices on how to proceed:
 	- Save schemas for the end
 
 (Will use a super secret tool to help with some of this!)
+
+## XML Schema in a Nutshell
+
+#todo Add a quick description of the relationship between XML instance documents and XML Schema as well as the same for JSON. Add small diagram with small snippets of each.
+
 ___
 
 ![Mapping](IEPD_Process_Graphics/Process_Artifacts_2_scaled.png)
@@ -483,6 +488,8 @@ Its type, [`nc:PersonType`](http://niem5.org/schemas/nc.html#PersonType), has a 
 				<xs:element ref="nc:PersonAccentText" minOccurs="0" maxOccurs="unbounded"/>
 				<xs:element ref="nc:PersonAgeDescriptionText" minOccurs="0" maxOccurs="unbounded"/>
 				<!-- A whole slew of objects removed for clarity -->
+				<xs:element ref="nc:PersonLivingIndicator" minOccurs="0" maxOccurs="unbounded"/>
+				<!-- A whole slew of objects removed for clarity -->
 				<xs:element ref="nc:PersonName" minOccurs="0" maxOccurs="unbounded"/>
 				<!-- A whole slew of objects removed for clarity -->
 				<xs:element ref="nc:PersonHomeContactInformation" minOccurs="0" maxOccurs="unbounded"/>
@@ -574,11 +581,21 @@ The XML Schema defining [`nc:PersonGivenName`](http://niem5.org/schemas/nc.html#
 </xs:complexType>
 
 ```
+Finally, the definition for `nc:PersonLivingIndicator` is very simple. It's a boolean value, `true` or `false`.
+
+```xml
+<xs:element name="PersonLivingIndicator" type="niem-xs:boolean" nillable="true">
+	<xs:annotation>
+		<xs:documentation>True if a person is alive; false if a person is dead.</xs:documentation>
+	</xs:annotation>
+</xs:element>
+```
 
 The resulting instance document that all this creates might look like this:
 
 ```xml
 <nc:Person>
+	<nc:PersonLivingIndicator>false</nc:PersonLivingIndicator>
 	<nc:PersonName nc:personNameCommentText="copied">
 		<nc:PersonGivenName>Peter</nc:PersonGivenName>
 		<nc:PersonMiddleName>Death</nc:PersonMiddleName>
@@ -587,6 +604,8 @@ The resulting instance document that all this creates might look like this:
 	</nc:PersonName>
 </nc:Person>
 ```
+
+(Who is [Peter Wimsey](https://en.wikipedia.org/wiki/Lord_Peter_Wimsey)?)
 ___
 ### What About JSON?
 
@@ -603,6 +622,7 @@ Linking is a topic for later in the class, but here is an example of the `@conte
 		"nc": "http://release.niem.gov/niem/niem-core/5.0/#"
 	},
 	"nc:Person": {
+		"nc:PersonLivingIndicator": "false",
 		"nc:PersonName": {
 			"nc:personNameCommentText": "copied",
 			"nc:PersonGivenName": "Peter",
@@ -1021,11 +1041,11 @@ This beings with it two advantages:
 <j:PersonChargeAssociation>
 	<nc:Person structures:ref="P01" xsi:nil="true"/>
 	<j:Charge structures:ref="CH01" xsi:nil="true"/>
-	<j:JuvenileAsAdultIndicator>true</j:JuvenileAsAdultIndicator>
+	<j:JuvenileAsAdultIndicator>false</j:JuvenileAsAdultIndicator>
 </j:PersonChargeAssociation>
 <nc:Person structures:id="P01">
 	<nc:PersonName>
-		<nc:PersonGivenName>Tommy</nc:PersonGivenName>
+		<nc:PersonGivenName>Peter</nc:PersonGivenName>
 	</nc:PersonName>
 </nc:Person>
 <j:Charge structures:id="CH01">
@@ -1042,14 +1062,14 @@ The alternative to referencing is to just include the `nc:Person` and `j:Charge`
 <j:PersonChargeAssociation>
 	<nc:Person>
 		<nc:PersonName>
-			<nc:PersonGivenName>Tommy</nc:PersonGivenName>
+			<nc:PersonGivenName>Peter</nc:PersonGivenName>
 		</nc:PersonName>
 	</nc:Person>
 	<j:Charge>
 		<j:ChargeDescriptionText>Furious Driving</j:ChargeDescriptionText>
 		<j:ChargeFelonyIndicator>false</j:ChargeFelonyIndicator>
 	</j:Charge>
-	<j:JuvenileAsAdultIndicator>true</j:JuvenileAsAdultIndicator>
+	<j:JuvenileAsAdultIndicator>false</j:JuvenileAsAdultIndicator>
 </j:PersonChargeAssociation>
 ```
 You can also mix and match. You could reference a `nc:Person` while including the `j:Charge` inside the association.
@@ -1066,13 +1086,13 @@ JSON-LD works similarly. `j:PersonChargeAssociation` contains a `nc:Person` obje
 	"j:Charge": {
 		"@id": "#CH01"
 	},
-	"j:JuvenileAsAdultIndicator": true,
+	"j:JuvenileAsAdultIndicator": false,
 	"j:CriminalInformationIndicator": true
 },
 "nc:Person": {
 	"@id": "#P01",
 	"nc:PersonName": {
-		"nc:PersonGivenName": "Tommy"
+		"nc:PersonGivenName": "Peter"
 	}
 },
 "j:Charge": {
@@ -1089,7 +1109,7 @@ As with the XML version, you can also just include the `nc:Person` and `j:Charge
 "j:PersonChargeAssociation": {
 	"nc:Person": {
 		"nc:PersonName": {
-			"nc:PersonGivenName": "Tommy"
+			"nc:PersonGivenName": "Peter"
 		}
 	},
 	"j:Charge": {
@@ -1097,7 +1117,7 @@ As with the XML version, you can also just include the `nc:Person` and `j:Charge
 		"j:ChargeFelonyIndicator": false,
 		"j:CriminalInformationIndicator": true
 	},
-	"j:JuvenileAsAdultIndicator": true,
+	"j:JuvenileAsAdultIndicator": false,
 	"j:CriminalInformationIndicator": true
 }
 
@@ -1105,14 +1125,16 @@ As with the XML version, you can also just include the `nc:Person` and `j:Charge
 
 The same trade-offs apply as in XML, but JSON developers may lean more towards inclusion rather than referencing based on implementation effort required. Again, NIEM _never_ requires you to do referencing.
 
+Additionally, while referencing is part of XML Schema, it is _not_ part of JSON Schema. Checking that the `@id` values match up needs to be done with a JSON-LD validator.
+
 ___
 ## Roles
 - Modeling some objects as specialized things gets complicated
 - Roles are, well, roles that objects play
 	- People, organizations, items are the major ones
 - Roles reference the objects playing the role
-	- Objects can thus play multiple roles
-- Roles can also just include the object playing the role
+	- An objects can thus play multiple roles, because multiple role objects can point to it
+- Roles can also just include the object playing the role, as with associations
 - Roles contain other information about the role
 - Examples:
 	- `j:CrashPerson` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-45q)/[Wayfarer](http://niem5.org/wayfarer/j/CrashPerson.html))
@@ -1221,7 +1243,7 @@ The JSON-LD versions are, again, similar to the ones for associations. Here the 
 "nc:Person": {
 	"@id": "#P01",
 	"nc:PersonName": {
-		"nc:PersonGivenName": "Tommy"
+		"nc:PersonGivenName": "Peter"
 	}
 }
 ```
@@ -1232,7 +1254,7 @@ And, again as with associations, you can simply include the Person-specific info
 "j:CrashPerson": {
 	"nc:RoleOfPerson": {
 		"nc:PersonName": {
-			"nc:PersonGivenName": "Tommy"
+			"nc:PersonGivenName": "Peter"
 		}
 	}
 }
