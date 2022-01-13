@@ -758,6 +758,8 @@ Above you can see object with different prefixes, `j:Crash` and `nc:ActivityDate
 
 ![Namespaces and Case](Mapping_Graphics/Namespace_Case.png)
 
+#todo Insert namespace example snippets.
+
 JSON-LD maps JSON objects to NIEM namespaces in the `@context`. Each of these entries maps a prefix to a NIEM namespace, providing a link back to the NIEM object. 
 
 ```json
@@ -1445,8 +1447,12 @@ JSON-LD doesn't support a specific metadata link, so for JSON we just include th
 
 ```
 
+___
 
 ## Combining Domains (Augmentations)
+
+![[08 Augmentations - CrashDriverClassDiagram.png]]
+
 - Sometimes you just want to add properties from other domains to an object without making a special kind of thing
 - Augmentations are bags of stuff
 - Augmentation Points are hooks onto which to hang the bags of stuff
@@ -1567,7 +1573,17 @@ The equivalent JSON-LD would be:
 }
 ```
 
+### Artifacts
+
+- [[08 Combining Domains - Augmentations]]
+- [[Mapping_Spreadsheets/08 Combining Domains - Augmentations.numbers]]
+
+___
+
 ## External Standards
+
+![[09 External Standards - CrashDriverClassDiagram.png]]
+
 - NIEM supports external standards, if they’re XML
 - Wraps them in NIEM-conformant adapters
 - Example:
@@ -1703,12 +1719,22 @@ It doesn't make much sense to try and represent this in JSON in a NIEM-conforman
 	}
 }
 ```
+
+### Artifacts
+
+- [[09 External Standards]]
+- [[Mapping_Spreadsheets/09 External Standards.numbers]]
+
 ___
 ## Creating New Objects
 
 ![New Element Flowchart](Mapping_Graphics/New_Element_Flowchart.png)
 
+___
+
 ### Creating Simple Data Elements
+
+![[10 Simple Elements - CrashDriverClassDiagram.png]]
 
 - Base them on whichever XML Schema data type is appropriate
 	- They're all in the [niem-xs](http://niem5.org/schemas/niem-xs.html) schema
@@ -1860,7 +1886,14 @@ Instead of linking to separate metadata objects, we've embedded those into the `
 }
 ```
 
+### Artifacts
+
+- [[10 Creating New Objects - Simple Data]]
+- [[Mapping_Spreadsheets/10 Creating New Objects - Simple Data.numbers]]
+
 ### Creating Complex Objects
+
+![[11 Complex Objects - CrashDriverClassDiagram.png]]
 
 - If you’re making a special kind of existing NIEM type:
 	- Use that type as a base to extend from and add things to it, or
@@ -1917,6 +1950,23 @@ But `j:CrashDriver` doesn't hold an `ext:DriverLicense`, so we need to make a ne
 But `j:Crash` doesn't hold an `ext:CrashDriver`, so we need to make a new `ext:CrashType` and `ext:Crash` that can hold `ext:CrashDriver`.
 
 That's a lot of extra work and muddies the semantics of the elements.
+### Artifacts
+
+- [[11 Creating New Objects - Complex Objects]]
+- [[Mapping_Spreadsheets/11 Creating New Objects - Complex Objects.numbers]]
+
+___
+
+## Mapping Completed!
+
+- [[12 Crash Driver Report Complete]]
+- [[12 Crash Driver Report Complete.numbers]]
+
+| Started With | Ended With |
+| --- | --- |
+| ![[NIEM Training/Master NIEM Document/Req_Analysis_Graphics/CrashDriverClassDiagram.png]] | ![[NIEM Training/Master NIEM Document/Req_Analysis_Graphics/CrashDriverClassDiagram-NIEM.png]] |
+
+___
 
 ![Creating and Validating Schemas](IEPD_Process_Graphics/Process_Artifacts_3_scaled.png)
 
