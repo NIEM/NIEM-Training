@@ -2139,6 +2139,8 @@ ___
 
 # Exercises
 
+([[Exercise_Solutions]])
+
 ## Understanding NIEM Objects
 
 Let's think about cardinality a little:
