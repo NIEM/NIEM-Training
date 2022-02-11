@@ -2,11 +2,11 @@
 
 # Master NIEM Training Document
 NIEM Training
-2022 January 11-13
+2022 February 15-17
 
 Tom Carlson
 tom@tomcarlsonconsulting.com
-GTRI / NIEM Consultant
+GTRI
 
 # Introduction
 
@@ -365,7 +365,7 @@ ___
 - [BOUML](https://en.wikipedia.org/wiki/BOUML)
 - [MagicDraw](https://en.wikipedia.org/wiki/MagicDraw) / [Rational Rose](https://en.wikipedia.org/wiki/IBM_Rational_Rose_XDE) (\$\$\$)
 - [Visio](https://en.wikipedia.org/wiki/Microsoft_Visio) / [OmniGraffle](https://en.wikipedia.org/wiki/OmniGraffle)
-- [Graphviz](https://graphviz.org/) / [Mermaid](https://mermaid-js.github.io/mermaid/#/)
+- [Graphviz](https://graphviz.org/) / [Mermaid](https://mermaid-js.github.io/mermaid/) / [PlantUML](https://plantuml.com/)
 - Many more…
 ___
 ### Business Rules
@@ -416,6 +416,7 @@ ___
 - Can also be used for mapping in an IEPD
 	- Just need one of the tabs, mainly
 - Is a bit overkill for a Message Spec
+- [[Mapping_Spreadsheets/niem-mapping-template.xlsx]]
 ___
 ### Simple Training Spreadsheet
 - Minimal
@@ -432,6 +433,11 @@ ___
 - Works with the NIEM Linter
 - You can make your own custom one
 	- The IEPD Spec doesn’t specify a required format, by design
+- Fresh copy for our example Message Spec / IEPD
+	- [[Mapping_Spreadsheets/00 Crash Driver Report Fresh.numbers]]
+	- [[Mapping_Spreadsheets/00 Crash Driver Report Fresh.xlsx]]
+	- [[Mapping_Spreadsheets/00 Crash Driver Report Fresh.pdf]]
+
 ___
 ### Basics of Searching NIEM
 
@@ -642,6 +648,9 @@ Throughout the training, matching JSON instances will be included with XML insta
 
 ___
 ## Native Properties
+
+![[01 Native Properties - CrashDriverClassDiagram.png]]
+
 - Some things will be easy to find
 - Will map directly to NIEM objects
 - Examples:
@@ -650,8 +659,19 @@ ___
 	- Search for `nc:Person` in [Wayfarer](http://niem5.org/wayfarer/search.php?option=exact&query=person)
 
 We've already seen the schema for these in detail.
+
+### Artifacts
+
+- [[01 Native Properties]]
+- Mapping Spreadsheets
+	- [[Mapping_Spreadsheets/01 Native Properties.numbers]]
+	- [[Mapping_Spreadsheets/01 Native Properties.xlsx]]
+	- [[Mapping_Spreadsheets/01 Native Properties.pdf]]
+
 ___
 ## Substitution Groups
+
+![[02 Substitution Groups - CrashDriverClassDiagram.png]]
 
 - Some concepts can be represented multiple ways
 - Text / code combinations are common
@@ -663,7 +683,7 @@ ___
 	- `nc:PersonBirthDate` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-11r)/[Wayfarer](http://niem5.org/wayfarer/nc/PersonBirthDate.html)) contains a `nc:DateRepresentation` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-92a)/[Wayfarer](http://niem5.org/wayfarer/nc/DateRepresentation.html))
 	- Substitution group heads follow the form of: `SomethingRepresentation` or `WhateverAbstract`
 
-## Schemas
+### Schemas
 
 Here we see [`nc:PersonBirthDate`](http://niem5.org/schemas/nc.html#PersonBirthDate) and its type, `nc:DateType`:
 
@@ -774,8 +794,19 @@ JSON-LD maps JSON objects to NIEM namespaces in the `@context`. Each of these en
 
 As mentioned earlier, NIEM doesn't support JSON Schema well yet. Using NIEM with JSON is currently focused on creating matching instance documents. Upcoming NIEM developments will greatly enhance the ability to work in JSON as a similar level as with XML and XML Schema.
 
+### Artifacts
+
+- [[02 Substitution Groups]]
+- Mapping Spreadsheets
+	- [[Mapping_Spreadsheets/02 Substitution Groups.numbers]]
+	- [[Mapping_Spreadsheets/02 Substitution Groups.xlsx]]
+	- [[Mapping_Spreadsheets/02 Substitution Groups.pdf]]
+
 ___
 ## Inherited Properties
+
+![[03 Inherited Properties - CrashDriverClassDiagram.png]]
+
 - NIEM is a model, not a flat data dictionary
 - Some concepts don’t exist as elements using the terms for the concept
 - Instead, properties are inherited
@@ -903,6 +934,14 @@ You need to understand this concept in order to know to look for these cases, wh
 - [`j:Crash` in the SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-44f)
 - [`j:Crash` in Wayfarer](http://niem5.org/wayfarer/j/Crash.html)
 
+### Artifacts
+
+- [[03 Inherited Properties]]
+- Mapping Spreadsheets
+	- [[Mapping_Spreadsheets/03 Inherited Properties.numbers]]
+	- [[Mapping_Spreadsheets/03 Inherited Properties.xlsx]]
+	- [[Mapping_Spreadsheets/03 Inherited Properties.pdf]]
+
 ___
 ## Linking Things Together
 - NIEM is relational in many senses
@@ -949,6 +988,7 @@ NIEM has several conceptual layers which build on top of each other:
 
 Examples of how NIEM uses these are the next few sections.
 
+#todo add short examples
 ___
 ## Referencing - JSON-LD
 
@@ -956,8 +996,12 @@ JSON itself doesn't provide a means of linking objects together. NIEM leverages 
 
 Again, we will see example throughout the next few sections.
 
+#todo repeat example as JSON
+
 ___
 ## Associations
+
+![[04 Associations - CrashDriverClassDiagram.png]]
 
 - Relationships can be complex
 - NIEM provides powerful Association objects
@@ -988,7 +1032,7 @@ ___
 </xs:element>
 ```
 
-[`j:PersonChargeAssociationType`](http://niem5.org/schemas/j.html#PersonChargeAssociationType) includes a [`nc:Person`](http://niem5.org/schemas/nc.html#Person) and a [`j:Charge`](http://niem5.org/schemas/j.html#Charge), but also includes information _about_ the association itself, in this case [`j:JuvenileAsAdultIndicator`](http://niem5.org/schemas/j.html#JuvenileAsAdultIndicator). `PersonChargeAssociationType` extends `nc:AssociationType`:
+[`j:PersonChargeAssociationType`](http://niem5.org/schemas/j.html#PersonChargeAssociationType) includes a [`nc:Person`](http://niem5.org/schemas/nc.html#Person) and a [`j:Charge`](http://niem5.org/schemas/j.html#Charge), but also includes information _about_ the association itself, in this case [`j:JuvenileAsAdultIndicator`](http://niem5.org/schemas/j.html#JuvenileAsAdultIndicator). (Which isn't used in _this_ exchange.) `PersonChargeAssociationType` extends `nc:AssociationType`:
 
 ```xml
 <xs:complexType name="PersonChargeAssociationType">
@@ -1043,7 +1087,6 @@ This beings with it two advantages:
 <j:PersonChargeAssociation>
 	<nc:Person structures:ref="P01" xsi:nil="true"/>
 	<j:Charge structures:ref="CH01" xsi:nil="true"/>
-	<j:JuvenileAsAdultIndicator>false</j:JuvenileAsAdultIndicator>
 </j:PersonChargeAssociation>
 <nc:Person structures:id="P01">
 	<nc:PersonName>
@@ -1071,7 +1114,6 @@ The alternative to referencing is to just include the `nc:Person` and `j:Charge`
 		<j:ChargeDescriptionText>Furious Driving</j:ChargeDescriptionText>
 		<j:ChargeFelonyIndicator>false</j:ChargeFelonyIndicator>
 	</j:Charge>
-	<j:JuvenileAsAdultIndicator>false</j:JuvenileAsAdultIndicator>
 </j:PersonChargeAssociation>
 ```
 You can also mix and match. You could reference a `nc:Person` while including the `j:Charge` inside the association.
@@ -1088,8 +1130,6 @@ JSON-LD works similarly. `j:PersonChargeAssociation` contains a `nc:Person` obje
 	"j:Charge": {
 		"@id": "#CH01"
 	},
-	"j:JuvenileAsAdultIndicator": false,
-	"j:CriminalInformationIndicator": true
 },
 "nc:Person": {
 	"@id": "#P01",
@@ -1100,8 +1140,7 @@ JSON-LD works similarly. `j:PersonChargeAssociation` contains a `nc:Person` obje
 "j:Charge": {
 	"@id": "#CH01",
 	"j:ChargeDescriptionText": "Furious Driving",
-	"j:ChargeFelonyIndicator": false,
-	"j:CriminalInformationIndicator": true
+	"j:ChargeFelonyIndicator": false
 }
 ```
 
@@ -1116,11 +1155,8 @@ As with the XML version, you can also just include the `nc:Person` and `j:Charge
 	},
 	"j:Charge": {
 		"j:ChargeDescriptionText": "Furious Driving",
-		"j:ChargeFelonyIndicator": false,
-		"j:CriminalInformationIndicator": true
-	},
-	"j:JuvenileAsAdultIndicator": false,
-	"j:CriminalInformationIndicator": true
+		"j:ChargeFelonyIndicator": false
+	}
 }
 
 ```
@@ -1129,8 +1165,17 @@ The same trade-offs apply as in XML, but JSON developers may lean more towards i
 
 Additionally, while referencing is part of XML Schema, it is _not_ part of JSON Schema. Checking that the `@id` values match up needs to be done with a JSON-LD validator.
 
+- [[04 Associations]]
+- Mapping Spreadsheets
+	- [[Mapping_Spreadsheets/04 Associations.numbers]]
+	- [[Mapping_Spreadsheets/04 Associations.xlsx]]
+	- [[Mapping_Spreadsheets/04 Associations.pdf]]
+
 ___
 ## Roles
+
+![[05 Roles - CrashDriverClassDiagram.png]]
+
 - Modeling some objects as specialized things gets complicated
 - Roles are, well, roles that objects play
 	- People, organizations, items are the major ones
@@ -1141,6 +1186,8 @@ ___
 - Examples:
 	- `j:CrashPerson` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-45q)/[Wayfarer](http://niem5.org/wayfarer/j/CrashPerson.html))
 	- Anything containing an `nc:RoleOfPerson`([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-1ro)/[Wayfarer](http://niem5.org/wayfarer/nc/RoleOfPerson.html)), `nc:RoleOfOrganization` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-1rn)/[Wayfarer](http://niem5.org/wayfarer/nc/RoleOfOrganization.html)), or `nc:RoleOfItem` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-1rp)/[Wayfarer](http://niem5.org/wayfarer/nc/RoleOfItem.html)), plus a few lesser used ones ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-1rm)/[Wayfarer](http://niem5.org/wayfarer/nc/RoleOfAbstract.html))
+
+#todo Show the search process to find this
 
 ### Roles - Not Special Kinds of People
 
@@ -1263,8 +1310,20 @@ And, again as with associations, you can simply include the Person-specific info
 ```
 
 The choices here are also a balance, although inclusion will likely be more attractive to most JSON developers.
+
+### Artifacts
+
+- [[05 Roles]]
+- Mapping Spreadsheets
+	- [[Mapping_Spreadsheets/05 Roles.numbers]]
+	- [[Mapping_Spreadsheets/05 Roles.xlsx]]
+	- [[Mapping_Spreadsheets/05 Roles.pdf]]
+
 ___
 ## Code Tables
+
+![[06 Code Tables - CrashDriverClassDiagram.png]]
+
 - Codes help ensure accurate information
 - Codes are, essentially, strings, simple data
 - A few in NIEM are integers
@@ -1283,7 +1342,7 @@ ___
 
 ### Schemas
 
-[`j:InjurySeverityCode`](http://niem5.org/schemas/j.html#InjurySeverityCode) is a code table, with its codes defined in another namespace, the one for AAMVA. Here's the schema for the element:
+[`j:InjurySeverityCode`](http://niem5.org/schemas/j.html#InjurySeverityCode) is a code table, with its codes defined in another namespace, the one for [AAMVA](https://www.aamva.org/. Here's the schema for the element:
 
 ```xml
 <xs:element name="InjurySeverityCode" type="aamva_d20:AccidentSeverityCodeType" substitutionGroup="nc:InjurySeverityAbstract" nillable="true">
@@ -1363,8 +1422,17 @@ And here's the JSON. Note that NIEM does not yet support JSON Schema, so there's
 	"j:InjurySeverityCode": "3"
 }
 ```
+
+- [[06 Code Tables]]
+- Mapping Spreadsheets
+	- [[Mapping_Spreadsheets/06 Code Tables.numbers]]
+	- [[Mapping_Spreadsheets/06 Code Tables.xlsx]]
+	- [[Mapping_Spreadsheets/06 Code Tables.pdf]]
+
 ___
 ## Metadata
+![[07 Metadata - CrashDriverClassDiagram.png]]
+
 Metadata is Data about Data. What does that mean? Here's an example:
 
 ![Jett](Mapping_Graphics/Jett_scaled.png)
@@ -1372,9 +1440,9 @@ Metadata is Data about Data. What does that mean? Here's an example:
 | Data | Metadata |
 | --- | --- |
 | _Name:_ **Jett** | _Reporting Organization:_ **Godspeed Animal Care** |
-| _Sex:_ **Female** | _Reporting Person:_ **Dr. Shiller** |   
-| _Weight:_ **8 pounds** |_Reported Date:_ **2019-12-13** |
-| | _Last Verified Date:_ **2021-06-10** |
+| _Sex:_ **Female** | _Reporting Person:_ **Dr. Dudley** |   
+| _Weight:_ **8 pounds** |_Reported Date:_ **2021-06-10** |
+| | _Last Verified Date:_ **2021-12-17** |
 
 - Objects reference the metadata objects that apply to them
 - An objects can reference more than one metadata object
@@ -1447,6 +1515,14 @@ JSON-LD doesn't support a specific metadata link, so for JSON we just include th
 
 ```
 
+### Artifacts
+
+- [[07 Metadata]]
+- Mapping Spreadsheets
+	- [[Mapping_Spreadsheets/07 Metadata.numbers]]
+	- [[Mapping_Spreadsheets/07 Metadata.xlsx]]
+	- [[Mapping_Spreadsheets/07 Metadata.pdf]]
+
 ___
 
 ## Combining Domains (Augmentations)
@@ -1460,6 +1536,8 @@ ___
 - Examples:
 	- `j:DriverLicense` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-lb))
 	- `j:DriverLicenseAugmentationPoint` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-11rg))
+
+#todo Show search. Talk about needing to add the whole person.
 
 ### Schemas
 
@@ -1576,7 +1654,10 @@ The equivalent JSON-LD would be:
 ### Artifacts
 
 - [[08 Combining Domains - Augmentations]]
-- [[Mapping_Spreadsheets/08 Combining Domains - Augmentations.numbers]]
+- Mapping Spreadsheets
+	- [[Mapping_Spreadsheets/08 Combining Domains - Augmentations.numbers]]
+	- [[Mapping_Spreadsheets/08 Combining Domains - Augmentations.xlsx]]
+	- [[Mapping_Spreadsheets/08 Combining Domains - Augmentations.pdf]]
 
 ___
 
@@ -1723,7 +1804,10 @@ It doesn't make much sense to try and represent this in JSON in a NIEM-conforman
 ### Artifacts
 
 - [[09 External Standards]]
-- [[Mapping_Spreadsheets/09 External Standards.numbers]]
+- Mapping Spreadsheets
+	- [[Mapping_Spreadsheets/09 External Standards.numbers]]
+	- [[Mapping_Spreadsheets/09 External Standards.xlsx]]
+	- [[Mapping_Spreadsheets/09 External Standards.pdf]]
 
 ___
 ## Creating New Objects
@@ -1889,7 +1973,10 @@ Instead of linking to separate metadata objects, we've embedded those into the `
 ### Artifacts
 
 - [[10 Creating New Objects - Simple Data]]
-- [[Mapping_Spreadsheets/10 Creating New Objects - Simple Data.numbers]]
+- Mapping Spreadsheets
+	- [[Mapping_Spreadsheets/10 Creating New Objects - Simple Data.numbers]]
+	- [[Mapping_Spreadsheets/10 Creating New Objects - Simple Data.xlsx]]
+	- [[Mapping_Spreadsheets/10 Creating New Objects - Simple Data.pdf]]
 
 ### Creating Complex Objects
 
@@ -1904,6 +1991,8 @@ Instead of linking to separate metadata objects, we've embedded those into the `
 Here we're making the root element that will hold everything else. We create `CrashDriverInfoType`, basing it on `structures:ObjectType` so that it's just an empty object.
 
 To that empty object, we add all the major objects in our exchange, `nc:Person`, `j:Crash`, and `j:Charge`. We also add a `j:PersonChargeAssociation` which lets us link together people and charges. Finally, we add a couple metadata object, the built-in `j:Metadata`, and `ext:PrivacyMetadata`, which we create in the extension schema and is in the prior example.
+
+#todo Fix definitions.
 
 ```xml
 <xs:element name="CrashDriverInfo" type="exch:CrashDriverInfoType">
@@ -1947,13 +2036,18 @@ The issue with concrete extensions is that if the extension is happening deep in
 
 But `j:CrashDriver` doesn't hold an `ext:DriverLicense`, so we need to make a new `ext:CrashDriverType` and `ext:CrashDriver` that can hold an `ext:DriverLicense`.
 
+#todo add vehicle
+
 But `j:Crash` doesn't hold an `ext:CrashDriver`, so we need to make a new `ext:CrashType` and `ext:Crash` that can hold `ext:CrashDriver`.
 
 That's a lot of extra work and muddies the semantics of the elements.
 ### Artifacts
 
 - [[11 Creating New Objects - Complex Objects]]
-- [[Mapping_Spreadsheets/11 Creating New Objects - Complex Objects.numbers]]
+- Mapping Spreadsheets
+	- [[Mapping_Spreadsheets/11 Creating New Objects - Complex Objects.numbers]]
+	- [[Mapping_Spreadsheets/11 Creating New Objects - Complex Objects.xlsx]]
+	- [[Mapping_Spreadsheets/11 Creating New Objects - Complex Objects.pdf]]
 
 ___
 
@@ -2139,7 +2233,7 @@ ___
 
 # Exercises
 
-([[Exercise_Solutions]])
+([[Exercise_Solutions|Solutions]])
 
 ## Understanding NIEM Objects
 
