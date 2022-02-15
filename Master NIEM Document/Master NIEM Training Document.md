@@ -2,11 +2,10 @@
 
 # Master NIEM Training Document
 NIEM Training
-2022 February 15-17
+2022 March 15-17
 
-Tom Carlson
-tom@tomcarlsonconsulting.com
-GTRI
+Tom Carlson, GTRI
+Thomas.Carlson@gtri.gatech.edu
 
 # Introduction
 
@@ -48,14 +47,12 @@ All materials are available on the NIEM Training Github repo at [https://github.
 ___
 ## Logistics and Background
 
-- Third live session
-	- Major revamp of prior training programs
-	- Materials revamped from first live session
+- Major revamp of prior training programs
 - Three days, 1-5pm each day
 - Short breaks on the hour
 - Ask questions via chat _when you have them_
 	- Someone is monitoring chat and will interrupt me as needed
-- This document and supporting materials at:
+- This document and supporting materials are at:
 	- https://github.com/niem/niem-training
 ___
 ## Introduction to NIEM
@@ -81,7 +78,7 @@ ___
 ### What is NIEM? And what not?
 **NIEM is:**
 - a common vocabulary
-- a means of enabling efficient information exchange across diverse public and private - organizations
+- a means of enabling efficient information exchange across diverse public and private organizations
 
 **NIEM is not:**
 - a system or database
@@ -133,7 +130,7 @@ ___
 ___
 ### NIEM Harmonization and Organization
 
-- Think of the NIEM data model as a mature and stable data dictionary of agreed-upon terms, definitions, relationships and formats independent of how information is stored in individual agency systems
+- Think of the NIEM data model as a mature and stable data dictionary of agreed-upon terms, definitions, relationships, and formats independent of how information is stored in individual agency systems
 - The data model consists of two sets of closely related vocabularies:
 	- NIEM core
 	- Individual NIEM domains
@@ -206,6 +203,7 @@ ___
 		- Misplaced content is moved, either to other domains or to core
 		- New content is added
 	- _Nothing_ in a major version change is guaranteed to be backwards compatible with earlier major releases
+	- NIEM 6.0 scheduled for end of 2023
 - Minor version releases, e.g. 5.0 to 5.1:
 	- Annually
 	- **NIEM-Core does not change!**
@@ -215,11 +213,13 @@ ___
 	- Domains can be added, like Cyber in 5.1
 	- Domains are not guaranteed to be backwards compatible with earlier minor releases
 		- But they often are
+	- NIEM 5.2 scheduled for end of 2022
 - Domain updates are done per-domain
 	- Domains can update their content in between minor releases
 	- Those updates then are normally folded into the next minor release
 - Older versions never go away
 	- You can still use NIEM 1.0 (but shouldn't)
+	- There are plenty of NIEM 2.0 exchanges in current use
 - Migration
 	- Don't have to migrate
 	- May want to migrate if a newer version gives you functionality you need (and you're already making changes)
@@ -270,7 +270,7 @@ Each step produces artifacts used by subsequent steps:
 
 ![Message Spec Seq Ideal](IEPD_Process_Graphics/Process_Seq_Real.png)
 ___
-### IEPD Artifacts - Documentation
+### Message Spec / IEPD Artifacts - Documentation
 
 - Master Documentation (Word)
 - IEPD catalog document (`iepd-catalog.xml`)
@@ -279,7 +279,7 @@ ___
 - Conformance assertion (text)
 
 ___
-### IEPD Artifacts - Definitional
+### Message Spec / IEPD Artifacts - Definitional
 
 - Wantlist (`wantlist.xml`)
 - Schema subset schemas
@@ -350,10 +350,14 @@ ___
 Representing objects in UML by their business names and relationships.
 
 ![Business Oriented Class Diagram](Req_Analysis_Graphics/CrashDriverClassDiagram.png)
+
+Alternate: [[CrashDriverClassDiagram_PlantUML.png]]
 ___
 ### NIEM Oriented Class Diagram
 
 ![NIEM Oriented Class Diagram](Req_Analysis_Graphics/CrashDriverClassDiagram-NIEM.png)
+
+Alternate: [[CrashDriverClassDiagram-NIEM_PlantUML.png]]
 
 **Close-ups:**
 
@@ -392,8 +396,41 @@ We have choices on how to proceed:
 
 ## XML Schema in a Nutshell
 
-#todo Add a quick description of the relationship between XML instance documents and XML Schema as well as the same for JSON. Add small diagram with small snippets of each.
+XML Schema defines what an XML document needs to look like. (JSON Schema does the same for JSON documents.)
 
+For example, this bit of XML Schema defines what a PersonName object needs to look like.
+
+```xml
+<xs:element name="PersonName" type="PersonNameType" nillable="true">
+	<xs:annotation>
+		<xs:documentation>A combination of names and/or titles by which a person is known.</xs:documentation>
+	</xs:annotation>
+</xs:element>
+
+<xs:complexType name="PersonNameType">
+	<xs:annotation>
+		<xs:documentation>A data type for a combination of names and/or titles by which a person is known.</xs:documentation>
+	</xs:annotation>
+	<xs:sequence>
+		<xs:element name="PersonGivenName" minOccurs="1" maxOccurs="1"/>
+		<xs:element name="PersonMiddleName" minOccurs="0" maxOccurs="unbounded"/>
+		<xs:element name="PersonSurName" minOccurs="1" maxOccurs="1"/>
+	</xs:sequence>
+	<xs:attribute name="personNameCommentText" use="optional"/>
+</xs:complexType>
+```
+And here's what the matching XML _instance_ document might look like.
+
+```xml
+	<PersonName personNameCommentText="copied">
+		<PersonGivenName>Peter</PersonGivenName>
+		<PersonMiddleName>Death</PersonMiddleName>
+		<PersonMiddleName>Bredon</PersonMiddleName>
+		<PersonSurName>Wimsey</PersonSurName>
+	</PersonName>
+```
+
+We will see much more of this. This is just an initial glance at it.
 ___
 
 ![Mapping](IEPD_Process_Graphics/Process_Artifacts_2_scaled.png)
@@ -778,7 +815,15 @@ Above you can see object with different prefixes, `j:Crash` and `nc:ActivityDate
 
 ![Namespaces and Case](Mapping_Graphics/Namespace_Case.png)
 
-#todo Insert namespace example snippets.
+```xml
+<xs:schema  
+ targetNamespace="http://example.com/CrashDriver/1.0/extension" version="1" xml:lang="en-US"  
+ xmlns:ext="http://example.com/CrashDriver/1.0/extension"  
+ xmlns:j="http://release.niem.gov/niem/domains/jxdm/7.0/">
+
+	<xs:import schemaLocation="../niem/domains/jxdm.xsd"  
+ namespace="http://release.niem.gov/niem/domains/jxdm/7.0/"/>
+```
 
 JSON-LD maps JSON objects to NIEM namespaces in the `@context`. Each of these entries maps a prefix to a NIEM namespace, providing a link back to the NIEM object. 
 
