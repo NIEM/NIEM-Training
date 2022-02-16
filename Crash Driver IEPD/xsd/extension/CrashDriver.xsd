@@ -12,8 +12,7 @@
     xmlns:ct="http://release.niem.gov/niem/conformanceTargets/3.0/" elementFormDefault="qualified">
 
     <xs:annotation>
-        <xs:documentation> This is the extension schema for an example IEPD used to illustrate
-            guidance for representing an IEP in JSON-LD syntax. </xs:documentation>
+        <xs:documentation>Exchange schema for an example IEPD used to illustrate NIEM's technical features.</xs:documentation>
     </xs:annotation>
 
     <xs:import schemaLocation="./extension.xsd"
@@ -27,14 +26,12 @@
 
     <xs:element name="CrashDriverInfo" type="exch:CrashDriverInfoType">
         <xs:annotation>
-            <xs:documentation>A collection of legal charges associated with the driver of a vehicle
-                in a crash.</xs:documentation>
+            <xs:documentation>A collection of information about the driver of a vehicle in a crash.</xs:documentation>
         </xs:annotation>
     </xs:element>
     <xs:complexType name="CrashDriverInfoType">
         <xs:annotation>
-            <xs:documentation>A data type for a collection of legal charges associated with the
-                driver of a vehicle in a crash.</xs:documentation>
+            <xs:documentation>A data type for a collection of information about the driver of a vehicle in a crash.</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="structures:ObjectType">

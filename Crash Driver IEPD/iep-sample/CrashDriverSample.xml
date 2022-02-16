@@ -68,7 +68,6 @@
 	<j:PersonChargeAssociation structures:metadata="JMD01">
 		<nc:Person structures:ref="P01" xsi:nil="true"/>
 		<j:Charge structures:ref="CH01" xsi:nil="true"/>
-		<j:JuvenileAsAdultIndicator>true</j:JuvenileAsAdultIndicator>
 	</j:PersonChargeAssociation>
 	<j:Charge structures:id="CH01" structures:metadata="JMD01">
 		<j:ChargeDescriptionText>Furious Driving</j:ChargeDescriptionText>

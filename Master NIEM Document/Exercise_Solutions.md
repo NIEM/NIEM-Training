@@ -68,7 +68,7 @@ Q.  How could you indicate the primary color of a commercial vehicle? Can you fi
 
 Q.  How might you associate a person with their aunt or uncle? (Hint: "Facet" is the term the SSGT uses for code table codes. Play with the search options there to find this. Wayfarer won't be a help with this.)
 
-- `hs:PersonOtherKinAssociation`
+A. `hs:PersonOtherKinAssociation`. Find this by searching "Facets" for "aunt" or "uncle" in the SSGT, then see what contains that code table. The resulting XML might look like this:
 
 ```xml
 <hs:PersonOtherKinAssociation>
@@ -102,3 +102,56 @@ A. There are six different types that a `RoleOfItem` can be in:
 Q.  How many different elements can represent these kinds of roles? What are they? (Hint: Wayfarer is the best tool for this.)
 
 A. Wayfarer can show **all** the elements that are of or derived from any of these types.
+
+## Code Tables
+
+Q. Going back to the primary color of a commercial vehicle, is there any difference between the different code table options?
+
+A. Yes, one uses abbreviations, the other full words. These are quite similar, in terms of conceptual colors, but other similar tables can vary widely.
+
+Q. Why might there be all these different code tables for this? (You won't be expected to actually know this, but it's good to ponder it.)
+
+A. Different domains have different preferences and requirements. NIEM's domains allow them to each do it their own way.
+
+Q. Find all the values for a person's eye color.
+
+A. They're all listed at [`PersonEyeColorCodeSimpleType`](http://niem5.org/wayfarer/j/PersonEyeColorCodeSimpleType_codes.html):
+
+- BLACK
+- BLUE
+- BROWN
+- GRAY
+- GREEN
+- HAZEL
+- MAROON
+- MULTICOLORED
+- PINK
+- UNKNOWN
+
+Q. What if you wanted to describe the eye color as "The color of my favorite pair of faded blue jeans"?
+
+A. Most code tables have a textual counterpart, in this case [`nc:PersonEyeColorText`](http://niem5.org/wayfarer/nc/PersonEyeColorText.html)
+
+Q. What do you think happens if a code table has no enumerations defined? What will validate and what won't?
+
+A. Any string will validate!
+
+## Metadata
+
+Q. What does the Human Services domain count as metadata?
+
+A. It's all listed here: [`hs:Metadata`](http://niem5.org/wayfarer/hs/Metadata.html)
+
+Q. What about the Screening domain?
+
+A. Screening only has Person-oriented metadata: [`scr:PersonMetadataType`](http://niem5.org/wayfarer/scr/PersonMetadataType.html)
+
+Q. Think up an example of metadata about this class.
+
+A. The date it's being held and the instructor are basic ones.
+
+## Combining Domains - Augmentations
+
+Q. Can you mix and match NIEM elements into your own Augmentation?
+
+A. Yes. You can add them individually, or make an Augmentation bag to hold them.

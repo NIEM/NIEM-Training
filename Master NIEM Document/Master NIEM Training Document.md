@@ -388,7 +388,7 @@ We have choices on how to proceed:
 - Concurrent
 	- Building schemas and instances as you go
 - We'll use something in-between
-	- Build an ersatz matching instance document as we map
+	- Build an ersatz matching instance document as we map ([[12 Crash Driver Report Complete]])
 	- Sorta like YAML without data values
 	- Save schemas for the end
 
@@ -398,7 +398,7 @@ We have choices on how to proceed:
 
 XML Schema defines what an XML document needs to look like. (JSON Schema does the same for JSON documents.)
 
-For example, this bit of XML Schema defines what a PersonName object needs to look like.
+For example, this bit of XML Schema defines what a `PersonName` object needs to look like.
 
 ```xml
 <xs:element name="PersonName" type="PersonNameType" nillable="true">
@@ -412,11 +412,11 @@ For example, this bit of XML Schema defines what a PersonName object needs to lo
 		<xs:documentation>A data type for a combination of names and/or titles by which a person is known.</xs:documentation>
 	</xs:annotation>
 	<xs:sequence>
-		<xs:element name="PersonGivenName" minOccurs="1" maxOccurs="1"/>
-		<xs:element name="PersonMiddleName" minOccurs="0" maxOccurs="unbounded"/>
-		<xs:element name="PersonSurName" minOccurs="1" maxOccurs="1"/>
+		<xs:element name="PersonGivenName" type="xs:string" minOccurs="1" maxOccurs="1"/>
+		<xs:element name="PersonMiddleName" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+		<xs:element name="PersonSurName" type="xs:string" minOccurs="1" maxOccurs="1"/>
 	</xs:sequence>
-	<xs:attribute name="personNameCommentText" use="optional"/>
+	<xs:attribute name="personNameCommentText" type="xs:string" use="optional"/>
 </xs:complexType>
 ```
 And here's what the matching XML _instance_ document might look like.
@@ -804,8 +804,18 @@ The matching JSON similarly just shows `nc:Date`:
 	}
 }
 ```
+
+### Artifacts
+
+- [[02 Substitution Groups]]
+- Mapping Spreadsheets
+	- [[Mapping_Spreadsheets/02 Substitution Groups.numbers]]
+	- [[Mapping_Spreadsheets/02 Substitution Groups.xlsx]]
+	- [[Mapping_Spreadsheets/02 Substitution Groups.pdf]]
+
 ___
-## Namespaces
+
+## An aside about Namespaces
 
 Above you can see object with different prefixes, `j:Crash` and `nc:ActivityDate`. The `j` and `nc` refer to different namespaces in XML Schema.
 
@@ -838,14 +848,6 @@ JSON-LD maps JSON objects to NIEM namespaces in the `@context`. Each of these en
 ```
 
 As mentioned earlier, NIEM doesn't support JSON Schema well yet. Using NIEM with JSON is currently focused on creating matching instance documents. Upcoming NIEM developments will greatly enhance the ability to work in JSON as a similar level as with XML and XML Schema.
-
-### Artifacts
-
-- [[02 Substitution Groups]]
-- Mapping Spreadsheets
-	- [[Mapping_Spreadsheets/02 Substitution Groups.numbers]]
-	- [[Mapping_Spreadsheets/02 Substitution Groups.xlsx]]
-	- [[Mapping_Spreadsheets/02 Substitution Groups.pdf]]
 
 ___
 ## Inherited Properties
@@ -1033,7 +1035,30 @@ NIEM has several conceptual layers which build on top of each other:
 
 Examples of how NIEM uses these are the next few sections.
 
-#todo add short examples
+Plain Old XML:
+
+```xml
+<Cat>
+	<CatName>Jett</CatName>
+	<CatOwner IDREF="owner01"/>
+</Cat>
+<Human ID="owner01">
+	<HumanName>Tom</HumanName>
+</Human>
+```
+
+NIEM's renaming:
+
+```xml
+<Cat>
+	<CatName>Jett</CatName>
+	<CatOwner ref="owner01"/>
+</Cat>
+<Human id="owner01">
+	<HumanName>Tom</HumanName>
+</Human>
+```
+
 ___
 ## Referencing - JSON-LD
 
@@ -1041,7 +1066,18 @@ JSON itself doesn't provide a means of linking objects together. NIEM leverages 
 
 Again, we will see example throughout the next few sections.
 
-#todo repeat example as JSON
+```json
+"Cat": {
+	"CatName": "Jett",	
+	"CatOwner": {
+		"@id": "#owner01"
+	}
+},
+"Human": {
+	"@id": "#owner01",
+	"HumanName": "Tom"
+}
+```
 
 ___
 ## Associations
@@ -1232,7 +1268,18 @@ ___
 	- `j:CrashPerson` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-45q)/[Wayfarer](http://niem5.org/wayfarer/j/CrashPerson.html))
 	- Anything containing an `nc:RoleOfPerson`([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-1ro)/[Wayfarer](http://niem5.org/wayfarer/nc/RoleOfPerson.html)), `nc:RoleOfOrganization` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-1rn)/[Wayfarer](http://niem5.org/wayfarer/nc/RoleOfOrganization.html)), or `nc:RoleOfItem` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-1rp)/[Wayfarer](http://niem5.org/wayfarer/nc/RoleOfItem.html)), plus a few lesser used ones ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-1rm)/[Wayfarer](http://niem5.org/wayfarer/nc/RoleOfAbstract.html))
 
-#todo Show the search process to find this
+### Searching for Injured Person
+
+How do we find the match for "injured person"? Here's one way:
+
+- Search for `injured person`
+	- [SSGT](http://niem5.org/ssgt_redirect.php?query=injured+person)
+	- [Wayfarer](http://niem5.org/wayfarer/search.php?option=both&injured+person)
+- Notice that [`j:InjuryLocationCode`](http://niem5.org/wayfarer/j/InjuryLocationCode.html) looks like something an injured person would have
+- That's inside of things of [`nc:InjuryType`](http://niem5.org/wayfarer/nc/InjuryType.html)
+- [`j:CrashPersonInjury`](http://niem5.org/wayfarer/j/CrashPersonInjury.html) is one of the things of that type
+- And that's inside of [`j:CrashPerson`](http://niem5.org/wayfarer/j/CrashPerson.html)
+
 
 ### Roles - Not Special Kinds of People
 
@@ -1582,7 +1629,26 @@ ___
 	- `j:DriverLicense` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-lb))
 	- `j:DriverLicenseAugmentationPoint` ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-11rg))
 
-#todo Show search. Talk about needing to add the whole person.
+Does driver's license have what we need? Does it have an email address?
+
+- Try searching for "drivers license":
+	- [SSGT](http://niem5.org/ssgt_redirect.php?query=drivers+license)
+	- [Wayfarer](http://niem5.org/wayfarer/search.php?option=both&query=drivers+license)
+- Try searching for "driver license", singular:
+	- [SSGT](http://niem5.org/ssgt_redirect.php?query=driver+license)
+	- [Wayfarer](http://niem5.org/wayfarer/search.php?option=both&query=driver+license)
+	- It's _usually_ a good idea to drop pluralization in search terms
+- Check to see if it has an email address. (Spoiler, it doesn't.)
+- But we should learn its structure while we're here:
+	- Check what can contain it, specifically [`j:CrashDriver`](http://niem5.org/wayfarer/j/CrashDriver.html)
+	- Follow up to [`j:CrashVehicle`](http://niem5.org/wayfarer/j/CrashVehicle.html)
+	- Follow up to [`j:Crash`](http://niem5.org/wayfarer/j/Crash.html)
+
+Follow a similar process for [`nc:ContactEmailID`](http://niem5.org/wayfarer/nc/ContactEmailID.html) and [`nc:ContactInformation`](http://niem5.org/wayfarer/nc/ContactInformation.html). Learn about the _object_, not just the individual elements.
+
+The SSGT is best for learning overall structure, so check out [`j:Crash`](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-44f) and [`nc:ContactInformation`](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-eh) there, too!
+
+Why not [`j:CrashDriverLicense`](http://niem5.org/wayfarer/j/CrashDriverLicense.html)? It doesn't go inside a `j:CrashDriver`. Why? I don't know.
 
 ### Schemas
 
@@ -2037,18 +2103,16 @@ Here we're making the root element that will hold everything else. We create `Cr
 
 To that empty object, we add all the major objects in our exchange, `nc:Person`, `j:Crash`, and `j:Charge`. We also add a `j:PersonChargeAssociation` which lets us link together people and charges. Finally, we add a couple metadata object, the built-in `j:Metadata`, and `ext:PrivacyMetadata`, which we create in the extension schema and is in the prior example.
 
-#todo Fix definitions.
-
 ```xml
 <xs:element name="CrashDriverInfo" type="exch:CrashDriverInfoType">
 	<xs:annotation>
-		<xs:documentation>A collection of legal charges associated with the driver of a vehicle in a crash.</xs:documentation>
+		<xs:documentation>A collection of information about the driver of a vehicle in a crash.</xs:documentation>
 	</xs:annotation>
 </xs:element>
 
 <xs:complexType name="CrashDriverInfoType">
 	<xs:annotation>
-		<xs:documentation>A data type for a collection of legal charges associated with the driver of a vehicle in a crash.</xs:documentation>
+		<xs:documentation>A data type for a collection of information about the driver of a vehicle in a crash.</xs:documentation>
 	</xs:annotation>
 	<xs:complexContent>
 		<xs:extension base="structures:ObjectType">
@@ -2081,11 +2145,12 @@ The issue with concrete extensions is that if the extension is happening deep in
 
 But `j:CrashDriver` doesn't hold an `ext:DriverLicense`, so we need to make a new `ext:CrashDriverType` and `ext:CrashDriver` that can hold an `ext:DriverLicense`.
 
-#todo add vehicle
+But `j:CrashVehicle` doesn't hold a `ext:CrashDriver`, so we need to make a new `ext:CrashVehicleType` and `ext:CrashVehicle` that can hold an `ext:CrashDriver`.
 
-But `j:Crash` doesn't hold an `ext:CrashDriver`, so we need to make a new `ext:CrashType` and `ext:Crash` that can hold `ext:CrashDriver`.
+But `j:Crash` doesn't hold an `ext:CrashVehicle`, so we need to make a new `ext:CrashType` and `ext:Crash` that can hold `ext:CrashVehicle`.
 
 That's a lot of extra work and muddies the semantics of the elements.
+
 ### Artifacts
 
 - [[11 Creating New Objects - Complex Objects]]
@@ -2329,7 +2394,7 @@ Find out some information about commercial vehicles by finding the properties th
 
 ## Code Tables
 
-1. Going back to the primary color of a commercial vehicle, is there any difference between the different code table options?
+1. Going back to the primary color of a commercial vehicle, is there any difference between the different code tables, `cbrn:ConveyanceColorPrimaryCode` and `j:ConveyanceColorPrimaryCode`?
 2. Why might there be all these different code tables for this? (You won't be expected to actually know this, but it's good to ponder it.)
 3. Find all the values for a person's eye color.
 4. What if you wanted to describe the eye color as "The color of my favorite pair of faded blue jeans"?
