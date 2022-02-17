@@ -39,7 +39,6 @@ ext:CrashDriverInfo
 	j:PersonChargeAssociation
 		nc:Person
 		j:Charge
-		j:JuvenileAsAdultIndicator
 	j:Charge
 		j:ChargeDescriptionText
 		j:ChargeFelonyIndicator

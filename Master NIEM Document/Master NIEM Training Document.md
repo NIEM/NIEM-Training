@@ -1252,6 +1252,7 @@ Additionally, while referencing is part of XML Schema, it is _not_ part of JSON 
 	- [[Mapping_Spreadsheets/04 Associations.xlsx]]
 	- [[Mapping_Spreadsheets/04 Associations.pdf]]
 
+
 ___
 ## Roles
 
@@ -1419,8 +1420,8 @@ ___
 - Codes help ensure accurate information
 - Codes are, essentially, strings, simple data
 - A few in NIEM are integers
-	- Elements defined in the domains
-	- Types are often defined in their own namespaces
+- Elements defined in the domains
+- Types are often defined in their own namespaces
 - NIEM wraps them in a complex type in order to apply some attributes needed for infrastructure
 	- Which we will need in the next section…
 - Examples:
@@ -1434,7 +1435,7 @@ ___
 
 ### Schemas
 
-[`j:InjurySeverityCode`](http://niem5.org/schemas/j.html#InjurySeverityCode) is a code table, with its codes defined in another namespace, the one for [AAMVA](https://www.aamva.org/. Here's the schema for the element:
+[`j:InjurySeverityCode`](http://niem5.org/schemas/j.html#InjurySeverityCode) is a code table, with its codes defined in another namespace, the one for [AAMVA](https://www.aamva.org/). Here's the schema for the element:
 
 ```xml
 <xs:element name="InjurySeverityCode" type="aamva_d20:AccidentSeverityCodeType" substitutionGroup="nc:InjurySeverityAbstract" nillable="true">
@@ -1514,6 +1515,8 @@ And here's the JSON. Note that NIEM does not yet support JSON Schema, so there's
 	"j:InjurySeverityCode": "3"
 }
 ```
+
+### Artifacts
 
 - [[06 Code Tables]]
 - Mapping Spreadsheets

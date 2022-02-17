@@ -1,45 +1,45 @@
 classDiagram
 
-	class CrashDriverInfo{
+	class CrashDriverInfoClass{
 	}
 
-	CrashDriverInfo o-- Driver
-	CrashDriverInfo o-- InjuredPerson
-	CrashDriverInfo o-- Crash
-	CrashDriverInfo o-- Charge
+	CrashDriverInfoClass o-- DriverClass
+	CrashDriverInfoClass o-- InjuredPersonClass
+	CrashDriverInfoClass o-- CrashClass
+	CrashDriverInfoClass o-- ChargeClass
 
-	Person <|-- Driver
-	Person <|-- InjuredPerson
+	PersonClass <|-- DriverClass
+	PersonClass <|-- InjuredPersonClass
 	
-	class Person{
-		+Date BirthDate
-		+String BirthDatePrivacyCode
-		+String FirstName
-		+String MiddleName
-		+String LastName
+	class PersonClass{
+		+date BirthDate
+		+string FirstName
+		+string MiddleName
+		+string LastName
 	}
 	
-	class Driver{
+	class DriverClass{
 		+String DriverLicenseNumber
 		+String Email
 	
 	}
 
-	class InjuredPerson{
-		+String InjuryDescription
-		+Code SeverityCode
-		+String InjuryPrivacyCode
-		+Boolean ThroughWindow
+	class InjuredPersonClass{
+		+string InjuryDescription
+		+code SeverityCode
+		+string InjuryPrivacyCode
+		+boolean ThroughWindow
 	}
 
-	class Charge{
-		+String Description
+	class ChargeClass{
+		+string Description
 		+boolean isFelony
+		+boolean isCriminalInformation
 	}
 
-	class Crash{
-		+Date CrashDate
-		+String CrashLocationCoordinates
+	class CrashClass{
+		+date CrashDate
+		+string CrashLocationCoordinates
 	}
 
-	Person <--> Charge
+	PersonClass <--> ChargeClass
