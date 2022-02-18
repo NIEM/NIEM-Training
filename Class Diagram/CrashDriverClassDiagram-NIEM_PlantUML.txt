@@ -1,7 +1,6 @@
 @startuml
 
 	skinparam class {
-		TextColor Red
 		BackgroundColor White
 		ArrowColor Black
 		BorderColor Black
@@ -54,7 +53,8 @@
 	}
 
 	Activity <|-- Incident
-	Incident <|-- Crash
+	Incident <|-- DrivingIncident
+	DrivingIncident <|-- Crash
 
 	Activity o-- ActivityDate
 

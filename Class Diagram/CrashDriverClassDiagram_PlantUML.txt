@@ -1,7 +1,6 @@
 @startuml
 
 	skinparam class {
-		TextColor Red
 		BackgroundColor White
 		ArrowColor Black
 		BorderColor Black
