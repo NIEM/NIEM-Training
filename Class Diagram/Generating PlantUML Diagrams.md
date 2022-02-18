@@ -20,11 +20,11 @@ convert test.svg test.png
 
 Can't we just embed SVG? SVG won't expand to fill the screen. Also might not work in GitHub?
 
-![[NIEM Training/Class Diagram/CrashDriverClassDiagram.svg]]
+![UML SVG](CrashDriverClassDiagram.svg)
 
-![[NIEM Training/Class Diagram/CrashDriverClassDiagram.png]]
+![UML PNG](CrashDriverClassDiagram.png)
 
-![[NIEM Training/Class Diagram/CrashDriverClassDiagram-NIEM.svg]]
+![NIEM UML SVG](CrashDriverClassDiagram-NIEM.svg)
 
-![[NIEM Training/Class Diagram/CrashDriverClassDiagram-NIEM.png]]
+![NIEM UML PNG](CrashDriverClassDiagram-NIEM.png)
 
