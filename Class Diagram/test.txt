@@ -1,10 +1,10 @@
 @startuml
 
-skinparam shadowing false
-skinparam monochrome true
-skinparam backgroundColor transparent
-
-
+	skinparam class {
+		BackgroundColor White
+		ArrowColor Black
+		BorderColor Black
+	}
 
 	class CrashDriverInfo{
 	}
@@ -33,13 +33,11 @@ skinparam backgroundColor transparent
 		+Date Date
 	}
 
-	class Association{
-	}
 	class PersonChargeAssociation{
+		+Boolean JuvenileAsAdultIndicator
 	}
-	(Person, Charge) .. PersonChargeAssociation
-	Association <|-- PersonChargeAssociation
-
+	PersonChargeAssociation o-- Person
+	PersonChargeAssociation o-- Charge
 	
 	class Charge{
 		+String ChargeDescriptionText
@@ -95,11 +93,8 @@ skinparam backgroundColor transparent
 		+Date Date
 	}
 
-	class DriverLicenseBase{
-	}
 	class DriverLicense{
 	}
-	DriverLicenseBase <|-- DriverLicense
 	
 	class DriverLicenseCardIdentification{
 		+String IdentificationID
@@ -117,7 +112,7 @@ skinparam backgroundColor transparent
 	
 	Location o-- LocationGeospatialPoint
 	LocationGeospatialPoint o-- Point
-	Point *-- pos
+	Point <-- pos
 	
 	class Location{
 		

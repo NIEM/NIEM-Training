@@ -1,4 +1,19 @@
-Ways to convert SVG to PNG
+## Generate SVG
+
+[PlantUML Command Line Syntax](https://plantuml.com/command-line)
+
+```
+java -jar plantuml.jar source.txt -tsvg
+```
+
+Will create `source.svg`
+
+You can go directly to PNG, but the resolution will be low.
+
+
+## Convert SVG to PNG
+
+Ways to convert SVG to PNG:
 
 [SVG Export](https://github.com/shakiba/svgexport)
 

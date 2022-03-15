@@ -269,6 +269,8 @@ Each step produces artifacts used by subsequent steps:
 **Message Spec / IEPD Process – Real Life**
 
 ![Message Spec Seq Ideal](IEPD_Process_Graphics/Process_Seq_Real.png)
+
+#todo regenerate at a higher resolution
 ___
 ### Message Spec / IEPD Artifacts - Documentation
 
@@ -350,19 +352,11 @@ ___
 Representing objects in UML by their business names and relationships.
 
 ![Business Oriented Class Diagram](Req_Analysis_Graphics/CrashDriverClassDiagram.png)
-
-Alternate: [[CrashDriverClassDiagram_PlantUML.png]]
 ___
 ### NIEM Oriented Class Diagram
 
 ![NIEM Oriented Class Diagram](Req_Analysis_Graphics/CrashDriverClassDiagram-NIEM.png)
 
-Alternate: [[CrashDriverClassDiagram-NIEM_PlantUML.png]]
-
-**Close-ups:**
-
-![NIEM Oriented Class Diagram](Req_Analysis_Graphics/CrashDriverClassDiagram-NIEM-crop01.png)
-![NIEM Oriented Class Diagram](Req_Analysis_Graphics/CrashDriverClassDiagram-NIEM-crop02.png)
 ___
 ### UML Tools
 - [ArgoUML](https://en.wikipedia.org/wiki/ArgoUML)
@@ -401,12 +395,6 @@ XML Schema defines what an XML document needs to look like. (JSON Schema does th
 For example, this bit of XML Schema defines what a `PersonName` object needs to look like.
 
 ```xml
-<xs:element name="PersonName" type="PersonNameType" nillable="true">
-	<xs:annotation>
-		<xs:documentation>A combination of names and/or titles by which a person is known.</xs:documentation>
-	</xs:annotation>
-</xs:element>
-
 <xs:complexType name="PersonNameType">
 	<xs:annotation>
 		<xs:documentation>A data type for a combination of names and/or titles by which a person is known.</xs:documentation>
@@ -418,6 +406,13 @@ For example, this bit of XML Schema defines what a `PersonName` object needs to 
 	</xs:sequence>
 	<xs:attribute name="personNameCommentText" type="xs:string" use="optional"/>
 </xs:complexType>
+
+<xs:element name="PersonName" type="PersonNameType" nillable="true">
+	<xs:annotation>
+		<xs:documentation>A combination of names and/or titles by which a person is known.</xs:documentation>
+	</xs:annotation>
+</xs:element>
+
 ```
 And here's what the matching XML _instance_ document might look like.
 
@@ -547,12 +542,6 @@ Its type, [`nc:PersonType`](http://niem5.org/schemas/nc.html#PersonType), has a 
 The XML Schema defining [`nc:PersonName`](http://niem5.org/schemas/nc.html#PersonName) and [`nc:PersonNameType`](http://niem5.org/schemas/nc.html#PersonNameType) looks like:
 
 ```xml
-<xs:element name="PersonName" type="nc:PersonNameType" nillable="true">
-	<xs:annotation>
-		<xs:documentation>A combination of names and/or titles by which a person is known.</xs:documentation>
-	</xs:annotation>
-</xs:element>
-
 <xs:complexType name="PersonNameType">
 	<xs:annotation>
 		<xs:documentation>A data type for a combination of names and/or titles by which a person is known.</xs:documentation>
@@ -579,17 +568,18 @@ The XML Schema defining [`nc:PersonName`](http://niem5.org/schemas/nc.html#Perso
 		</xs:extension>
 	</xs:complexContent>
 </xs:complexType>
+
+<xs:element name="PersonName" type="nc:PersonNameType" nillable="true">
+	<xs:annotation>
+		<xs:documentation>A combination of names and/or titles by which a person is known.</xs:documentation>
+	</xs:annotation>
+</xs:element>
+
 ```
 
 The XML Schema defining [`nc:PersonGivenName`](http://niem5.org/schemas/nc.html#PersonGivenName), [`PersonNameTextType`](http://niem5.org/schemas/nc.html#PersonNameTextType), and supporting types looks like:
 
 ```xml
-<xs:element name="PersonGivenName" type="nc:PersonNameTextType" nillable="true">
-	<xs:annotation>
-		<xs:documentation>A first name of a person.</xs:documentation>
-	</xs:annotation>
-</xs:element>
-
 <xs:complexType name="PersonNameTextType">
 	<xs:annotation>
 		<xs:documentation>A data type for a name by which a person is known, referred, or addressed.</xs:documentation>
@@ -622,6 +612,12 @@ The XML Schema defining [`nc:PersonGivenName`](http://niem5.org/schemas/nc.html#
 		</xs:extension>
 	</xs:simpleContent>
 </xs:complexType>
+
+<xs:element name="PersonGivenName" type="nc:PersonNameTextType" nillable="true">
+	<xs:annotation>
+		<xs:documentation>A first name of a person.</xs:documentation>
+	</xs:annotation>
+</xs:element>
 
 ```
 Finally, the definition for `nc:PersonLivingIndicator` is very simple. It's a boolean value, `true` or `false`.
@@ -1033,7 +1029,7 @@ NIEM has several conceptual layers which build on top of each other:
 	- Can contain multiple IDs, separated with spaces
 	- The matching `id`s must exist in the instance document
 
-Examples of how NIEM uses these are the next few sections.
+Examples of how NIEM uses these are the next few sections. Here's a very simple non-NIEM example:
 
 Plain Old XML:
 
@@ -1137,7 +1133,8 @@ ___
 ```xml
 <xs:complexType name="AssociationType">
 	<xs:annotation>
-		<xs:documentation>A data type for an association, connection, relationship, or involvement somehow linking people, things, and/or activities together.</xs:documentation>
+		<xs:documentation>A data type for an association, connection, relationship,
+			or involvement somehow linking people, things, and/or activities together.</xs:documentation>
 	</xs:annotation>
 	<xs:complexContent>
 		<xs:extension base="structures:AssociationType">
@@ -1445,7 +1442,7 @@ ___
 </xs:element>
 ```
 
-The actual codes are defined in a pair of types. The first, [`aamva_d20:AccidentSeverityCodeSimpleType`](http://niem5.org/schemas/aamva_d20.html#AccidentSeverityCodeSimpleType), defines the actual codes and their definitions, one per `enumeration` below. This simple type is then wrapped in a complex type, [`aamva_d20:AccidentSeverityCodeType`](http://niem5.org/schemas/aamva_d20.html#AccidentSeverityCodeType), to add infrastructure attributes that we've seen used in associations and roles. The two types are grouped together in the [`aamva_d20`](http://niem5.org/schemas/aamva_d20.html) namespace so they can be governed by AAMVA without needing to change the `j` domain:
+The actual codes are defined in a pair of types. The first, [`aamva_d20:AccidentSeverityCodeSimpleType`](http://niem5.org/schemas/aamva_d20.html#AccidentSeverityCodeSimpleType), defines the actual codes and their definitions, one per `enumeration` below:
 
 ```xml
 <xs:simpleType name="AccidentSeverityCodeSimpleType">
@@ -1485,6 +1482,11 @@ The actual codes are defined in a pair of types. The first, [`aamva_d20:Accident
 		</xs:enumeration>
 	</xs:restriction>
 </xs:simpleType>
+```
+
+This simple type is then wrapped in a complex type, [`aamva_d20:AccidentSeverityCodeType`](http://niem5.org/schemas/aamva_d20.html#AccidentSeverityCodeType), to add infrastructure attributes that we've seen used in associations and roles. The two types are grouped together in the [`aamva_d20`](http://niem5.org/schemas/aamva_d20.html) namespace so they can be governed by AAMVA without needing to change the `j` domain:
+
+```xml
 <xs:complexType name="AccidentSeverityCodeType">
 	<xs:annotation>
 		<xs:documentation>A data type for severity levels of an accident.</xs:documentation>
@@ -1590,25 +1592,29 @@ There's nothing special about [`j:MetadataType`](http://niem5.org/schemas/j.html
 <j:Metadata structures:id="JMD01">
 	<j:CriminalInformationIndicator>true</j:CriminalInformationIndicator>
 </j:Metadata>
-```
-```xml
+
 <j:Charge structures:id="CH01" structures:metadata="JMD01">
 	<j:ChargeDescriptionText>Furious Driving</j:ChargeDescriptionText>
 	<j:ChargeFelonyIndicator>false</j:ChargeFelonyIndicator>
 </j:Charge>
 ```
 
-JSON-LD doesn't support a specific metadata link, so for JSON we just include the metadata inside the object to which it applies.
+JSON-LD doesn't support a specific metadata link, so for JSON we just use `@id` and rely on the term "Metadata".
 
 ```json
+"j:Metadata" : {
+	"@id": "#CH01",
+	"j:CriminalInformationIndicator": true
+},
+
 "j:Charge": {
 	"@id": "#CH01",
 	"j:ChargeDescriptionText": "Furious Driving",
-	"j:ChargeFelonyIndicator": false,
-	"j:CriminalInformationIndicator": true
+	"j:ChargeFelonyIndicator": false
 }
 
 ```
+
 
 ### Artifacts
 
@@ -1622,7 +1628,7 @@ ___
 
 ## Combining Domains (Augmentations)
 
-![[08 Augmentations - CrashDriverClassDiagram.png]]
+![[09 Augmentations - CrashDriverClassDiagram.png]]
 
 - Sometimes you just want to add properties from other domains to an object without making a special kind of thing
 - Augmentations are bags of stuff
@@ -1652,6 +1658,8 @@ Follow a similar process for [`nc:ContactEmailID`](http://niem5.org/wayfarer/nc/
 The SSGT is best for learning overall structure, so check out [`j:Crash`](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-44f) and [`nc:ContactInformation`](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-eh) there, too!
 
 Why not [`j:CrashDriverLicense`](http://niem5.org/wayfarer/j/CrashDriverLicense.html)? It doesn't go inside a `j:CrashDriver`. Why? I don't know.
+
+#todo Ask CM about this
 
 ### Schemas
 
@@ -1777,7 +1785,7 @@ ___
 
 ## External Standards
 
-![[09 External Standards - CrashDriverClassDiagram.png]]
+![[08 External Standards - CrashDriverClassDiagram.png]]
 
 - NIEM supports external standards, if they’re XML
 - Wraps them in NIEM-conformant adapters
@@ -1838,7 +1846,9 @@ One of the members of that substitution group is `geo:LocationGeospatialPoint`, 
 ```xml
 <xs:element name="LocationGeospatialPoint" type="geo:PointType" substitutionGroup="nc:LocationGeospatialCoordinateAbstract" nillable="true">
 	<xs:annotation>
-		<xs:documentation>A 2D or 3D geometric point.	A gml:Point is defined by a single coordinate tuple. The direct position of a point is specified by the gml:pos element which is of type gml:DirectPositionType.</xs:documentation>
+		<xs:documentation>A 2D or 3D geometric point. A gml:Point is defined by a single coordinate tuple.
+			The direct position of a point is specified by the gml:pos element which is of
+			type gml:DirectPositionType.</xs:documentation>
 	</xs:annotation>
 </xs:element>
 ```
@@ -1847,14 +1857,18 @@ Its type is `geo:PointType`. We're still in NIEM, but `gml:Point` isn't:
 ```xml
 <xs:complexType name="PointType" appinfo:externalAdapterTypeIndicator="true">
 	<xs:annotation>
-		<xs:documentation>A data type for a 2D or 3D geometric point.	A gml:Point is defined by a single coordinate tuple. The direct position of a point is specified by the gml:pos element which is of type gml:DirectPositionType.</xs:documentation>
+		<xs:documentation>A data type for a 2D or 3D geometric point. A gml:Point is defined by a single
+			coordinate tuple. The direct position of a point is specified by the gml:pos element which is
+			of type gml:DirectPositionType.</xs:documentation>
 	</xs:annotation>
 	<xs:complexContent>
 		<xs:extension base="structures:ObjectType">
 			<xs:sequence>
 				<xs:element ref="gml:Point" minOccurs="1" maxOccurs="1">
 					<xs:annotation>
-						<xs:documentation>A gml:Point is defined by a single coordinate tuple. The direct position of a point is specified by the gml:pos element which is of type gml:DirectPositionType.</xs:documentation>
+						<xs:documentation>A gml:Point is defined by a single coordinate tuple.
+							The direct position of a point is specified by the gml:pos element
+							which is of type gml:DirectPositionType.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:sequence>
@@ -2167,7 +2181,10 @@ ___
 ## Mapping Completed!
 
 - [[12 Crash Driver Report Complete]]
-- [[12 Crash Driver Report Complete.numbers]]
+- Mapping Spreadsheets
+	- [[Mapping_Spreadsheets/12 Crash Driver Report Complete.numbers]]
+	- [[Mapping_Spreadsheets/12 Crash Driver Report Complete.xlsx]]
+	- [[Mapping_Spreadsheets/12 Crash Driver Report Complete.pdf]]
 
 | Started With | Ended With |
 | --- | --- |

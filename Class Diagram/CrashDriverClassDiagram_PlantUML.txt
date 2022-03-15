@@ -1,53 +1,51 @@
 @startuml
 
-	skinparam class {
-		BackgroundColor White
-		ArrowColor Black
-		BorderColor Black
+skinparam shadowing false
+skinparam monochrome true
+skinparam backgroundColor transparent
+
+	class CrashDriverInfo{
 	}
 
-	class CrashDriverInfoClass{
-	}
+	CrashDriverInfo o-- Driver
+	CrashDriverInfo o-- InjuredPerson
+	CrashDriverInfo o-- Crash
+	CrashDriverInfo o-- Charge
 
-	CrashDriverInfoClass o-- DriverClass
-	CrashDriverInfoClass o-- InjuredPersonClass
-	CrashDriverInfoClass o-- CrashClass
-	CrashDriverInfoClass o-- ChargeClass
-
-	PersonClass <|-- DriverClass
-	PersonClass <|-- InjuredPersonClass
+	Person <|-- Driver
+	Person <|-- InjuredPerson
 	
-	class PersonClass{
-		+date BirthDate
-		+string FirstName
-		+string MiddleName
-		+string LastName
+	class Person{
+		+Date BirthDate
+		+String FirstName
+		+String MiddleName
+		+String LastName
 	}
 	
-	class DriverClass{
+	class Driver{
 		+String DriverLicenseNumber
 		+String Email
 	
 	}
 
-	class InjuredPersonClass{
-		+string InjuryDescription
-		+code SeverityCode
-		+string InjuryPrivacyCode
-		+boolean ThroughWindow
+	class InjuredPerson{
+		+String InjuryDescription
+		+Code SeverityCode
+		+String InjuryPrivacyCode
+		+Boolean ThroughWindow
 	}
 
-	class ChargeClass{
-		+string Description
-		+boolean isFelony
-		+boolean isCriminalInformation
+	class Charge{
+		+String Description
+		+Boolean isFelony
+		+Boolean isCriminalInformation
 	}
 
-	class CrashClass{
-		+date CrashDate
-		+string CrashLocationCoordinates
+	class Crash{
+		+Date CrashDate
+		+String CrashLocationCoordinates
 	}
 
-	PersonClass <--> ChargeClass
+	Person <--> Charge
 
 @enduml
