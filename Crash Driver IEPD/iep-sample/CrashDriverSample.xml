@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <exch:CrashDriverInfo
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://example.com/CrashDriver/1.0/ ../xsd/extension/CrashDriver.xsd"
+	xsi:schemaLocation="http://training.niem.gov/CrashDriver/1.0/ ../xsd/extension/CrashDriver.xsd"
 	xmlns:nc="http://release.niem.gov/niem/niem-core/5.0/"
-	xmlns:exch="http://example.com/CrashDriver/1.0/"
-	xmlns:ext="http://example.com/CrashDriver/1.0/extension"
+	xmlns:exch="http://training.niem.gov/CrashDriver/1.0/"
+	xmlns:ext="http://training.niem.gov/CrashDriver/1.0/extension"
 	xmlns:structures="http://release.niem.gov/niem/structures/5.0/"
 	xmlns:j="http://release.niem.gov/niem/domains/jxdm/7.0/"
 	xmlns:geo="http://release.niem.gov/niem/adapters/geospatial/5.0/"

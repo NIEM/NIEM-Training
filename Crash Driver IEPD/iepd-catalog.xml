@@ -36,8 +36,8 @@
         <c:IEPSampleXMLDocument c:pathURI="iep-sample/CrashDriverSample.xml"/>
     </c:IEPConformanceTarget>
     <c:ReadMe c:pathURI="README.md"/>
-    <c:IEPDChangeLog c:pathURI="changelog.txt"/>
-    <c:ConformanceAssertion c:pathURI="conformance.txt"/>
+    <c:IEPDChangeLog c:pathURI="changelog.md"/>
+    <c:ConformanceAssertion c:pathURI="conformance.md"/>
     <c:Wantlist c:pathURI="xsd/wantlist.xml"/>
     <c:ExtensionSchemaDocument c:pathURI="xsd/extension/CrashDriver.xsd"/>
     <c:ExtensionSchemaDocument c:pathURI="xsd/extension/extension.xsd"/>

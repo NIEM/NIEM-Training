@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema 
     ct:conformanceTargets="http://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/#ExtensionSchemaDocument"
-    targetNamespace="http://example.com/CrashDriver/1.0/" version="1"
-    xmlns:exch="http://example.com/CrashDriver/1.0/"
-    xmlns:ext="http://example.com/CrashDriver/1.0/extension"
+    targetNamespace="http://training.niem.gov/CrashDriver/1.0/" version="1"
+    xmlns:exch="http://training.niem.gov/CrashDriver/1.0/"
+    xmlns:ext="http://training.niem.gov/CrashDriver/1.0/extension"
     xmlns:j="http://release.niem.gov/niem/domains/jxdm/7.0/"
     xmlns:nc="http://release.niem.gov/niem/niem-core/5.0/"
     xmlns:geo="http://release.niem.gov/niem/adapters/geospatial/5.0/"
@@ -22,7 +22,7 @@
         </xs:documentation>
     </xs:annotation>
         
-    <xs:import schemaLocation="./extension.xsd" namespace="http://example.com/CrashDriver/1.0/extension"/>
+    <xs:import schemaLocation="./extension.xsd" namespace="http://training.niem.gov/CrashDriver/1.0/extension"/>
     <xs:import schemaLocation="../niem/domains/jxdm.xsd" namespace="http://release.niem.gov/niem/domains/jxdm/7.0/"/>
     <xs:import schemaLocation="../niem/niem-core.xsd" namespace="http://release.niem.gov/niem/niem-core/5.0/"/>
     <xs:import schemaLocation="../niem/adapters/geospatial.xsd" namespace="http://release.niem.gov/niem/adapters/geospatial/5.0/"/>

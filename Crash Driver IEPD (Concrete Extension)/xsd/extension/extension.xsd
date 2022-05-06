@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema 
     ct:conformanceTargets="http://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/#ExtensionSchemaDocument"
-    targetNamespace="http://example.com/CrashDriver/1.0/extension" version="1"
-    xmlns:ext="http://example.com/CrashDriver/1.0/extension"
+    targetNamespace="http://training.niem.gov/CrashDriver/1.0/extension" version="1"
+    xmlns:ext="http://training.niem.gov/CrashDriver/1.0/extension"
     xmlns:j="http://release.niem.gov/niem/domains/jxdm/7.0/"
     xmlns:nc="http://release.niem.gov/niem/niem-core/5.0/"
     xmlns:geo="http://release.niem.gov/niem/adapters/geospatial/5.0/"
