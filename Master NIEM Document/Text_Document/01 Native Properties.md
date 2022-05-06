@@ -1,7 +1,0 @@
-```
-+	nc:Person
-+		nc:PersonName
-+			nc:PersonGivenName
-+			nc:PersonMiddleName
-+			nc:PersonSurName
-```
