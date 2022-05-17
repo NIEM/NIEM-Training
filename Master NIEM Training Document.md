@@ -16,10 +16,9 @@ A technical webinar focused on developers and implementers who are interested in
 
 All materials are available on the NIEM Training Github repo at [https://github.com/NIEM/NIEM-Training](https://github.com/NIEM/NIEM-Training). Specific materials used are listed on the README page and include:
 
-- [NIEM Training Syllabus](https://github.com/NIEM/NIEM-Training/blob/main/NIEM%20Training%20Syllabus.md)
-- [**Master NIEM Training Document**](https://github.com/NIEM/NIEM-Training/blob/main/Master%20NIEM%20Document/Master%20NIEM%20Training%20Document.md)
-- [Mapping Spreadsheets](https://github.com/NIEM/NIEM-Training/tree/main/Master%20NIEM%20Document/Mapping_Spreadsheets)
-- [Ersatz Textual Instances](https://github.com/NIEM/NIEM-Training/tree/main/Master%20NIEM%20Document/Text_Document)
+- [**Master NIEM Training Document**](https://github.com/NIEM/NIEM-Training/blob/main/Master%20NIEM%20Training%20Document.md)
+- [Mapping Spreadsheets](https://github.com/NIEM/NIEM-Training/tree/main/Mapping_Spreadsheets)
+- [Ersatz Textual Instances](https://github.com/NIEM/NIEM-Training/tree/main/Text_Document)
 
 ## Sample Message Specification
 
@@ -228,6 +227,27 @@ ___
 **NIEM Administration Organization**
 
 ![Org Chart](Intro_Graphics/Org_Chart.png)
+
+**Move to OASIS**
+
+The NIEM program is transitioning from being a solely government-funded project to an open source project under [OASIS Open](https://www.oasis-open.org). So here's a quick plug for OASIS Open...
+
+**About OASIS Open**
+
+One of the most respected, nonprofit open source and open standards bodies in the world, OASIS Open advances the fair, transparent development of open source software and standards through the power of global collaboration and community.
+
+**Why Should My Organization Join the NIEM OASIS Open Project?**
+
+- Participate in the development of internationally recognized NIEM standards, ensuring your perspectives and use-cases are represented
+- Unify fragmented efforts and encourage convergence
+- Facilitate communication between private and public-sector
+- Create partnerships and tap into brain trust of NIEM experts from the public sector
+- Opportunity to become a steward with a seat on the NIEM Board
+- Determine if/when approved work should be submitted to ITU, ICC, UN, ISO, etc.
+
+**Get Involved!**
+
+For more information about supporting the NIEM OASIS Open Project, contact Dee Schur, dee.schur@oasis-open.org
 ___
 
 # Message Spec / IEPD Overview
@@ -2335,7 +2355,7 @@ ___
 	- IEPD Clearinghouse
 	- Work With IEPDs (currently not working)
 - New repositories are coming
-	- Restricted (coming soon)
+	- Restricted (brand new)
 	- Unrestricted (coming later)
 
 ![Implementation](IEPD_Process_Graphics/Process_Artifacts_5_scaled.png)
