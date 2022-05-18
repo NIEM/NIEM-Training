@@ -224,7 +224,7 @@ ___
 	- NIEM provides tools for migrating the NIEM objects, ~90% effective
 	- Manual work is needed for things you've added for your exchange
 
-**NIEM Administration Organization**
+**NIEM Administration and Organization**
 
 ![Org Chart](Intro_Graphics/Org_Chart.png)
 
@@ -296,6 +296,7 @@ ___
 - Change log (text)
 - README (text)
 - Conformance assertion (text)
+- Mapping Spreadsheet
 
 ___
 ### Message Spec / IEPD Artifacts - Definitional
@@ -379,6 +380,8 @@ ___
 Representing objects in UML by their business names and relationships.
 
 ![Business Oriented Class Diagram](Req_Analysis_Graphics/CrashDriverClassDiagram.png)
+
+- [ ] Why not to driver instead of person
 ___
 ### NIEM Oriented Class Diagram
 
@@ -446,7 +449,6 @@ And here's what the matching XML _instance_ document might look like.
 ```xml
 	<PersonName personNameCommentText="copied">
 		<PersonGivenName>Peter</PersonGivenName>
-		<PersonMiddleName>Death</PersonMiddleName>
 		<PersonMiddleName>Bredon</PersonMiddleName>
 		<PersonSurName>Wimsey</PersonSurName>
 	</PersonName>
@@ -473,7 +475,7 @@ ___
 - Primarily for submitting content for inclusion in NIEM
 	- Eight different tabs
 - Can also be used for mapping in a Message Spec / IEPD
-	- Just need a few of the tabs, mainly
+	- Just need a few of the tabs, mainly Property and Type
 - Is a bit overkill for a Message Spec
 - Slight difference between the versions on the NIEM site and for use with MEP Builder
 - [[Mapping_Spreadsheets/niem-mapping-template.xlsx]]
@@ -1010,6 +1012,8 @@ You need to understand this concept in order to know to look for these cases, wh
 
 - [`j:Crash` in the SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-44f)
 - [`j:Crash` in Wayfarer](http://niem5.org/wayfarer/j/Crash.html)
+	- Wayfarer has a new feature that does some level of [contextual searching](http://niem5.org/wayfarer/searchcontextuals.php)
+	- [Search contextually for "crash date" in Wayfarer](http://niem5.org/wayfarer/searchcontextuals.php?query=crash+date)
 
 ### Artifacts
 
@@ -1596,7 +1600,9 @@ Metadata is Data about Data. What does that mean? Here's an example:
 | Easy to apply same metadata to many objects | ![Many to One](Mapping_Graphics/Metadata_Many_to_One.png) |
 | Many-to-many relationships can get messy | ![Many to Many](Mapping_Graphics/Metadata_Many_to_Many.png) |
 
-**Powerful, but can be difficult to implement**
+**Powerful, but can be difficult to implement.**
+
+Should be simpler in NIEM 6.
 
 ### Schemas
 
