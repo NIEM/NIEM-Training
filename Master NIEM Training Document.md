@@ -381,7 +381,7 @@ Representing objects in UML by their business names and relationships.
 
 ![Business Oriented Class Diagram](Req_Analysis_Graphics/CrashDriverClassDiagram.png)
 
-- [ ] Why not to driver instead of person
+This vary depending on how your subject matter experts view objects and their relationships. For example, the charge to person relationship could be charge to the driver instead. The important thing is reflecting how your business folks understand the data, not model purity.
 ___
 ### NIEM Oriented Class Diagram
 
@@ -1383,9 +1383,12 @@ Roles Contain Info About the Role
 As with associations, we can implement the role in two different ways. Here we see it used as a reference. `j:CrashDriver` contains a `nc:RoleOfPerson`, which uses the `ref` attribute to point to the `nc:Person` object playing that role:
 
 ```xml
-<j:CrashDriver>
+<j:CrashPerson>
 	<nc:RoleOfPerson structures:ref="P01" xsi:nil="true"/>
-</j:CrashDriver>
+	<j:CrashPersonInjury>  
+		<nc:InjuryDescriptionText>Broken Arm</nc:InjuryDescriptionText>  
+	</j:CrashPersonInjury>
+</j:CrashPerson>
 
 <nc:Person structures:id="P01">
 	<nc:PersonName>
@@ -1397,13 +1400,16 @@ As with associations, we can implement the role in two different ways. Here we s
 As with associations, `nc:RoleOfPerson` can also simply contain the Person-specific information. So it can contain `nc:PersonName` instead of referencing an object elsewhere:
 
 ```xml
-<j:CrashDriver>
+<j:CrashPerson>
 	<nc:RoleOfPerson>
 		<nc:PersonName>
 			<nc:PersonGivenName>Peter</nc:PersonGivenName>
 		</nc:PersonName>
 	</nc:RoleOfPerson>
-</j:CrashDriver>
+	<j:CrashPersonInjury>  
+		<nc:InjuryDescriptionText>Broken Arm</nc:InjuryDescriptionText>  
+	</j:CrashPersonInjury>
+</j:CrashPerson>
 ```
 
 As with associations, the choice comes down to a balance between how often the Person is used, whether you care about duplicate data in an exchange, and implementation effort.
@@ -1414,6 +1420,9 @@ The JSON-LD versions are, again, similar to the ones for associations. Here the 
 "j:CrashPerson": {
 	"nc:RoleOfPerson": {
 		"@id": "#P01"
+	},
+	"j:CrashPersonInjury": {
+		"nc:InjuryDescriptionText" : "Broken Arm"
 	}
 },
 
@@ -1433,6 +1442,9 @@ And, again as with associations, you can simply include the Person-specific info
 		"nc:PersonName": {
 			"nc:PersonGivenName": "Peter"
 		}
+	},
+	"j:CrashPersonInjury": {
+		"nc:InjuryDescriptionText" : "Broken Arm"
 	}
 }
 ```
@@ -1566,8 +1578,6 @@ ___
 ## Metadata
 ![[07 Metadata - CrashDriverClassDiagram.png]]
 
-
-
 ![Jett](Mapping_Graphics/Jett_scaled.png)
 
 Metadata is Data about Data. What does that mean? Here's an example:
@@ -1588,7 +1598,7 @@ Metadata is Data about Data. What does that mean? Here's an example:
 ### Object Reference Metadata
 
 - Objects reference the metadata objects that apply to them
-- An objects can reference more than one metadata object
+- An object can reference more than one metadata object
 - More than one object can reference the same metadata object
 - Example: `j:Metadata` (containing `j:CriminalInformationIndicator`) ([SSGT](https://tools.niem.gov/niemtools/ssgt/SSGT-GetProperty.iepd?propertyKey=o4-4qr)/[Wayfarer](http://niem5.org/wayfarer/j/Metadata.html))
 
@@ -2124,15 +2134,26 @@ In this exchange, this code is metadata to be applied to other objects, so we ca
 The resulting XML instance document is:
 
 ```xml
-<ext:PrivacyMetadata structures:id="PMD01">
-	<ext:PrivacyCode>PII</ext:PrivacyCode>
-	<ext:PrivacyCode>MEDICAL</ext:PrivacyCode>
+<ext:PrivacyMetadata structures:id="PMD01">  
+	<ext:PrivacyCode>PII</ext:PrivacyCode>  
+</ext:PrivacyMetadata>  
+
+<ext:PrivacyMetadata structures:id="PMD02">  
+	<ext:PrivacyCode>MEDICAL</ext:PrivacyCode>  
 </ext:PrivacyMetadata>
+
+<j:CrashPerson>
+	<nc:RoleOfPerson structures:ref="P01" xsi:nil="true"/>
+	<j:CrashPersonInjury structures:metadata="PMD01 PMD02">
+		<nc:InjuryDescriptionText>Broken Arm</nc:InjuryDescriptionText>
+		<j:InjurySeverityCode>3</j:InjurySeverityCode>
+	</j:CrashPersonInjury>
+	<ext:PersonDefenestrationIndicator>false</ext:PersonDefenestrationIndicator>
+</j:CrashPerson>
+
 ```
 
 An equivalent JSON document would be:
-
-Instead of linking to separate metadata objects, we've embedded those into the `j:CrashPeson`.
 
 ```json
 "j:CrashPerson": {
@@ -2149,6 +2170,8 @@ Instead of linking to separate metadata objects, we've embedded those into the `
 	"ext:PersonDefenestrationIndicator": "false"
 }
 ```
+
+Instead of linking to two separate metadata objects, we've embedded those into the `j:CrashPeson`.
 
 ### Artifacts
 
@@ -2320,6 +2343,8 @@ ___
 	- oXygen
 	- XMLSpy with plug-in
 - [MEP Builder](https://sourceforge.net/projects/niem-mep-builder/)
+	- Work on mapping spreadsheets
+	- Generate subsets
 - Tom’s [Mapping Spreadsheet Linter](http://niem5.org/linter/)
 
 ![Other Artifacts](IEPD_Process_Graphics/Process_Artifacts_4_scaled.png)
@@ -2362,6 +2387,8 @@ ___
 	- Work With IEPDs (currently not working)
 - New repositories are coming
 	- Restricted (brand new)
+		- Warfighting Mission Area-Architecture Federation and Integration Portal (WMA-AFIP)
+		- If you don't know what this is, you probably don't have access
 	- Unrestricted (coming later)
 
 ![Implementation](IEPD_Process_Graphics/Process_Artifacts_5_scaled.png)
@@ -2388,6 +2415,8 @@ ___
 - The NIEM technical specifications are complex, however
 	- Most developers do not need to read them
 	- Free tools can perform most of the conformance checking
+		- Schematron directly
+		- [Conformance Testing Assistant (ConTesA)](https://tools.niem.gov/contesa/)
 
 
 ___
@@ -2403,8 +2432,8 @@ ___
 	- [https://niem.github.io/NIEM-JSON-Spec/v5.0/](https://niem.github.io/NIEM-JSON-Spec/v5.0/)
 - Materials from this course:
 	- [https://github.com/NIEM/NIEM-Training](https://github.com/NIEM/NIEM-Training)
-	- Some of these are internal work products
-	- `README` has links to the good stuff
+- NIEM.gov Contact Page
+	- [https://www.niem.gov/contact](https://www.niem.gov/contact)
 
 ## Tools
 - SSGT:
