@@ -479,7 +479,7 @@ ___
 	- Just need a few of the tabs, mainly Property and Type
 - Is a bit overkill for a Message Spec
 - Slight difference between the versions on the NIEM site and for use with MEP Builder
-- [[Mapping_Spreadsheets/niem-mapping-template.xlsx]]
+- [Mapping Spreadseet Template](Mapping_Spreadsheets/niem-mapping-template.xlsx)
 ___
 ### Simple Training Spreadsheet
 - Minimal
@@ -497,9 +497,9 @@ ___
 - You can make your own custom one
 	- The IEPD Spec doesn’t specify a required format, by design
 - Fresh copy for our example Message Spec / IEPD
-	- [[Mapping_Spreadsheets/00 Crash Driver Report Fresh.numbers]]
-	- [[Mapping_Spreadsheets/00 Crash Driver Report Fresh.xlsx]]
-	- [[Mapping_Spreadsheets/00 Crash Driver Report Fresh.pdf]]
+	- [Mapping Spreadsheet (Numbers)](Mapping_Spreadsheets/00_Crash_Driver_Report_Fresh.numbers)
+	- [Mapping Spreadsheet (Excel)](Mapping_Spreadsheets/00_Crash_Driver_Report_Fresh.xlsx)
+	- [Mapping Spreadsheet (PDF)](Mapping_Spreadsheets/00_Crash_Driver_Report_Fresh.pdf)
 - Check on the cardinality
 	- Why is Person 1..1?
 	- Because this is a report on a Crash Driver, not the Crash itself
@@ -840,11 +840,11 @@ The matching JSON similarly just shows `nc:Date`:
 
 ### Artifacts
 
-- [[02 Substitution Groups]]
+- [Substitition Groups](Text_Document/02_Substitution_Groups.md)
 - Mapping Spreadsheets
-	- [[Mapping_Spreadsheets/02 Substitution Groups.numbers]]
-	- [[Mapping_Spreadsheets/02 Substitution Groups.xlsx]]
-	- [[Mapping_Spreadsheets/02 Substitution Groups.pdf]]
+	- [Mapping Spreadsheet (Numbers)](Mapping_Spreadsheets/02_Substitution_Groups.numbers)
+	- [Mapping Spreadsheet (Excel)](Mapping_Spreadsheets/02_Substitution_Groups.xlsx)
+	- [Mapping Spreadsheet (PDF)](Mapping_Spreadsheets/02_Substitution_Groups.pdf)
 
 ___
 
@@ -1018,11 +1018,11 @@ You need to understand this concept in order to know to look for these cases, wh
 
 ### Artifacts
 
-- [[03 Inherited Properties]]
+- [Inherited Properties](Text_Document/03_Inherited_Properties.md)
 - Mapping Spreadsheets
-	- [[Mapping_Spreadsheets/03 Inherited Properties.numbers]]
-	- [[Mapping_Spreadsheets/03 Inherited Properties.xlsx]]
-	- [[Mapping_Spreadsheets/03 Inherited Properties.pdf]]
+	- [Mapping Spreadsheet (Numbers)](Mapping_Spreadsheets/03_Inherited_Properties.numbers)
+	- [Mapping Spreadsheet (Excel)](Mapping_Spreadsheets/03_Inherited_Properties.xlsx)
+	- [Mapping Spreadsheet (PDF)](Mapping_Spreadsheets/03_Inherited_Properties.pdf)
 
 ___
 ## Linking Things Together
@@ -1279,11 +1279,11 @@ The same trade-offs apply as in XML, but JSON developers may lean more towards i
 
 Additionally, while referencing is part of XML Schema, it is _not_ part of JSON Schema. Checking that the `@id` values match up needs to be done with a JSON-LD validator.
 
-- [[04 Associations]]
+- [Associations](04_Associations.md)
 - Mapping Spreadsheets
-	- [[Mapping_Spreadsheets/04 Associations.numbers]]
-	- [[Mapping_Spreadsheets/04 Associations.xlsx]]
-	- [[Mapping_Spreadsheets/04 Associations.pdf]]
+	- [Mapping Spreadsheet (Numbers)](Mapping_Spreadsheets/04_Associations.numbers)
+	- [Mapping Spreadsheet (Excel)](Mapping_Spreadsheets/04_Associations.xlsx)
+	- [Mapping Spreadsheet (PDF)](Mapping_Spreadsheets/04_Associations.pdf)
 
 
 ___
@@ -1454,11 +1454,11 @@ The choices here are also a balance, although inclusion will likely be more attr
 
 ### Artifacts
 
-- [[05 Roles]]
+- [Roles](Text_Document/05_Roles.md)
 - Mapping Spreadsheets
-	- [[Mapping_Spreadsheets/05 Roles.numbers]]
-	- [[Mapping_Spreadsheets/05 Roles.xlsx]]
-	- [[Mapping_Spreadsheets/05 Roles.pdf]]
+	- [Mapping Spreadsheet (Numbers)](Mapping_Spreadsheets/05_Roles.numbers)
+	- [Mapping Spreadsheet (Excel)](Mapping_Spreadsheets/05_Roles.xlsx)
+	- [Mapping Spreadsheet (PDF)](Mapping_Spreadsheets/05_Roles.pdf)
 
 ___
 ## Code Tables
@@ -1569,11 +1569,11 @@ And here's the JSON. Note that NIEM does not yet support JSON Schema, so there's
 
 ### Artifacts
 
-- [[06 Code Tables]]
+- [Code Tables](Text_Document/06_Code_Tables.md)
 - Mapping Spreadsheets
-	- [[Mapping_Spreadsheets/06 Code Tables.numbers]]
-	- [[Mapping_Spreadsheets/06 Code Tables.xlsx]]
-	- [[Mapping_Spreadsheets/06 Code Tables.pdf]]
+	- [Mapping Spreadsheet (Numbers)](Mapping_Spreadsheets/06_Code_Tables.numbers)
+	- [Mapping Spreadsheet (Excel)](Mapping_Spreadsheets/06_Code_Tables.xlsx)
+	- [Mapping Spreadsheet (PDF)](Mapping_Spreadsheets/06_Code_Tables.pdf)
 
 ___
 ## Metadata
@@ -1676,11 +1676,11 @@ JSON-LD doesn't support a specific metadata link, so for JSON we just use `@id` 
 
 ### Artifacts
 
-- [[07 Metadata]]
+- [Metadata](Text_Document/07_Metadata.md)
 - Mapping Spreadsheets
-	- [[Mapping_Spreadsheets/07 Metadata.numbers]]
-	- [[Mapping_Spreadsheets/07 Metadata.xlsx]]
-	- [[Mapping_Spreadsheets/07 Metadata.pdf]]
+	- [Mapping Spreadsheet (Numbers)](Mapping_Spreadsheets/07_Metadata.numbers)
+	- [Mapping Spreadsheet (Excel)](Mapping_Spreadsheets/07_Metadata.xlsx)
+	- [Mapping Spreadsheet (PDF)](Mapping_Spreadsheets/07_Metadata.pdf)
 
 ___
 
@@ -1838,11 +1838,11 @@ The equivalent JSON-LD would be:
 
 ### Artifacts
 
-- [[08 Combining Domains - Augmentations]]
+- [Augmentations](Text_Document/08_Combining_Domains_Augmentations.md)
 - Mapping Spreadsheets
-	- [[Mapping_Spreadsheets/08 Combining Domains - Augmentations.numbers]]
-	- [[Mapping_Spreadsheets/08 Combining Domains - Augmentations.xlsx]]
-	- [[Mapping_Spreadsheets/08 Combining Domains - Augmentations.pdf]]
+	- [Mapping Spreadsheet (Numbers)](Mapping_Spreadsheets/08_Combining_Domains_Augmentations.numbers)
+	- [Mapping Spreadsheet (Excel)](Mapping_Spreadsheets/08_Combining_Domains_Augmentations.xlsx)
+	- [Mapping Spreadsheet (PDF)](Mapping_Spreadsheets/08_Combining_Domains_Augmentations.pdf)
 
 ___
 
@@ -1994,11 +1994,11 @@ It doesn't make much sense to try and represent this in JSON in a NIEM-conforman
 
 ### Artifacts
 
-- [[09 External Standards]]
+- [External Standards](Text_Document/09_External_Standards.md)
 - Mapping Spreadsheets
-	- [[Mapping_Spreadsheets/09 External Standards.numbers]]
-	- [[Mapping_Spreadsheets/09 External Standards.xlsx]]
-	- [[Mapping_Spreadsheets/09 External Standards.pdf]]
+	- [Mapping Spreadsheet (Numbers)](Mapping_Spreadsheets/09_External_Standards.numbers)
+	- [Mapping Spreadsheet (Excel)](Mapping_Spreadsheets/09_External_Standards.xlsx)
+	- [Mapping Spreadsheet (PDF)](Mapping_Spreadsheets/09_External_Standards.pdf)
 
 ___
 ## Creating New Objects
