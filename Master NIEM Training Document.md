@@ -1279,7 +1279,7 @@ The same trade-offs apply as in XML, but JSON developers may lean more towards i
 
 Additionally, while referencing is part of XML Schema, it is _not_ part of JSON Schema. Checking that the `@id` values match up needs to be done with a JSON-LD validator.
 
-- [Associations](04_Associations.md)
+- [Associations](Text_Document/04_Associations.md)
 - Mapping Spreadsheets
 	- [Mapping Spreadsheet (Numbers)](Mapping_Spreadsheets/04_Associations.numbers)
 	- [Mapping Spreadsheet (Excel)](Mapping_Spreadsheets/04_Associations.xlsx)
