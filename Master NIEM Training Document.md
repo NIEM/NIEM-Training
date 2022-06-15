@@ -412,7 +412,7 @@ We have choices on how to proceed:
 - Concurrent
 	- Building schemas and instances as you go
 - We'll use something in-between
-	- Build an ersatz matching instance document as we map ([[12 Crash Driver Report Complete]])
+	- Build an ersatz matching instance document as we map ([Crash Driver Report Complete](Text_Document/12_Crash_Driver_Report_Complete.md))
 	- Sorta like YAML without data values
 	- Save schemas for the end
 
@@ -2176,11 +2176,11 @@ Instead of linking to two separate metadata objects, we've embedded those into t
 
 ### Artifacts
 
-- [[10 Creating New Objects - Simple Data]]
+- [Creating New Objects - Simple Data](Text_Document/10_Creating_New_Objects_Simple_Data.md)
 - Mapping Spreadsheets
-	- [[Mapping_Spreadsheets/10 Creating New Objects - Simple Data.numbers]]
-	- [[Mapping_Spreadsheets/10 Creating New Objects - Simple Data.xlsx]]
-	- [[Mapping_Spreadsheets/10 Creating New Objects - Simple Data.pdf]]
+	- [Mapping Spreadsheet (Numbers)](Mapping_Spreadsheets/10_Creating_New_Objects_Simple_Data.numbers)
+	- [Mapping Spreadsheet (Excel)](Mapping_Spreadsheets/10_Creating_New_Objects_Simple_Data.xlsx)
+	- [Mapping Spreadsheet (PDF)](Mapping_Spreadsheets/10_Creating_New_Objects_Simple_Data.pdf)
 
 ### Creating Complex Objects
 
@@ -2246,21 +2246,21 @@ That's a lot of extra work and muddies the semantics of the elements.
 
 ### Artifacts
 
-- [[11 Creating New Objects - Complex Objects]]
+- [Creating New Objects - Complex Objects](Text_Document/11_Creating_New_Objects_Complex_Objects.md)
 - Mapping Spreadsheets
-	- [[Mapping_Spreadsheets/11 Creating New Objects - Complex Objects.numbers]]
-	- [[Mapping_Spreadsheets/11 Creating New Objects - Complex Objects.xlsx]]
-	- [[Mapping_Spreadsheets/11 Creating New Objects - Complex Objects.pdf]]
+	- [Mapping Spreadsheet (Numbers)](Mapping_Spreadsheets/11_Creating_New_Objects_Complex_Objects.numbers)
+	- [Mapping Spreadsheet (Excel)](Mapping_Spreadsheets/11_Creating_New_Objects_Complex_Objects.xlsx)
+	- [Mapping Spreadsheet (PDF)](Mapping_Spreadsheets/11_Creating_New_Objects_Complex_Objects.pdf)
 
 ___
 
 ## Mapping Completed!
 
-- [[12 Crash Driver Report Complete]]
+- [Crash Driver Report Complete](Text_Document/12_Crash_Driver_Report_Complete.md)
 - Mapping Spreadsheets
-	- [[Mapping_Spreadsheets/12 Crash Driver Report Complete.numbers]]
-	- [[Mapping_Spreadsheets/12 Crash Driver Report Complete.xlsx]]
-	- [[Mapping_Spreadsheets/12 Crash Driver Report Complete.pdf]]
+	- [Mapping Spreadsheet (Numbers)](Mapping_Spreadsheets/12_Crash_Driver_Report_Complete.numbers)
+	- [Mapping Spreadsheet (Excel)](Mapping_Spreadsheets/12_Crash_Driver_Report_Complete.xlsx)
+	- [Mapping Spreadsheet (PDF)](Mapping_Spreadsheets/12_Crash_Driver_Report_Complete.pdf)
 
 | Started With | Ended With |
 | --- | --- |
