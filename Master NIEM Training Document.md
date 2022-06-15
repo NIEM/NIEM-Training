@@ -741,7 +741,7 @@ We've already seen the schema for these in detail.
 ___
 ## Substitution Groups
 
-![[02 Substitution Groups - CrashDriverClassDiagram.png]]
+![Substitution Groups](Req_Analysis_Graphics/02_Substitution_Groups_CrashDriverClassDiagram.png)
 
 - Some concepts can be represented multiple ways
 - Text / code combinations are common
@@ -885,7 +885,7 @@ As mentioned earlier, NIEM doesn't support JSON Schema well yet. Using NIEM with
 ___
 ## Inherited Properties
 
-![[03 Inherited Properties - CrashDriverClassDiagram.png]]
+![Inherited Properties](Req_Analysis_Graphics/03_Inherited_Properties_CrashDriverClassDiagram.png)
 
 - NIEM is a model, not a flat data dictionary
 - Some concepts don’t exist as elements using the terms for the concept
@@ -1117,7 +1117,7 @@ Again, we will see example throughout the next few sections.
 ___
 ## Associations
 
-![[04 Associations - CrashDriverClassDiagram.png]]
+![Associations](Req_Analysis_Graphics/04_Associations_CrashDriverClassDiagram.png)
 
 - Relationships can be complex
 - NIEM provides powerful Association objects
@@ -1289,7 +1289,7 @@ Additionally, while referencing is part of XML Schema, it is _not_ part of JSON 
 ___
 ## Roles
 
-![[05 Roles - CrashDriverClassDiagram.png]]
+![Roles](Req_Analysis_Graphics/05_Roles_CrashDriverClassDiagram.png)
 
 - Modeling some objects as specialized things gets complicated
 - Roles are, well, roles that objects play
@@ -1463,7 +1463,7 @@ The choices here are also a balance, although inclusion will likely be more attr
 ___
 ## Code Tables
 
-![[06 Code Tables - CrashDriverClassDiagram.png]]
+![Code Tables](Req_Analysis_Graphics/06_Code_Tables_CrashDriverClassDiagram.png)
 
 - Codes help ensure accurate information
 - Codes are, essentially, strings, simple data
@@ -1577,7 +1577,7 @@ And here's the JSON. Note that NIEM does not yet support JSON Schema, so there's
 
 ___
 ## Metadata
-![[07 Metadata - CrashDriverClassDiagram.png]]
+![Metadata](Req_Analysis_Graphics/07_Metadata_CrashDriverClassDiagram.png)
 
 ![Jett](Mapping_Graphics/Jett_scaled.png)
 
@@ -1686,7 +1686,7 @@ ___
 
 ## Combining Domains (Augmentations)
 
-![[09 Augmentations - CrashDriverClassDiagram.png]]
+![Augmentations](Req_Analysis_Graphics/09_Augmentations_CrashDriverClassDiagram.png)
 
 - Sometimes you just want to add properties from other domains to an object without making a special kind of thing
 - Augmentations are bags of stuff
@@ -1848,7 +1848,7 @@ ___
 
 ## External Standards
 
-![[08 External Standards - CrashDriverClassDiagram.png]]
+![External Standards](Req_Analysis_Graphics/08_External_Standards_CrashDriverClassDiagram.png)
 
 - NIEM supports external standards, if they’re XML
 - Wraps them in NIEM-conformant adapters
@@ -2009,7 +2009,7 @@ ___
 
 ### Creating Simple Data Elements
 
-![[10 Simple Elements - CrashDriverClassDiagram.png]]
+![Simple Elements](Req_Analysis_Graphics/10_Simple_Elements_CrashDriverClassDiagram.png)
 
 - Base them on whichever XML Schema data type is appropriate
 	- They're all in the [niem-xs](http://niem5.org/schemas/niem-xs.html) schema
@@ -2184,7 +2184,7 @@ Instead of linking to two separate metadata objects, we've embedded those into t
 
 ### Creating Complex Objects
 
-![[11 Complex Objects - CrashDriverClassDiagram.png]]
+![Complex Objects](Req_Analysis_Graphics/11_Complex_Objects_CrashDriverClassDiagram.png)
 
 - If you’re making a special kind of existing NIEM type:
 	- Use that type as a base to extend from and add things to it, or
