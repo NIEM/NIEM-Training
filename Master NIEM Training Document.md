@@ -732,11 +732,11 @@ We've already seen the schema for these in detail.
 
 ### Artifacts
 
-- [[01 Native Properties]]
+- [01 Native Properties](Text_Document/01_Native_Properties.md)
 - Mapping Spreadsheets
-	- [[Mapping_Spreadsheets/01 Native Properties.numbers]]
-	- [[Mapping_Spreadsheets/01 Native Properties.xlsx]]
-	- [[Mapping_Spreadsheets/01 Native Properties.pdf]]
+	- [Mapping Spreadsheet (Numbers)](Mapping_Spreadsheets/01_Native_Properties.numbers)
+	- [Mapping Spreadsheet (Excel)](Mapping_Spreadsheets/01_Native_Properties.xlsx)
+	- [Mapping Spreadsheet (PDF)](Mapping_Spreadsheets/01_Native_Properties.pdf)
 
 ___
 ## Substitution Groups
