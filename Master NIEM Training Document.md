@@ -719,7 +719,7 @@ Throughout the training, matching JSON instances will be included with XML insta
 ___
 ## Native Properties
 
-![Native Properties](Req_Analysis_Graphics/01 Native Properties - CrashDriverClassDiagram.png)
+![Native Properties](Req_Analysis_Graphics/01_Native_Properties_CrashDriverClassDiagram.png)
 
 - Some things will be easy to find
 - Will map directly to NIEM objects
