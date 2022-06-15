@@ -732,7 +732,7 @@ We've already seen the schema for these in detail.
 
 ### Artifacts
 
-- [01 Native Properties](Text_Document/01_Native_Properties.md)
+- [Native Properties](Text_Document/01_Native_Properties.md)
 - Mapping Spreadsheets
 	- [Mapping Spreadsheet (Numbers)](Mapping_Spreadsheets/01_Native_Properties.numbers)
 	- [Mapping Spreadsheet (Excel)](Mapping_Spreadsheets/01_Native_Properties.xlsx)
