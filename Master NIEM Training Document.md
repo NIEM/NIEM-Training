@@ -381,7 +381,7 @@ Representing objects in UML by their business names and relationships.
 
 ![Business Oriented Class Diagram](Req_Analysis_Graphics/CrashDriverClassDiagram.png)
 
-This vary depending on how your subject matter experts view objects and their relationships. For example, the charge to person relationship could be charge to the driver instead. The important thing is reflecting how your business folks understand the data, not model purity.
+This vary depending on how your subject matter experts view objects and their relationships. For example, the charge to person relationship could be charge to the driver instead. Cardinality, which we will touch on later, could vary depending on the needs of the exchange. The important thing is reflecting how your business folks understand the data, not model purity.
 ___
 ### NIEM Oriented Class Diagram
 
@@ -450,6 +450,7 @@ And here's what the matching XML _instance_ document might look like.
 	<PersonName personNameCommentText="copied">
 		<PersonGivenName>Peter</PersonGivenName>
 		<PersonMiddleName>Bredon</PersonMiddleName>
+		<PersonMiddleName>Death</PersonMiddleName>
 		<PersonSurName>Wimsey</PersonSurName>
 	</PersonName>
 ```
@@ -718,7 +719,7 @@ Throughout the training, matching JSON instances will be included with XML insta
 ___
 ## Native Properties
 
-![[01 Native Properties - CrashDriverClassDiagram.png]]
+![Native Properties](Req_Analysis_Graphics/01 Native Properties - CrashDriverClassDiagram.png)
 
 - Some things will be easy to find
 - Will map directly to NIEM objects
